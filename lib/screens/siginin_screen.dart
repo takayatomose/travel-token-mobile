@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -47,7 +49,7 @@ class SignInScreen extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(10)))),
                 ),
               ),
-               Container(
+              Container(
                 padding: const EdgeInsets.only(bottom: 20),
                 alignment: Alignment.topRight,
                 child: InkWell(
@@ -61,12 +63,66 @@ class SignInScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 25),
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Text('Login')),
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 60)),
+                    onPressed: () {},
+                    child: const Text(
+                      'Login',
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.w300),
+                    )),
               ),
               const Padding(
                 padding: EdgeInsets.only(bottom: 16),
                 child: Text('Or connect using'),
               ),
+              Container(
+                padding: const EdgeInsets.only(bottom: 30),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 25),
+                    child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 12)),
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.facebook_sharp,
+                          size: 27,
+                        ),
+                        label: const Text(
+                          'Facebook',
+                          style: TextStyle(fontSize: 18),
+                        )),
+                  ),
+                  ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 12)),
+                      onPressed: () {},
+                      icon: const Icon(
+                        MdiIcons.google,
+                        size: 27,
+                      ),
+                      label:
+                          const Text('Google', style: TextStyle(fontSize: 18))),
+                ]),
+              ),
+              RichText(
+                  text: TextSpan(
+                      text: 'Don\'t have account? ',
+                      style: const TextStyle(color: Colors.black),
+                      children: [
+                    TextSpan(
+                        text: 'Sign up',
+                        style: const TextStyle(
+                            decoration: TextDecoration.underline),
+                        recognizer: TapGestureRecognizer()..onTap = () {})
+                  ]))
             ],
           ),
         ),
