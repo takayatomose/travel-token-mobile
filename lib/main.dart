@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:xtrip_mobile/screens/forgot_password_screen.dart';
 import 'package:xtrip_mobile/screens/siginin_screen.dart';
 import 'package:xtrip_mobile/screens/signup_screen.dart';
 import 'package:xtrip_mobile/screens/splash_screen.dart';
-import 'package:xtrip_mobile/widgets/circle_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SignInScreen(),
+      home: const ForgotPasswordScreen(),
     );
   }
 }
