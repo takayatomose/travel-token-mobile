@@ -16,4 +16,8 @@ class AuthRepository {
           'password': password
         }));
   }
+
+  Future attemptAutoLogin() async {
+    throw Exception('not signed in');
+  }
 }
