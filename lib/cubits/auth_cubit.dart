@@ -6,5 +6,5 @@ enum AuthState { signUp, login }
 class AuthCubit extends Cubit<AuthState> {
   final SessionCubit sessionCubit;
 
-  AuthCubit({required this.sessionCubit}) : super(AuthState.login);
+  AuthCubit({required this.sessionCubit}) : super(AuthState.signUp);
 }

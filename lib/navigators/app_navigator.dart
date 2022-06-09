@@ -24,6 +24,7 @@ class AppNavigator extends StatelessWidget {
               child: const AuthNavigator(),
             ))
         ],
+        onPopPage: (router, result) => router.didPop(result),
       );
     });
   }

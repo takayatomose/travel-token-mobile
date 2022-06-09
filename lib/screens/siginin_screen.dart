@@ -29,26 +29,8 @@ class SignInScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 20),
-                child: TextField(
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email),
-                      hintText: 'Input your email address',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)))),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 11),
-                child: TextField(
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.key),
-                      hintText: 'Input your password',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)))),
-                ),
-              ),
+              _emailField(),
+              _passwordField(),
               Container(
                 padding: const EdgeInsets.only(bottom: 20),
                 alignment: Alignment.topRight,
@@ -128,5 +110,31 @@ class SignInScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _passwordField() {
+    return const Padding(
+              padding: EdgeInsets.only(bottom: 11),
+              child: TextField(
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.key),
+                    hintText: 'Input your password',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)))),
+              ),
+            );
+  }
+
+  Widget _emailField() {
+    return const Padding(
+              padding: EdgeInsets.only(bottom: 20),
+              child: TextField(
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.email),
+                    hintText: 'Input your email address',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)))),
+              ),
+            );
   }
 }

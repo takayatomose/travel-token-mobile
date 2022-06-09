@@ -7,8 +7,9 @@ class SessionCubit extends Cubit<SessionState> {
   SessionCubit({required this.authRepo}) : super(UnknownSessionState()) {
     attemptAutoLogin();
   }
-  attemptAutoLogin() {
+  void attemptAutoLogin () async {
     try {
+      await authRepo.attemptAutoLogin();
       emit(Authenticated(user: null));
     } on Exception {
       emit(Unauthenticated());
