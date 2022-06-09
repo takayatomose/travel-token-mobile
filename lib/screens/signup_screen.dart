@@ -1,5 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xtrip_mobile/bloc/auth/sign_up/signup_bloc.dart';
+import 'package:xtrip_mobile/bloc/auth/sign_up/signup_event.dart';
+import 'package:xtrip_mobile/bloc/auth/sign_up/signup_state.dart';
+import 'package:xtrip_mobile/cubits/auth_cubit.dart';
+import 'package:xtrip_mobile/repositories/auth_repository.dart';
+import 'package:xtrip_mobile/widgets/border_text_field.dart';
+// import 'package:provider/'
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -14,175 +22,207 @@ class _SignUpScreen extends State<SignUpScreen> {
   final TextEditingController fullName = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
+  final TextEditingController invitationCode = TextEditingController();
 
-  // const SignUpScreen({Key? key}) : super(key: key);
-  // const SignUpScreen({Key? key}) : super(key: key);
+  Widget _invitationField() {
+    return BorderTextField(
+      controller: invitationCode,
+      padding: const EdgeInsets.only(bottom: 30),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter your invitation code';
+        }
+        return null;
+      },
+      hintText: 'Invitation code',
+      icon: Icons.code,
+    );
+  }
+
+  Widget _emailField() {
+    return BlocBuilder<SignUpBloc, SignUpState>(builder: (context, state) {
+      return BorderTextField(
+        controller: email,
+        padding: const EdgeInsets.only(bottom: 30),
+        hintText: 'Your email address',
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter your email';
+          }
+          return null;
+        },
+        icon: Icons.email,
+        onChanged: (value) =>
+            context.read<SignUpBloc>().add(SignUpEmailChanged(email: value)),
+      );
+    });
+  }
+
+  Widget _passwordField() {
+    return BorderTextField(
+      controller: password,
+      padding: const EdgeInsets.only(bottom: 30),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter your password';
+        }
+        return null;
+      },
+      icon: Icons.key,
+      hintText: 'Your password',
+      obscureText: true,
+    );
+  }
+
+  Widget _fullNameField() {
+    return BorderTextField(
+      controller: fullName,
+      padding: const EdgeInsets.only(bottom: 10),
+      hintText: 'Your full name',
+      icon: Icons.people_alt,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter your name';
+        }
+        return null;
+      },
+    );
+  }
+
+  Widget _confirmPasswordField() {
+    return BorderTextField(
+      controller: confirmPassword,
+      padding: const EdgeInsets.only(bottom: 30),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please re-enter password';
+        }
+        if (password.text != confirmPassword.text) {
+          return 'Password does not match';
+        }
+        return null;
+      },
+      icon: Icons.key,
+      hintText: 'Confirm your password',
+      obscureText: true,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    void onCreate() {
-      // if (_signupFormKey.currentState.validate()) {}
-    }
-
     return Scaffold(
-      body: Center(
-          child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
-        child: Form(
-          key: _signupFormKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(bottom: 17),
-                child: Text(
-                  'Let\'s Get Started',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 27),
+      resizeToAvoidBottomInset: false,
+      body: BlocProvider(
+        create: (context) => SignUpBloc(
+            authRepo: context.read<AuthRepository>(),
+            authCubit: context.read<AuthCubit>()),
+        child: SingleChildScrollView(
+          child: Center(
+              child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
+            child: BlocListener<SignUpBloc, SignUpState>(
+              listener: (context, state) {},
+              child: Form(
+                key: _signupFormKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _headerText(),
+                    _secondHeaderText(),
+                    _invitationField(),
+                    _fullNameField(),
+                    _emailField(),
+                    _passwordField(),
+                    _confirmPasswordField(),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 60),
+                            primary: const Color.fromRGBO(46, 46, 46, 1),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        onPressed: () {
+                          if (_signupFormKey.currentState!.validate()) {
+                            // await Provi
+                          }
+                        },
+                        child: const Text(
+                          'Create',
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w300),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 50),
+                      child: Center(
+                        child: RichText(
+                          softWrap: true,
+                          textAlign: TextAlign.justify,
+                          text: TextSpan(
+                              text:
+                                  'By creating the account, you agree with our ',
+                              style: const TextStyle(color: Colors.black),
+                              children: [
+                                TextSpan(
+                                    text: 'Terms and Conditions',
+                                    style: const TextStyle(
+                                        decoration: TextDecoration.underline),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {})
+                              ]),
+                        ),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: Text('Already had account?'),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 25),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6)),
+                        ),
+                        child: const Text(
+                          'Login with us',
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ))
+                  ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 40),
-                child: Text(
-                  'Create an account to get earning while traveling',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 30),
-                child: TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your name';
-                    }
-                    return null;
-                  },
-                  controller: fullName,
-                  decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.people_alt),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      hintText: 'Your full name'),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 30),
-                child: TextFormField(
-                    controller: email,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.email),
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        hintText: 'Your email address')),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 30),
-                child: TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  },
-                  controller: password,
-                  decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.key),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      hintText: 'Your password'),
-                  obscureText: true,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 30),
-                child: TextFormField(
-                  controller: confirmPassword,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please re-enter password';
-                    }
-                    if (password.text != confirmPassword.text) {
-                      return 'Password does not match';
-                    }
-                    return null;
-                  },
-                  decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.key),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      hintText: 'Confirm your password'),
-                  obscureText: true,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 6),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 60),
-                      primary: const Color.fromRGBO(46, 46, 46, 1),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                  onPressed: () {
-                    print('submit');
-                    if (_signupFormKey.currentState!.validate()) {}
-                  },
-                  child: const Text(
-                    'Create',
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 50),
-                child: Center(
-                  child: RichText(
-                    softWrap: true,
-                    textAlign: TextAlign.justify,
-                    text: TextSpan(
-                        text: 'By creating the account, you agree with our ',
-                        style: const TextStyle(color: Colors.black),
-                        children: [
-                          TextSpan(
-                              text: 'Terms and Conditions',
-                              style: const TextStyle(
-                                  decoration: TextDecoration.underline),
-                              recognizer: TapGestureRecognizer()..onTap = () {})
-                        ]),
-                  ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 10),
-                child: Text('Already had account?'),
-              ),
-              ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6)),
-                  ),
-                  child: const Text(
-                    'Login with us',
-                    style: TextStyle(fontSize: 15, color: Colors.black),
-                  ))
-            ],
-          ),
+            ),
+          )),
         ),
-      )),
+      ),
+    );
+  }
+
+  Padding _secondHeaderText() {
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 40),
+      child: Text(
+        'Create an account to get earning while traveling',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 15),
+      ),
+    );
+  }
+
+  Padding _headerText() {
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 17),
+      child: Text(
+        'Let\'s Get Started',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontWeight: FontWeight.w800, fontSize: 27),
+      ),
     );
   }
 }
