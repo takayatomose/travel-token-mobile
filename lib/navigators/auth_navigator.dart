@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
-import 'package:xtrip_mobile/screens/siginin_screen.dart';
+import 'package:xtrip_mobile/screens/signin_screen.dart';
 import 'package:xtrip_mobile/screens/signup_screen.dart';
 
 class AuthNavigator extends StatelessWidget {

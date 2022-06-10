@@ -30,6 +30,14 @@ class AuthRepository {
         body: json.encode({'email': email, 'password': password}));
   }
 
+  Future<http.Response> forgotPassword({required String email}) {
+    return http.post(Uri.parse('${Api.getHttpClient()}/user/forgot-password'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: json.encode({'email': email}));
+  }
+
   Future attemptAutoLogin() async {
     throw Exception('not signed in');
   }
