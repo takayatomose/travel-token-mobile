@@ -8,7 +8,6 @@ class AuthRepository {
       required String email,
       required String fullName,
       required String password}) async {
-    print(invitationCode);
     final response = await http.post(Uri.parse('${Api.getHttpClient()}/user'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
@@ -20,6 +19,15 @@ class AuthRepository {
           'password': password
         }));
     return response;
+  }
+
+  Future<http.Response> signin(
+      {required String email, required String password}) {
+    return http.post(Uri.parse('${Api.getHttpClient()}/user'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: json.encode({'email': email, 'password': password}));
   }
 
   Future attemptAutoLogin() async {
