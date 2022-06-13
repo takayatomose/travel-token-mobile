@@ -30,7 +30,7 @@ class BorderTextField extends StatelessWidget {
             prefixIcon: Icon(icon),
             hintText: hintText,
             border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)))),
+                borderRadius: BorderRadius.all(Radius.circular(30)))),
         validator: validator,
         controller: controller,
         obscureText: obscureText,
