@@ -21,11 +21,14 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         (event, emit) => emit(state.copyWith(email: event.email)));
     on<SignUpSubmitted>(((event, emit) async {
       emit(state.copyWith(formStatus: FormSubmitting()));
-      final response = await authRepo.signup(
-          invitationCode: state.invitationCode,
-          email: state.email,
-          fullName: state.fullName,
-          password: state.password);
+      try {
+        final response = await authRepo.signup(
+            invitationCode: state.invitationCode,
+            email: state.email,
+            fullName: state.fullName,
+            password: state.password);
+        emit(state.copyWith(formStatus: SubmissionSuccess()));
+      } catch (e) {}
     }));
   }
 }

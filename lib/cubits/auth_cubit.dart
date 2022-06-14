@@ -16,4 +16,5 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit({required this.sessionCubit}) : super(AuthState.onBoard);
   void showSignIn() => emit(AuthState.login);
   void showSignUp() => emit(AuthState.signUp);
+  void showActivation() => emit(AuthState.activation);
 }

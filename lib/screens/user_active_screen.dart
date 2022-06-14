@@ -9,7 +9,7 @@ class UserActiveScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ContainerBackground(
       bgAsset: 'assets/images/signup_1.png',
-      child: BlocProvider(create: (context) => ),
+      // child: BlocProvider(create: (context) => ),
     );
   }
 }

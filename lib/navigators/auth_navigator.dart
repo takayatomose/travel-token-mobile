@@ -4,6 +4,7 @@ import 'package:xtrip_mobile/cubits/auth_cubit.dart';
 import 'package:xtrip_mobile/screens/onboard_screen.dart';
 import 'package:xtrip_mobile/screens/signin_screen.dart';
 import 'package:xtrip_mobile/screens/signup_screen.dart';
+import 'package:xtrip_mobile/screens/user_active_screen.dart';
 
 class AuthNavigator extends StatelessWidget {
   const AuthNavigator({Key? key}) : super(key: key);
@@ -19,6 +20,8 @@ class AuthNavigator extends StatelessWidget {
             const MaterialPage(child: SignInScreen()),
           if (state == AuthState.signUp)
             const MaterialPage(child: SignUpScreen()),
+          if (state == AuthState.activation)
+            const MaterialPage(child: UserActiveScreen())
         ],
         onPopPage: (router, result) => router.didPop(result),
       );
