@@ -7,6 +7,8 @@ import 'package:xtrip_mobile/bloc/auth/sign_up/signup_state.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
 import 'package:xtrip_mobile/widgets/border_text_field.dart';
+import 'package:xtrip_mobile/widgets/card_shadow.dart';
+import 'package:xtrip_mobile/widgets/circle_next_button.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -29,178 +31,173 @@ class _SignUpScreen extends State<SignUpScreen> {
               image: AssetImage('assets/images/signup_1.png'),
               fit: BoxFit.cover)),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.transparent,
-        resizeToAvoidBottomInset: false,
         body: BlocProvider(
           create: (context) => SignUpBloc(
               authRepo: context.read<AuthRepository>(),
               authCubit: context.read<AuthCubit>()),
           child: Stack(
             children: [
-              SingleChildScrollView(
-                child: Center(
-                    child: Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
-                  child: BlocListener<SignUpBloc, SignUpState>(
-                    listener: (context, state) {},
-                    child: BlocBuilder<SignUpBloc, SignUpState>(
-                      builder: (context, state) => Form(
-                        key: _signupFormKey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+              BlocListener<SignUpBloc, SignUpState>(
+                listener: (context, state) {},
+                child: BlocBuilder<SignUpBloc, SignUpState>(
+                  builder: (context, state) => Form(
+                    key: _signupFormKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Stack(
                           children: [
-                            _headerText(),
-                            _secondHeaderText(),
-                            BorderTextField(
-                              padding: const EdgeInsets.only(bottom: 10),
-                              hintText: 'Your full name',
-                              icon: Icons.person,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your name';
-                                }
-                                return null;
-                              },
-                              onChanged: (value) => context
-                                  .read<SignUpBloc>()
-                                  .add(SignUpFullNameChanged(fullName: value)),
-                            ),
-                            BorderTextField(
-                              padding: const EdgeInsets.only(bottom: 10),
-                              hintText: 'Your email address',
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your email';
-                                }
-                                return null;
-                              },
-                              icon: Icons.email,
-                              onChanged: (value) => context
-                                  .read<SignUpBloc>()
-                                  .add(SignUpEmailChanged(email: value)),
-                            ),
-                            BorderTextField(
-                              controller: password,
-                              padding: const EdgeInsets.only(bottom: 10),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your password';
-                                }
-                                return null;
-                              },
-                              icon: Icons.key,
-                              hintText: 'Your password',
-                              obscureText: true,
-                              onChanged: (value) => context
-                                  .read<SignUpBloc>()
-                                  .add(SignUpPasswordChanged(password: value)),
-                            ),
-                            BorderTextField(
-                              controller: confirmPassword,
-                              padding: const EdgeInsets.only(bottom: 30),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please re-enter password';
-                                }
-                                if (password.text != confirmPassword.text) {
-                                  return 'Password does not match';
-                                }
-                                return null;
-                              },
-                              icon: Icons.key,
-                              hintText: 'Confirm your password',
-                              obscureText: true,
-                            ),
-                            BorderTextField(
-                              onChanged: (value) => context
-                                  .read<SignUpBloc>()
-                                  .add(SignUpInvitationChanged(
-                                      invitationCode: value)),
-                              padding: const EdgeInsets.only(bottom: 10),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your invitation code';
-                                }
-                                return null;
-                              },
-                              hintText: 'Invitation code',
-                              icon: Icons.discount,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 6),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 60),
-                                    primary:
-                                        const Color.fromRGBO(46, 46, 46, 1),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10))),
-                                onPressed: () {
-                                  if (_signupFormKey.currentState!.validate()) {
-                                    context
+                            CardShadow(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _headerText(),
+                                  _secondHeaderText(),
+                                  BorderTextField(
+                                    padding: const EdgeInsets.only(bottom: 15),
+                                    hintText: 'Your full name',
+                                    icon: Icons.person,
+                                    requiredField: true,
+                                    requiredMessage: 'Please enter your name',
+                                    onChanged: (value) => context
                                         .read<SignUpBloc>()
-                                        .add(SignUpSubmitted());
-                                  }
-                                },
-                                child: const Text(
-                                  'Create',
-                                  style: TextStyle(
-                                      fontSize: 30,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 50),
-                              child: Center(
-                                child: RichText(
-                                  softWrap: true,
-                                  textAlign: TextAlign.justify,
-                                  text: TextSpan(
-                                      text:
-                                          'By creating the account, you agree with our ',
-                                      style:
-                                          const TextStyle(color: Colors.black),
-                                      children: [
-                                        TextSpan(
-                                            text: 'Terms and Conditions',
+                                        .add(SignUpFullNameChanged(
+                                            fullName: value)),
+                                  ),
+                                  BorderTextField(
+                                    padding: const EdgeInsets.only(bottom: 15),
+                                    hintText: 'Your email address',
+                                    requiredField: true,
+                                    requiredMessage:
+                                        'Please enter your email address',
+                                    icon: Icons.email,
+                                    onChanged: (value) => context
+                                        .read<SignUpBloc>()
+                                        .add(SignUpEmailChanged(email: value)),
+                                  ),
+                                  BorderTextField(
+                                    controller: password,
+                                    padding: const EdgeInsets.only(bottom: 15),
+                                    requiredField: true,
+                                    requiredMessage:
+                                        'Please enter your password',
+                                    icon: Icons.key,
+                                    hintText: 'Your password',
+                                    obscureText: true,
+                                    onChanged: (value) => context
+                                        .read<SignUpBloc>()
+                                        .add(SignUpPasswordChanged(
+                                            password: value)),
+                                  ),
+                                  BorderTextField(
+                                    controller: confirmPassword,
+                                    padding: const EdgeInsets.only(bottom: 15),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please re-enter password';
+                                      }
+                                      if (password.text !=
+                                          confirmPassword.text) {
+                                        return 'Password does not match';
+                                      }
+                                      return null;
+                                    },
+                                    icon: Icons.key,
+                                    hintText: 'Confirm your password',
+                                    obscureText: true,
+                                  ),
+                                  BorderTextField(
+                                    onChanged: (value) => context
+                                        .read<SignUpBloc>()
+                                        .add(SignUpInvitationChanged(
+                                            invitationCode: value)),
+                                    padding: const EdgeInsets.only(bottom: 20),
+                                    requiredMessage:
+                                        'Please enter your invitation code',
+                                    requiredField: true,
+                                    hintText: 'Invitation code',
+                                    icon: Icons.discount,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 70, right: 30, left: 30),
+                                    child: Center(
+                                      child: RichText(
+                                        softWrap: true,
+                                        textAlign: TextAlign.center,
+                                        text: TextSpan(
+                                            text:
+                                                'By creating the account, you agree with our ',
                                             style: const TextStyle(
-                                                decoration:
-                                                    TextDecoration.underline),
-                                            recognizer: TapGestureRecognizer()
-                                              ..onTap = () {})
-                                      ]),
-                                ),
+                                                color: Color.fromRGBO(
+                                                    0, 0, 0, 0.5),
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400),
+                                            children: [
+                                              TextSpan(
+                                                  text: 'Terms and Conditions',
+                                                  style: const TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          255, 128, 8, 1),
+                                                      decoration: TextDecoration
+                                                          .underline),
+                                                  recognizer:
+                                                      TapGestureRecognizer()
+                                                        ..onTap = () {})
+                                            ]),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            const Padding(
-                              padding: EdgeInsets.only(bottom: 10),
-                              child: Text('Already had account?'),
-                            ),
-                            ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 25),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(6)),
-                                ),
-                                child: const Text(
-                                  'Login with us',
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.black),
+                            Positioned(
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                child: CircleNextButton(
+                                  onPressed: () {
+                                    if (_signupFormKey.currentState!
+                                        .validate()) {}
+                                  },
                                 ))
                           ],
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                )),
-              )
+                ),
+              ),
+              Positioned(
+                  bottom: 50,
+                  right: 0,
+                  left: 0,
+                  child: Center(
+                    child: RichText(
+                      text: TextSpan(
+                          style: const TextStyle(
+                              color: Color.fromRGBO(0, 0, 0, 0.5),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400),
+                          text: 'Already had account? ',
+                          children: [
+                            TextSpan(
+                                text: 'Login',
+                                style: const TextStyle(
+                                    color: Color.fromRGBO(255, 128, 8, 1),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
+                                    decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    context.read<AuthCubit>().showSignIn();
+                                  })
+                          ]),
+                    ),
+                  ))
             ],
           ),
         ),
@@ -210,10 +207,10 @@ class _SignUpScreen extends State<SignUpScreen> {
 
   Padding _secondHeaderText() {
     return const Padding(
-      padding: EdgeInsets.only(bottom: 40),
+      padding: EdgeInsets.only(bottom: 30),
       child: Text(
         'Create an account to get earning while traveling',
-        textAlign: TextAlign.center,
+        textAlign: TextAlign.left,
         style: TextStyle(fontSize: 15),
       ),
     );
@@ -221,11 +218,11 @@ class _SignUpScreen extends State<SignUpScreen> {
 
   Padding _headerText() {
     return const Padding(
-      padding: EdgeInsets.only(bottom: 17),
+      padding: EdgeInsets.only(bottom: 10),
       child: Text(
         'SIGNUP',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontWeight: FontWeight.w800, fontSize: 27),
+        textAlign: TextAlign.left,
+        style: TextStyle(fontWeight: FontWeight.w800, fontSize: 24),
       ),
     );
   }
