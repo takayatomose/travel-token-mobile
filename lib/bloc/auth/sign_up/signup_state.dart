@@ -6,26 +6,29 @@ class SignUpState {
   final String email;
   final String password;
   final FormSubmissionStatus formStatus;
+  final String errorMessage;
 
-  SignUpState({
-    this.invitationCode = '',
-    this.email = '',
-    this.fullName = '',
-    this.password = '',
-    this.formStatus = const InitialFormStatus(),
-  });
+  SignUpState(
+      {this.invitationCode = '',
+      this.email = '',
+      this.fullName = '',
+      this.password = '',
+      this.formStatus = const InitialFormStatus(),
+      this.errorMessage = ''});
 
   SignUpState copyWith(
       {String? invitationCode,
       String? email,
       String? fullName,
       String? password,
-      FormSubmissionStatus? formStatus}) {
+      FormSubmissionStatus? formStatus,
+      String? errorMessage}) {
     return SignUpState(
         invitationCode: invitationCode ?? this.invitationCode,
         fullName: fullName ?? this.fullName,
         email: email ?? this.email,
         password: password ?? this.password,
-        formStatus: formStatus ?? this.formStatus);
+        formStatus: formStatus ?? this.formStatus,
+        errorMessage: errorMessage ?? this.errorMessage);
   }
 }

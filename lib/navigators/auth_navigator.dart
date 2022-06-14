@@ -14,13 +14,13 @@ class AuthNavigator extends StatelessWidget {
     return BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
       return Navigator(
         pages: [
-          if (state == AuthState.onBoard)
+          if (state.screenState == ScreenState.onBoard)
             const MaterialPage(child: OnBoardScreen()),
-          if (state == AuthState.login)
+          if (state.screenState == ScreenState.login)
             const MaterialPage(child: SignInScreen()),
-          if (state == AuthState.signUp)
+          if (state.screenState == ScreenState.signUp)
             const MaterialPage(child: SignUpScreen()),
-          if (state == AuthState.activation)
+          if (state.screenState == ScreenState.activation)
             const MaterialPage(child: UserActiveScreen())
         ],
         onPopPage: (router, result) => router.didPop(result),

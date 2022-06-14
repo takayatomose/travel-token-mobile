@@ -11,7 +11,7 @@ class UserActivationBloc
   final AuthCubit authCubit;
 
   UserActivationBloc({required this.authRepo, required this.authCubit})
-      : super(UserActivationState()) {
+      : super(UserActivationState(email: authCubit.state.email)) {
     on<UserActivationEmailChanged>(
         (event, emit) => emit(state.copyWith(email: event.email)));
     on<UserActivationCodeChange>((event, emit) =>

@@ -11,6 +11,7 @@ import 'package:xtrip_mobile/widgets/border_text_field.dart';
 import 'package:xtrip_mobile/widgets/card_shadow.dart';
 import 'package:xtrip_mobile/widgets/circle_next_button.dart';
 import 'package:xtrip_mobile/widgets/container_background.dart';
+import 'package:xtrip_mobile/widgets/overlay_container.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -32,12 +33,13 @@ class _SignUpScreen extends State<SignUpScreen> {
         create: (context) => SignUpBloc(
             authRepo: context.read<AuthRepository>(),
             authCubit: context.read<AuthCubit>()),
-        child: BlocListener<SignUpBloc, SignUpState>(
+        child: BlocConsumer<SignUpBloc, SignUpState>(
           listener: (context, state) {},
-          child: BlocBuilder<SignUpBloc, SignUpState>(
-            builder: (context, state) => Stack(
-              children: [
-                Form(
+          builder: (context, state) => Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Form(
                   key: _signupFormKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -152,7 +154,11 @@ class _SignUpScreen extends State<SignUpScreen> {
                             right: 0,
                             child: CircleNextButton(
                               onPressed: () {
-                                if (_signupFormKey.currentState!.validate()) {}
+                                if (_signupFormKey.currentState!.validate()) {
+                                  context
+                                      .read<SignUpBloc>()
+                                      .add(SignUpSubmitted());
+                                }
                               },
                             ),
                           )
@@ -161,52 +167,89 @@ class _SignUpScreen extends State<SignUpScreen> {
                     ],
                   ),
                 ),
-                Positioned(
-                  bottom: 50,
-                  right: 0,
-                  left: 0,
-                  child: Center(
-                    child: RichText(
-                      text: TextSpan(
-                        style: const TextStyle(
-                            color: Color.fromRGBO(0, 0, 0, 0.5),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                        text: 'Already had account? ',
-                        children: [
-                          TextSpan(
-                              text: 'Login',
-                              style: const TextStyle(
-                                  color: Color.fromRGBO(255, 128, 8, 1),
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 16,
-                                  decoration: TextDecoration.underline),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  context.read<AuthCubit>().showSignIn();
-                                })
-                        ],
-                      ),
+              ),
+              Positioned(
+                bottom: 50,
+                right: 0,
+                left: 0,
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(
+                          color: Color.fromRGBO(0, 0, 0, 0.5),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                      text: 'Already had account? ',
+                      children: [
+                        TextSpan(
+                            text: 'Login',
+                            style: const TextStyle(
+                                color: Color.fromRGBO(255, 128, 8, 1),
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                                decoration: TextDecoration.underline),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                context.read<AuthCubit>().showSignIn();
+                              })
+                      ],
                     ),
                   ),
                 ),
-                AlertDialog(
-                  title: const Text('Account has been created!'),
-                  content: const Text(
-                      'Your account has been created successfully! An email has been sent to your email address containing an activation code. Please use code to activate your account!'),
-                  actions: [
-                    TextButton(
-                        onPressed: () =>
-                            {context.read<AuthCubit>().showActivation()},
-                        child: const Text('Confirm'))
-                  ],
-                ),
-              ],
-            ),
+              ),
+              _showDialog(context, state),
+            ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _showDialog(BuildContext context, SignUpState state) {
+    FormSubmissionStatus formStatus = state.formStatus;
+
+    if (formStatus is FormSubmitting) {
+      return const OverlayContainer(
+        child: Center(
+            child: SizedBox(
+          height: 100,
+          width: 100,
+          child: CircularProgressIndicator(),
+        )),
+      );
+    } else if (formStatus is SubmissionFailed) {
+      return OverlayContainer(
+        child: AlertDialog(
+          title: const Text('Signup Failed'),
+          content: Text(state.errorMessage),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  context.read<SignUpBloc>().add(SignUpAgain());
+                },
+                child: const Text('Ok'))
+          ],
+        ),
+      );
+    } else if (formStatus is SubmissionSuccess) {
+      return OverlayContainer(
+        child: AlertDialog(
+          title: const Text('Account has been created!'),
+          content: const Text(
+              'Your account has been created successfully! An email has been sent to your email address containing an activation code. Please use code to activate your account!'),
+          actions: [
+            TextButton(
+                onPressed: () => {
+                      context
+                          .read<AuthCubit>()
+                          .showActivation(email: state.email)
+                    },
+                child: const Text('Confirm'))
+          ],
+        ),
+      );
+    }
+    return Container();
   }
 
   Padding _secondHeaderText() {

@@ -9,7 +9,6 @@ class ContainerBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
           image:
               DecorationImage(image: AssetImage(bgAsset), fit: BoxFit.cover)),

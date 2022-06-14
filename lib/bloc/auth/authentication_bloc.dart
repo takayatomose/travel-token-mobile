@@ -7,5 +7,5 @@ class AuthenticationBloc extends Bloc {
   final AuthCubit authCubit;
 
   AuthenticationBloc({required this.authRepo, required this.authCubit})
-      : super({});
+      : super({}) {}
 }
