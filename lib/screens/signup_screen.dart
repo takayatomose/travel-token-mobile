@@ -32,27 +32,16 @@ class _SignUpScreen extends State<SignUpScreen> {
         create: (context) => SignUpBloc(
             authRepo: context.read<AuthRepository>(),
             authCubit: context.read<AuthCubit>()),
-        child: Stack(
-          children: [
-            BlocListener<SignUpBloc, SignUpState>(
-              listener: (context, state) {},
-              child: BlocBuilder<SignUpBloc, SignUpState>(
-                builder: (context, state) => Form(
+        child: BlocListener<SignUpBloc, SignUpState>(
+          listener: (context, state) {},
+          child: BlocBuilder<SignUpBloc, SignUpState>(
+            builder: (context, state) => Stack(
+              children: [
+                Form(
                   key: _signupFormKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AlertDialog(
-                        title: const Text('Account has been created!'),
-                        content: const Text(
-                            'Your account has been created successfully! An email has been sent to your email address containing an activation code. Please use code to activate your account!'),
-                        actions: [
-                          TextButton(
-                              onPressed: () =>
-                                  {context.read<AuthCubit>().showActivation()},
-                              child: const Text('Confirm'))
-                        ],
-                      ),
                       Stack(
                         children: [
                           CardShadow(
@@ -172,38 +161,49 @@ class _SignUpScreen extends State<SignUpScreen> {
                     ],
                   ),
                 ),
-              ),
-            ),
-            Positioned(
-              bottom: 50,
-              right: 0,
-              left: 0,
-              child: Center(
-                child: RichText(
-                  text: TextSpan(
-                    style: const TextStyle(
-                        color: Color.fromRGBO(0, 0, 0, 0.5),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                    text: 'Already had account? ',
-                    children: [
-                      TextSpan(
-                          text: 'Login',
-                          style: const TextStyle(
-                              color: Color.fromRGBO(255, 128, 8, 1),
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                              decoration: TextDecoration.underline),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              context.read<AuthCubit>().showSignIn();
-                            })
-                    ],
+                Positioned(
+                  bottom: 50,
+                  right: 0,
+                  left: 0,
+                  child: Center(
+                    child: RichText(
+                      text: TextSpan(
+                        style: const TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 0.5),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
+                        text: 'Already had account? ',
+                        children: [
+                          TextSpan(
+                              text: 'Login',
+                              style: const TextStyle(
+                                  color: Color.fromRGBO(255, 128, 8, 1),
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                  decoration: TextDecoration.underline),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  context.read<AuthCubit>().showSignIn();
+                                })
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
+                AlertDialog(
+                  title: const Text('Account has been created!'),
+                  content: const Text(
+                      'Your account has been created successfully! An email has been sent to your email address containing an activation code. Please use code to activate your account!'),
+                  actions: [
+                    TextButton(
+                        onPressed: () =>
+                            {context.read<AuthCubit>().showActivation()},
+                        child: const Text('Confirm'))
+                  ],
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
