@@ -22,7 +22,7 @@ class AuthRepository {
   }
 
   Future<http.Response> signin(
-      {required String email, required String password}) {
+      {required String email, required String password}) async {
     return http.post(Uri.parse('${Api.getHttpClient()}/user'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
@@ -30,7 +30,7 @@ class AuthRepository {
         body: json.encode({'email': email, 'password': password}));
   }
 
-  Future<http.Response> forgotPassword({required String email}) {
+  Future<http.Response> forgotPassword({required String email}) async {
     return http.post(Uri.parse('${Api.getHttpClient()}/user/forgot-password'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
@@ -43,8 +43,8 @@ class AuthRepository {
   }
 
   Future<http.Response> activateUser(
-      {required String email, required String code}) {
-    return http.post(Uri.parse('${Api.getHttpClient()}/user/forgot-password'),
+      {required String email, required String code}) async {
+    return http.post(Uri.parse('${Api.getHttpClient()}/user/activate'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },

@@ -16,11 +16,25 @@ class UserActivationBloc
         (event, emit) => emit(state.copyWith(email: event.email)));
     on<UserActivationCodeChange>((event, emit) =>
         emit(state.copyWith(activationCode: event.activationCode)));
+    on<ActiveCodeAgain>(((event, emit) => emit(
+        state.copyWith(formStatus: InitialFormStatus(), activationCode: ''))));
     on<UserActivationSubmitted>(
       (event, emit) async {
         emit(state.copyWith(formStatus: FormSubmitting()));
-        final response = await authRepo.activateUser(
-            email: state.email, code: state.activationCode);
+        // Future.delayed(const Duration(microseconds: 300), () async {
+        try {
+          final response = await authRepo.activateUser(
+              email: state.email, code: state.activationCode);
+          if (response.statusCode == 200) {
+            emit(state.copyWith(formStatus: SubmissionSuccess()));
+          } else {
+            emit(state.copyWith(
+                formStatus: SubmissionFailed(Exception('Invalid'))));
+          }
+        } on Exception catch (e) {
+          emit(state.copyWith(formStatus: SubmissionFailed(e)));
+        }
+        // });
       },
     );
   }

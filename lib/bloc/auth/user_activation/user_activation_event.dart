@@ -11,3 +11,5 @@ class UserActivationCodeChange extends UserActivationEvent {
 }
 
 class UserActivationSubmitted extends UserActivationEvent {}
+
+class ActiveCodeAgain extends UserActivationEvent {}
