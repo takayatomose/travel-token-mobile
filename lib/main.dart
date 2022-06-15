@@ -1,26 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:xtrip_mobile/screens/forgot_password_screen.dart';
-import 'package:xtrip_mobile/screens/siginin_screen.dart';
-import 'package:xtrip_mobile/screens/signup_screen.dart';
-import 'package:xtrip_mobile/screens/splash_screen.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+// This class is what Provider will work with.
+// It will _provide_ an instance of the class to any widget
+// in the tree that cares about it.
+class Person extends ChangeNotifier {
+  int age = 10;
+
+
+  void add() {
+    age++;
+  }
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+// Here, we are running an app as you'd expect with any Flutter app
+// But, we're also wrapping `MyApp` in a widget called 'Provider'
+// Importantly, `Provider` is itself a widget, so it can live in the widget tree.
+// This class uses a property called `create` to make an instance of `Person`
+// whenever it's needed by a widget in the tree.
+// The object returned by the function passed to `create` is what the rest of our app
+// has access to.
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => Person(),
+      child: MyApp(),
+    ),
+  );
+}
 
-  // This widget is the root of your application.
+// Just a plain ol' StatelessWidget
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const ForgotPasswordScreen(),
+    return const MaterialApp(
+      home: MyHomePage(),
     );
   }
 }
 
+// Again, just a stateless widget
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Provider Class'),
+      ),
+      body: Center(
+        child: Text(
+          // this string is where we use Provider to fetch the instance
+          // of `Person` created above in the `create` property
+          context.watch<Person>().age.toString(),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Provider.of<Person>(context, listen: true);
+              context.read<Person>().add();
+            },
+            backgroundColor: Colors.blueAccent,
+            child: const Icon(Icons.navigation),
+          ),
+    );
+  }
+}
