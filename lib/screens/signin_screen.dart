@@ -97,7 +97,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                           color:
                                               Color.fromRGBO(255, 128, 8, 1)),
                                     ),
-                                    onTap: () {},
+                                    onTap: () {
+                                      context
+                                          .read<AuthCubit>()
+                                          .showForgotPassword();
+                                    },
                                   ),
                                 ),
                               ],
@@ -115,7 +119,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                       side: BorderSide(
                                           width: 8, color: Colors.white)),
                                   padding: const EdgeInsets.all(25)),
-                              onPressed: () {},
+                              onPressed: () {
+                                context
+                                    .read<SignInBloc>()
+                                    .add(SignInSubmitted());
+                              },
                               child: const Icon(
                                 Icons.east,
                                 size: 30,

@@ -38,6 +38,18 @@ class AuthRepository {
         body: json.encode({'email': email}));
   }
 
+  Future<http.Response> resetPassword(
+      {required String email,
+      required String code,
+      required String password}) async {
+    return http.post(Uri.parse('${Api.getHttpClient()}/user/reset-password'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body:
+            json.encode({'email': email, 'password': password, 'code': code}));
+  }
+
   Future attemptAutoLogin() async {
     throw Exception('not signed in');
   }

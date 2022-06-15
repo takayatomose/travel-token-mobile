@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
+import 'package:xtrip_mobile/screens/forgot_password_screen.dart';
 import 'package:xtrip_mobile/screens/onboard_screen.dart';
 import 'package:xtrip_mobile/screens/signin_screen.dart';
 import 'package:xtrip_mobile/screens/signup_screen.dart';
@@ -21,7 +22,9 @@ class AuthNavigator extends StatelessWidget {
           if (state.screenState == ScreenState.signUp)
             const MaterialPage(child: SignUpScreen()),
           if (state.screenState == ScreenState.activation)
-            const MaterialPage(child: UserActiveScreen())
+            const MaterialPage(child: UserActiveScreen()),
+          if (state.screenState == ScreenState.forgotPassword)
+            const MaterialPage(child: ForgotPasswordScreen())
         ],
         onPopPage: (router, result) => router.didPop(result),
       );

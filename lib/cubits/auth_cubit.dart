@@ -38,4 +38,6 @@ class AuthCubit extends Cubit<AuthState> {
   void showSignUp() => emit(AuthState(screenState: ScreenState.signUp));
   void showActivation({required String email}) =>
       emit(AuthState(screenState: ScreenState.activation, email: email));
+  void showForgotPassword() =>
+      emit(AuthState(email: '', screenState: ScreenState.forgotPassword));
 }

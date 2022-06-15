@@ -19,8 +19,14 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     );
     on<SignInSubmitted>((event, emit) async {
       emit(state.copyWith(formStatus: FormSubmitting()));
-      final response =
-          await authRepo.signin(email: state.email, password: state.password);
+      try {
+        emit(state.copyWith(formStatus: FormSubmitting()));
+        final response =
+            await authRepo.signin(email: state.email, password: state.password);
+            
+      } on Exception catch (e) {
+        emit(state.copyWith(formStatus: SubmissionFailed(e)));
+      }
     });
   }
 }
