@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/auth/sign_up/signup_event.dart';
 import 'package:xtrip_mobile/bloc/auth/sign_up/signup_state.dart';

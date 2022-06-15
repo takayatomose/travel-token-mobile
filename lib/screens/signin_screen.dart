@@ -169,8 +169,8 @@ class _SignInScreenState extends State<SignInScreen> {
     } else if (formStatus is SubmissionFailed) {
       return OverlayContainer(
         child: AlertDialog(
-          title: const Text('Error'),
-          content: const Text('Error'),
+          title: const Text('Login Failed'),
+          content: const Text('Invalid email or password!'),
           actions: [
             TextButton(
                 onPressed: () {
