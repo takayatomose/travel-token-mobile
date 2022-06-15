@@ -40,7 +40,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
               formStatus: SubmissionFailed(Exception('Bad request'))));
         }
       } on Exception {
-        print('grhhhh');
         emit(
             state.copyWith(formStatus: SubmissionFailed(Exception('Invalid'))));
       }
