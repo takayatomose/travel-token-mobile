@@ -6,9 +6,14 @@ import 'package:xtrip_mobile/bloc/auth/signin/signin_event.dart';
 import 'package:xtrip_mobile/bloc/auth/signin/signin_state.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
+import 'package:xtrip_mobile/sessions/form_submission_status.dart';
 import 'package:xtrip_mobile/widgets/border_text_field.dart';
 import 'package:xtrip_mobile/widgets/card_shadow.dart';
+import 'package:xtrip_mobile/widgets/circle_next_button.dart';
 import 'package:xtrip_mobile/widgets/container_background.dart';
+import 'package:xtrip_mobile/widgets/loading_indicator.dart';
+
+import '../widgets/overlay_container.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -79,6 +84,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   requiredField: true,
                                   requiredMessage: 'Please enter your password',
                                   icon: Icons.lock,
+                                  obscureText: true,
                                   onChanged: (value) => context
                                       .read<SignInBloc>()
                                       .add(SignInPasswordChanged(
@@ -112,22 +118,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           bottom: 0,
                           left: 0,
                           right: 0,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: const Color.fromRGBO(255, 128, 8, 1),
-                                  shape: const CircleBorder(
-                                      side: BorderSide(
-                                          width: 8, color: Colors.white)),
-                                  padding: const EdgeInsets.all(25)),
-                              onPressed: () {
-                                context
-                                    .read<SignInBloc>()
-                                    .add(SignInSubmitted());
-                              },
-                              child: const Icon(
-                                Icons.east,
-                                size: 30,
-                              )),
+                          child: CircleNextButton(onPressed: () {
+                            context.read<SignInBloc>().add(SignInSubmitted());
+                          }),
                         )
                       ],
                     ),
@@ -160,11 +153,44 @@ class _SignInScreenState extends State<SignInScreen> {
                               },
                           )
                         ])),
-              )
+              ),
+              _showDialog(context, state),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _showDialog(BuildContext context, SignInState state) {
+    FormSubmissionStatus formStatus = state.formStatus;
+    if (formStatus is FormSubmitting) {
+      return const LoadingIndicator();
+    } else if (formStatus is SubmissionFailed) {
+      return OverlayContainer(
+        child: AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Error'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  context.read<SignInBloc>().add(SignInAgain());
+                },
+                child: const Text('Ok'))
+          ],
+        ),
+      );
+    } else if (formStatus is SubmissionSuccess) {
+      return OverlayContainer(
+        child: AlertDialog(
+          title: const Text('Login Succesfully'),
+          content: const Text('You have login to your account successful'),
+          actions: [
+            TextButton(onPressed: () {}, child: const Text('Continue to app'))
+          ],
+        ),
+      );
+    }
+    return Container();
   }
 }

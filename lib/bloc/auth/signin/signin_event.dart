@@ -11,3 +11,5 @@ class SignInPasswordChanged extends SignInEvent {
 }
 
 class SignInSubmitted extends SignInEvent {}
+
+class SignInAgain extends SignInEvent {}

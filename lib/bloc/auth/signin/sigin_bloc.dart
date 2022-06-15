@@ -17,13 +17,19 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInPasswordChanged>(
       (event, emit) => emit(state.copyWith(password: event.password)),
     );
+    on<SignInAgain>(((event, emit) =>
+        emit(state.copyWith(formStatus: const InitialFormStatus()))));
     on<SignInSubmitted>((event, emit) async {
       emit(state.copyWith(formStatus: FormSubmitting()));
       try {
         emit(state.copyWith(formStatus: FormSubmitting()));
         final response =
             await authRepo.signin(email: state.email, password: state.password);
-            
+        if (response.statusCode == 200) {
+          emit(state.copyWith(formStatus: SubmissionSuccess()));
+        } else {
+          throw Exception('Invalid email or password');
+        }
       } on Exception catch (e) {
         emit(state.copyWith(formStatus: SubmissionFailed(e)));
       }
