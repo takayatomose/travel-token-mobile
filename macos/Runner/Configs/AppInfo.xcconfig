@@ -8,7 +8,7 @@
 PRODUCT_NAME = xtrip_mobile
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.xtripMobile
+PRODUCT_BUNDLE_IDENTIFIER = com.atastay.xtripMobile
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 com.atastay. All rights reserved.

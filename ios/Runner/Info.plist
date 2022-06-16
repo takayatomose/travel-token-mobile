@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Xtrip Mobile</string>
+	<string>Xtrip</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -27,13 +27,14 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Location Need</string>
+	<string>Location Needed</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Location Need</string>
+	<string>Location Needed</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location Need</string>
+	<string>Location Needed</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>fetch</string>
 		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
