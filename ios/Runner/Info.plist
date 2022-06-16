@@ -27,13 +27,14 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Location Need</string>
+	<string>Location Needed</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Location Need</string>
+	<string>Location Needed</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location Need</string>
+	<string>Location Needed</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>fetch</string>
 		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
