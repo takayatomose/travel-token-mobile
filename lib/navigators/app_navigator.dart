@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
 import 'package:xtrip_mobile/navigators/auth_navigator.dart';
 import 'package:xtrip_mobile/screens/loading_screen.dart';
+import 'package:xtrip_mobile/screens/unauthorized_permissions_screen.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
 import 'package:xtrip_mobile/sessions/session_state.dart';
 
@@ -14,6 +15,8 @@ class AppNavigator extends StatelessWidget {
     return BlocBuilder<SessionCubit, SessionState>(builder: (context, state) {
       return Navigator(
         pages: [
+          if (state is UnAuthorizedPermissions)
+            const MaterialPage(child: UnAuthorizedPermissionsScreen()),
           if (state is UnknownSessionState)
             const MaterialPage(child: LoadingScreen()),
           if (state is Unauthenticated)

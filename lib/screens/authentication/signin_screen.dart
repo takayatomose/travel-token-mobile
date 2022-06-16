@@ -13,7 +13,7 @@ import 'package:xtrip_mobile/widgets/circle_next_button.dart';
 import 'package:xtrip_mobile/widgets/container_background.dart';
 import 'package:xtrip_mobile/widgets/loading_indicator.dart';
 
-import '../widgets/overlay_container.dart';
+import '../../widgets/overlay_container.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
