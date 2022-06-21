@@ -1,8 +1,16 @@
 part of 'map_bloc.dart';
 
 @immutable
-abstract class MapState {}
+class MapState {
+  final int selectedIndex;
 
-class MapInitial extends MapState {
-  
+  MapState({this.selectedIndex = 0});
+
+  MapState copyWith({
+    int? selectedIndex,
+  }) {
+    return MapState(
+        selectedIndex: selectedIndex ?? this.selectedIndex);
+  }
 }
+

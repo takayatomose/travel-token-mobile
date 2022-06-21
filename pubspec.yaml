@@ -42,7 +42,6 @@ dependencies:
   equatable: ^2.0.3
   flutter_bloc: ^8.0.1
   formz: ^0.4.1
-  flutter_map: ^1.1.0
   # background_locator: 
   #   git: 
   #     url: https://github.com/caiobraga/background_locator
@@ -53,6 +52,8 @@ dependencies:
   background_fetch: ^1.1.0
   location: ^4.4.0
   latlong2: ^0.8.1
+  flutter_map: any
+  flutter_map_marker_cluster: any
 
 dev_dependencies:
   flutter_test:

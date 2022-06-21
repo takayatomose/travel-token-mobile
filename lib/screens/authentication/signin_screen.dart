@@ -181,15 +181,20 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       );
     } else if (formStatus is SubmissionSuccess) {
-      return OverlayContainer(
-        child: AlertDialog(
-          title: const Text('Login Succesfully'),
-          content: const Text('You have login to your account successful'),
-          actions: [
-            TextButton(onPressed: () {}, child: const Text('Continue to app'))
-          ],
-        ),
-      );
+      context.read<AuthCubit>().showHome();
+      // return OverlayContainer(
+      //   child: AlertDialog(
+      //     title: const Text('Login Succesfully'),
+      //     content: const Text('You have login to your account successful'),
+      //     actions: [
+      //       TextButton(
+      //           onPressed: () {
+      //             context.read<AuthCubit>().showMap();
+      //           },
+      //           child: const Text('Continue to app'))
+      //     ],
+      //   ),
+      // );
     }
     return Container();
   }

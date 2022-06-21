@@ -5,9 +5,9 @@ part 'map_event.dart';
 part 'map_state.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
-  MapBloc() : super(MapInitial()) {
-    on<MapEvent>((event, emit) {
-      // TODO: implement event handler
+  MapBloc() : super(MapState()) {
+    on<SelectSpot>((event, emit) {
+      emit(state.copyWith(selectedIndex: event.selectedIndex));
     });
   }
 }
