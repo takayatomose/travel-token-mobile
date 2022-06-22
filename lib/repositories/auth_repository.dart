@@ -3,15 +3,14 @@ import 'package:xtrip_mobile/utils/api.dart';
 import 'dart:convert';
 
 class AuthRepository {
+  final apiService = ApiService();
   Future<http.Response> signup(
       {required String invitationCode,
       required String email,
       required String fullName,
       required String password}) async {
-    final response = await http.post(Uri.parse('${Api.getHttpClient()}/user'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
+    final response = await apiService.postAPI(
+        uri: '/auth/register',
         body: json.encode({
           'invitationCode': invitationCode,
           'email': email,
@@ -21,17 +20,16 @@ class AuthRepository {
     return response;
   }
 
-  Future<http.Response> signin(
+  Future<http.Response?> signin(
       {required String email, required String password}) async {
-    return http.post(Uri.parse('${Api.getHttpClient()}/user/login'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
+    return apiService.postAPI(
+        uri: '/auth/login',
         body: json.encode({'email': email, 'password': password}));
   }
 
   Future<http.Response> forgotPassword({required String email}) async {
-    return http.post(Uri.parse('${Api.getHttpClient()}/user/forgot-password'),
+    return http.post(
+        Uri.parse('${ApiService.getHttpClient()}/auth/forgot-password'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -42,7 +40,8 @@ class AuthRepository {
       {required String email,
       required String code,
       required String password}) async {
-    return http.post(Uri.parse('${Api.getHttpClient()}/user/reset-password'),
+    return http.post(
+        Uri.parse('${ApiService.getHttpClient()}/auth/reset-password'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -56,7 +55,7 @@ class AuthRepository {
 
   Future<http.Response> activateUser(
       {required String email, required String code}) async {
-    return http.post(Uri.parse('${Api.getHttpClient()}/user/activate'),
+    return http.post(Uri.parse('${ApiService.getHttpClient()}/auth/activate'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },

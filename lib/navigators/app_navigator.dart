@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
 import 'package:xtrip_mobile/navigators/auth_navigator.dart';
+import 'package:xtrip_mobile/screens/home_screen.dart';
 import 'package:xtrip_mobile/screens/loading_screen.dart';
 import 'package:xtrip_mobile/screens/unauthorized_permissions_screen.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
@@ -25,7 +26,8 @@ class AppNavigator extends StatelessWidget {
               create: (context) =>
                   AuthCubit(sessionCubit: context.read<SessionCubit>()),
               child: const AuthNavigator(),
-            ))
+            )),
+          if (state is Authenticated) MaterialPage(child: const Home()),
         ],
         onPopPage: (router, result) => router.didPop(result),
       );
