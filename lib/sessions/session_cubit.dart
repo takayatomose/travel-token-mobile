@@ -21,7 +21,7 @@ class SessionCubit extends Cubit<SessionState> {
       emit(UnAuthorizedPermissions());
     } else {
       try {
-        await authRepo.attemptAutoLogin();
+        await attemptAutoLogin();
         emit(Authenticated(user: null));
       } on Exception {
         emit(Unauthenticated());
@@ -29,7 +29,7 @@ class SessionCubit extends Cubit<SessionState> {
     }
   }
 
-  void attemptAutoLogin() async {
+  Future<void> attemptAutoLogin() async {
     try {
       final userToken = await _secureStorage.read(key: USER_TOKEN);
       if (userToken == null || userToken == '' || userToken.isEmpty) {
