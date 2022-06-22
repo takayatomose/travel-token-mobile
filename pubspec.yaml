@@ -56,6 +56,9 @@ dependencies:
   flutter_secure_storage: ^5.0.2
   jwt_decoder: ^2.0.1
   http_interceptor: ^1.0.2
+  latlong2: ^0.8.1
+  flutter_map: any
+  flutter_map_marker_cluster: any
 
 dev_dependencies:
   flutter_test:

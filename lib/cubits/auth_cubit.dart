@@ -8,7 +8,9 @@ enum ScreenState {
   forgotPassword,
   resetPassword,
   onBoard,
-  activation
+  activation,
+  customMap,
+  home
 }
 
 class AuthState {
@@ -35,4 +37,7 @@ class AuthCubit extends Cubit<AuthState> {
   launchSession(AuthCredentials authCredentials) {
     sessionCubit.setSession(authCredentials);
   }
+
+  void showMap() => emit(AuthState(screenState: ScreenState.customMap));
+  void showHome() => emit(AuthState(screenState: ScreenState.home));
 }
