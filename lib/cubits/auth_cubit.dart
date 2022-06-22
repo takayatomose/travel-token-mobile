@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xtrip_mobile/bloc/auth/auth_credentials.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
 
 enum ScreenState {
@@ -31,4 +32,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthState(screenState: ScreenState.activation, email: email));
   void showForgotPassword() =>
       emit(AuthState(email: '', screenState: ScreenState.forgotPassword));
+  launchSession(AuthCredentials authCredentials) {
+    sessionCubit.setSession(authCredentials);
+  }
 }
