@@ -53,16 +53,15 @@ class _CustomMapState extends State<CustomMap> {
 
   @override
   Widget build(BuildContext context) {
-    // final MapBloc mapBloc = BlocProvider.of<MapBloc>(context);
-    // print('mapBloc: ${mapBloc}' );
     return BlocProvider(
       create: (context) => MapBloc(),
-      child: BlocConsumer<MapBloc , MapState>(
+      child: BlocConsumer<MapBloc, MapState>(
         listener: (context, state) {
           print('listener:' + state.selectedIndex.toString());
           // TODO: implement listener
         },
         builder: (context, state) {
+          print('map state: ' + state.selectedIndex.toString());
           return Scaffold(
             appBar: AppBar(
               title: Text(state.selectedIndex.toString()),
@@ -147,7 +146,6 @@ class _CustomMapState extends State<CustomMap> {
 }
 
 class MySearchDelegate extends SearchDelegate {
-  
   @override
   List<Widget>? buildActions(BuildContext context) => [
         IconButton(
@@ -180,17 +178,20 @@ class MySearchDelegate extends SearchDelegate {
       final input = query.toLowerCase();
       return result.contains(input);
     }).toList();
-    return ListView.builder(
-        itemCount: suggestions.length,
-        itemBuilder: ((context, index) {
-          final suggestion = suggestions[index];
-          return ListTile(
-              title: Text(suggestion.name),
-              onTap: () {
-                context.read<MapBloc>().add(SelectSpot(selectedIndex: index));
-                query = index.toString();
-                showResults(context);
-              });
-        }));
+    return BlocProvider(
+      create: (context) => MapBloc(),
+      child: ListView.builder(
+          itemCount: suggestions.length,
+          itemBuilder: ((context, index) {
+            final suggestion = suggestions[index];
+            return ListTile(
+                title: Text(suggestion.name),
+                onTap: () {
+                  context.read<MapBloc>().add(SelectSpot(selectedIndex: index));
+                  query = index.toString();
+                  showResults(context);
+                });
+          })),
+    );
   }
 }
