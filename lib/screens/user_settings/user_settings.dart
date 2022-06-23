@@ -94,12 +94,12 @@ class UserSettingsScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 25, bottom: 50),
                       child: Row(
                         children: [
-                          const Expanded(
+                          Expanded(
                             flex: 50,
                             child: Text(
-                              'Takaya Tomose',
+                              _sessionState.user!.fullName,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700,
                                 color: Color.fromRGBO(255, 255, 255, 1),
