@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,8 +26,6 @@ Future main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,8 +39,9 @@ class MyApp extends StatelessWidget {
           RepositoryProvider(create: (context) => UserRepository()),
         ],
         child: BlocProvider(
-          create: (context) =>
-              SessionCubit(authRepo: context.read<AuthRepository>(), userRepo: context.read<UserRepository>()),
+          create: (context) => SessionCubit(
+              authRepo: context.read<AuthRepository>(),
+              userRepo: context.read<UserRepository>()),
           child: const AppNavigator(),
         ),
       ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xtrip_mobile/sessions/session_cubit.dart';
+import 'package:xtrip_mobile/sessions/session_state.dart';
 import 'package:xtrip_mobile/widgets/user_balance_column.dart';
 import 'package:xtrip_mobile/widgets/user_settings_row.dart';
 
@@ -7,6 +10,8 @@ class UserSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SessionState _sessionState =
+        BlocProvider.of<SessionCubit>(context).state;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 60),
@@ -15,14 +20,24 @@ class UserSettingsScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Image(
-                    width: 60,
-                    height: 60,
-                    image: AssetImage('assets/avatars/avatar_1.png'),
+                  Expanded(
+                    flex: 20,
+                    child: Image(
+                      width: 60,
+                      height: 60,
+                      image: AssetImage(
+                          'assets/avatars/${_sessionState.user!.profileAvatar}.png'),
+                    ),
                   ),
-                  const Text(
-                    '',
-                    style: TextStyle(color: Colors.blueAccent),
+                  Expanded(
+                    flex: 50,
+                    child: Text(
+                      'Welcome,\n${_sessionState.user!.fullName}',
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromRGBO(0, 0, 0, 1)),
+                    ),
                   ),
                   TextButton(
                     onPressed: () {},
