@@ -22,7 +22,7 @@ class SessionCubit extends Cubit<SessionState> {
     } else {
       try {
         await attemptAutoLogin();
-        emit(Authenticated(user: null));
+        // emit(Authenticated(user: null));
       } on Exception {
         emit(Unauthenticated());
       }
@@ -42,7 +42,8 @@ class SessionCubit extends Cubit<SessionState> {
       final user = await userRepository.getUserInfo();
 
       emit(Authenticated(user: user));
-    } on Exception {
+    } on Exception catch (e){
+      print('error');
       emit(Unauthenticated());
     }
   }

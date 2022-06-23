@@ -25,7 +25,7 @@ class _UserActiveScreenState extends State<UserActiveScreen> {
   @override
   Widget build(BuildContext context) {
     return ContainerBackground(
-      bgAsset: 'assets/images/signup_1.png',
+      bgAsset: 'assets/images/auth_2.png',
       child: BlocProvider(
         create: (context) => UserActivationBloc(
             authRepo: context.read<AuthRepository>(),
