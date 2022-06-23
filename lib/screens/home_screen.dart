@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xtrip_mobile/screens/custom_map_screen.dart';
+import 'package:xtrip_mobile/screens/user_settings/user_settings.dart';
 
 // void main() => runApp(const Home());
 
@@ -42,10 +43,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'Index 3: Shop',
       style: optionStyle,
     ),
-    Text(
-      'Index 4: Account',
-      style: optionStyle,
-    ),
+    UserSettingsScreen(),
   ];
 
   void _onItemTapped(int index) {

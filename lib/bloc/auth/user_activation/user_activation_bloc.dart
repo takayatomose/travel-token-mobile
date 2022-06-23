@@ -17,11 +17,10 @@ class UserActivationBloc
     on<UserActivationCodeChange>((event, emit) =>
         emit(state.copyWith(activationCode: event.activationCode)));
     on<ActiveCodeAgain>(((event, emit) => emit(
-        state.copyWith(formStatus: InitialFormStatus(), activationCode: ''))));
+        state.copyWith(formStatus: const InitialFormStatus(), activationCode: ''))));
     on<UserActivationSubmitted>(
       (event, emit) async {
         emit(state.copyWith(formStatus: FormSubmitting()));
-        // Future.delayed(const Duration(microseconds: 300), () async {
         try {
           final response = await authRepo.activateUser(
               email: state.email, code: state.activationCode);

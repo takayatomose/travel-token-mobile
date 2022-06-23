@@ -10,9 +10,11 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SessionCubit extends Cubit<SessionState> {
   final AuthRepository authRepo;
+  final UserRepository userRepo;
   final _secureStorage = const FlutterSecureStorage();
-  final userRepository = UserRepository();
-  SessionCubit({required this.authRepo}) : super(UnknownSessionState()) {
+
+  SessionCubit({required this.authRepo, required this.userRepo})
+      : super(UnknownSessionState()) {
     checkPermissions();
   }
 
@@ -22,7 +24,6 @@ class SessionCubit extends Cubit<SessionState> {
     } else {
       try {
         await attemptAutoLogin();
-        emit(Authenticated(user: null));
       } on Exception {
         emit(Unauthenticated());
       }
@@ -39,10 +40,13 @@ class SessionCubit extends Cubit<SessionState> {
         // TODO: refresh token
       }
 
-      final user = await userRepository.getUserInfo();
-
+      final user = await userRepo.getUserInfo();
+      if (user == null) {
+        await _secureStorage.delete(key: USER_TOKEN);
+        throw Exception('Not found user');
+      }
       emit(Authenticated(user: user));
-    } on Exception {
+    } on Exception catch (e) {
       emit(Unauthenticated());
     }
   }
@@ -50,7 +54,7 @@ class SessionCubit extends Cubit<SessionState> {
   void setSession(AuthCredentials authCredentials) async {
     await _secureStorage.write(key: USER_TOKEN, value: authCredentials.token);
     // final user =
-    final user = await userRepository.getUserInfo();
+    final user = await userRepo.getUserInfo();
     emit(Authenticated(user: user));
     try {} on Exception catch (e) {
       emit(Unauthenticated());

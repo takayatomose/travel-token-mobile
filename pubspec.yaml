@@ -59,6 +59,8 @@ dependencies:
   latlong2: ^0.8.1
   flutter_map: any
   flutter_map_marker_cluster: any
+  flutter_svg: ^1.1.0
+  package_info_plus: ^1.4.2
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +90,7 @@ flutter:
   assets:
     - .env
     - assets/images/
+    - assets/avatars/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

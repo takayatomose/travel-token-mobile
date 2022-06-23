@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:xtrip_mobile/navigators/app_navigator.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
+import 'package:xtrip_mobile/repositories/user_repository.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -35,11 +36,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RepositoryProvider(
-        create: (context) => AuthRepository(),
+      home: MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider(create: (context) => AuthRepository()),
+          RepositoryProvider(create: (context) => UserRepository()),
+        ],
         child: BlocProvider(
           create: (context) =>
-              SessionCubit(authRepo: context.read<AuthRepository>()),
+              SessionCubit(authRepo: context.read<AuthRepository>(), userRepo: context.read<UserRepository>()),
           child: const AppNavigator(),
         ),
       ),

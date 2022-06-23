@@ -27,7 +27,7 @@ class AppNavigator extends StatelessWidget {
                   AuthCubit(sessionCubit: context.read<SessionCubit>()),
               child: const AuthNavigator(),
             )),
-          if (state is Authenticated) MaterialPage(child: const Home()),
+          if (state is Authenticated) const MaterialPage(child: Home()),
         ],
         onPopPage: (router, result) => router.didPop(result),
       );
