@@ -10,7 +10,7 @@ class ForgotPwdBloc extends Bloc<ForgotPwdEvent, ForgotPwdState> {
   final AuthCubit authCubit;
 
   ForgotPwdBloc({required this.authCubit, required this.authRepo})
-      : super(ForgotPwdState(formState: PwdFormState.forgot)) {
+      : super(ForgotPwdState(formState: PwdFormState.forgot, email: '')) {
     on<ForgotPwdFormStateChanged>((event, emit) => emit(state.copyWith(
         formState: event.formState, formStatus: const InitialFormStatus())));
     on<ForgotPwdEmailChanged>(
