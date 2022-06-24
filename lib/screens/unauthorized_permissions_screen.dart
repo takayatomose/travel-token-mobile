@@ -8,7 +8,7 @@ class UnAuthorizedPermissionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ContainerBackground(
-      bgAsset: 'assets/images/login_1.png',
+      bgAsset: 'assets/images/onboard_1.png',
       child: OverlayContainer(
           child: AlertDialog(
         title: Text('Permissions Error'),

@@ -27,7 +27,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return ContainerBackground(
-        bgAsset: 'assets/images/signup_1.png',
+        bgAsset: 'assets/images/auth_2.png',
         child: BlocProvider(
           create: (context) => ForgotPwdBloc(
               authCubit: context.read<AuthCubit>(),

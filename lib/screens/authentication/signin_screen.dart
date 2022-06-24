@@ -27,7 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return ContainerBackground(
-      bgAsset: 'assets/images/login_1.png',
+      bgAsset: 'assets/images/auth_3.png',
       child: BlocProvider(
         create: (context) => SignInBloc(
             authRepo: context.read<AuthRepository>(),

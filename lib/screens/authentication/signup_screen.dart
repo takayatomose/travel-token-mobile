@@ -28,7 +28,7 @@ class _SignUpScreen extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return ContainerBackground(
-      bgAsset: 'assets/images/signup_1.png',
+      bgAsset: 'assets/images/auth_4.png',
       child: BlocProvider(
         create: (context) => SignUpBloc(
             authRepo: context.read<AuthRepository>(),
@@ -80,7 +80,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                   padding: const EdgeInsets.only(bottom: 15),
                                   requiredField: true,
                                   requiredMessage: 'Please enter your password',
-                                  icon: Icons.key,
+                                  icon: Icons.lock,
                                   hintText: 'Your password',
                                   obscureText: true,
                                   onChanged: (value) => context
@@ -100,7 +100,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                     }
                                     return null;
                                   },
-                                  icon: Icons.key,
+                                  icon: Icons.lock,
                                   hintText: 'Confirm your password',
                                   obscureText: true,
                                 ),

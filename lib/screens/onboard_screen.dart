@@ -12,7 +12,7 @@ class OnBoardScreen extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/onboard_11.png'),
+              image: AssetImage('assets/images/onboard_1.webp'),
               fit: BoxFit.cover)),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -25,10 +25,10 @@ class OnBoardScreen extends StatelessWidget {
             child: Stack(
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Padding(
-                      padding: EdgeInsets.only(bottom: 35, top: 100),
+                      padding: EdgeInsets.only(bottom: 16, top: 73),
                       child: Text(
                         'Travel To Earn',
                         style: TextStyle(
@@ -40,11 +40,11 @@ class OnBoardScreen extends StatelessWidget {
                       ),
                     ),
                     const Padding(
-                      padding: EdgeInsets.only(bottom: 10),
+                      padding: EdgeInsets.only(bottom: 11),
                       child: Text(
                         'Already had account?',
                         style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 20,
                             fontWeight: FontWeight.w400,
                             color: Color.fromRGBO(0, 0, 0, 0.5)),
                       ),
@@ -59,7 +59,7 @@ class OnBoardScreen extends StatelessWidget {
                           'Login with us',
                           style: TextStyle(
                               decoration: TextDecoration.underline,
-                              fontSize: 16,
+                              fontSize: 20,
                               fontWeight: FontWeight.w700,
                               color: Color.fromRGBO(255, 128, 8, 1)),
                         ),
@@ -71,12 +71,12 @@ class OnBoardScreen extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 80),
+                              vertical: 15, horizontal: 50),
                           primary: const Color.fromRGBO(255, 128, 8, 1),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8))),
                       child: const Text(
-                        'Get started',
+                        'Start',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
@@ -92,7 +92,7 @@ class OnBoardScreen extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: Color.fromRGBO(0, 0, 0, 0.7)),
+                        color: Color.fromRGBO(234, 231, 231, 0.7)),
                     textAlign: TextAlign.center,
                   ),
                 )
