@@ -35,9 +35,10 @@ class UserSettingsScreen extends StatelessWidget {
                     child: Text(
                       'Welcome,\n${_sessionState.user!.fullName}',
                       style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: Color.fromRGBO(0, 0, 0, 1)),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromRGBO(0, 0, 0, 1),
+                      ),
                     ),
                   ),
                   TextButton(
