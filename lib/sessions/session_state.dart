@@ -1,12 +1,32 @@
-abstract class SessionState {}
+abstract class AuthSessionState {}
 
-class UnknownSessionState extends SessionState {}
+class UnknownSessionState extends AuthSessionState {}
 
-class Unauthenticated extends SessionState {}
+class Unauthenticated extends AuthSessionState {}
 
-class UnAuthorizedPermissions extends SessionState {}
+class Authenticated extends AuthSessionState {}
 
-class Authenticated extends SessionState {
+// enum AuthSessionState {
+//   unknownSessionState,
+//   unauthenticated,
+//   authenticated,
+// }
+
+class SessionState {
+  final bool locationPermission;
   final dynamic user;
-  Authenticated({required this.user});
+  final AuthSessionState authSessionState;
+  SessionState(
+      {required this.locationPermission,
+      this.user,
+      required this.authSessionState});
+  SessionState copyWith(
+      {bool? locationPermission,
+      dynamic user,
+      AuthSessionState? authSessionState}) {
+    return SessionState(
+        authSessionState: authSessionState ?? this.authSessionState,
+        locationPermission: locationPermission ?? this.locationPermission,
+        user: user ?? this.user);
+  }
 }

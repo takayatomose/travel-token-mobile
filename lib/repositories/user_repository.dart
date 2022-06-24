@@ -8,7 +8,6 @@ class UserRepository {
   Future<UserModel?> getUserInfo() async {
     try {
       final response = await apiService.getApi(uri: '/user/info');
-      print(json.decode(response.body));
       return UserModel.fromJson(json.decode(response.body));
     } on Exception catch (e) {
       return null;

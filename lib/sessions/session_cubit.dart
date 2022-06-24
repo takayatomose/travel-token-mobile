@@ -10,22 +10,24 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SessionCubit extends Cubit<SessionState> {
   final AuthRepository authRepo;
+  final UserRepository userRepo;
   final _secureStorage = const FlutterSecureStorage();
-  final userRepository = UserRepository();
-  SessionCubit({required this.authRepo}) : super(UnknownSessionState()) {
+
+  SessionCubit({required this.authRepo, required this.userRepo})
+      : super(SessionState(
+            locationPermission: true,
+            authSessionState: UnknownSessionState())) {
     checkPermissions();
   }
 
   Future<void> checkPermissions() async {
     if (!(await Permission.locationAlways.request().isGranted)) {
-      emit(UnAuthorizedPermissions());
-    } else {
-      try {
-        await attemptAutoLogin();
-        // emit(Authenticated(user: null));
-      } on Exception {
-        emit(Unauthenticated());
-      }
+      emit(state.copyWith(locationPermission: false));
+    }
+    try {
+      await attemptAutoLogin();
+    } on Exception {
+      emit(state.copyWith(authSessionState: Authenticated()));
     }
   }
 
@@ -39,22 +41,30 @@ class SessionCubit extends Cubit<SessionState> {
         // TODO: refresh token
       }
 
-      final user = await userRepository.getUserInfo();
-
-      emit(Authenticated(user: user));
-    } on Exception catch (e){
-      print('error');
-      emit(Unauthenticated());
+      final user = await userRepo.getUserInfo();
+      if (user == null) {
+        await _secureStorage.delete(key: USER_TOKEN);
+        throw Exception('Not found user');
+      }
+      emit(state.copyWith(authSessionState: Authenticated(), user: user));
+    } on Exception catch (e) {
+      emit(state.copyWith(authSessionState: Unauthenticated()));
     }
   }
 
   void setSession(AuthCredentials authCredentials) async {
-    await _secureStorage.write(key: USER_TOKEN, value: authCredentials.token);
-    // final user =
-    final user = await userRepository.getUserInfo();
-    emit(Authenticated(user: user));
-    try {} on Exception catch (e) {
-      emit(Unauthenticated());
+    try {
+      await _secureStorage.write(key: USER_TOKEN, value: authCredentials.token);
+      final user = await userRepo.getUserInfo();
+      emit(state.copyWith(authSessionState: Authenticated(), user: user));
+    } on Exception catch (e) {
+      emit(state.copyWith(authSessionState: Unauthenticated()));
     }
+  }
+
+  void signOut() async {
+    await _secureStorage.delete(key: USER_TOKEN);
+    await _secureStorage.delete(key: USER_REFRESH_TOKEN);
+    emit(state.copyWith(authSessionState: Unauthenticated()));
   }
 }
