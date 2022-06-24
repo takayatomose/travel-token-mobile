@@ -12,6 +12,7 @@ import 'package:xtrip_mobile/widgets/circle_next_button.dart';
 import 'package:xtrip_mobile/widgets/container_background.dart';
 import 'package:xtrip_mobile/widgets/loading_indicator.dart';
 import 'package:xtrip_mobile/widgets/overlay_container.dart';
+import 'package:xtrip_mobile/widgets/back_button.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -36,6 +37,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             listener: (context, state) {},
             builder: (context, state) => Stack(
               children: [
+                BackButtonCustom(onPressed: () {
+                  context.read<AuthCubit>().showSignIn();
+                }),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(

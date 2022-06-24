@@ -12,6 +12,7 @@ import 'package:xtrip_mobile/widgets/circle_next_button.dart';
 import 'package:xtrip_mobile/widgets/container_background.dart';
 import 'package:xtrip_mobile/widgets/loading_indicator.dart';
 import 'package:xtrip_mobile/widgets/overlay_container.dart';
+import 'package:xtrip_mobile/widgets/back_button.dart';
 
 class UserActiveScreen extends StatefulWidget {
   const UserActiveScreen({Key? key}) : super(key: key);
@@ -33,6 +34,9 @@ class _UserActiveScreenState extends State<UserActiveScreen> {
         child: BlocConsumer<UserActivationBloc, UserActivationState>(
           builder: (context, state) => Stack(
             children: [
+              BackButtonCustom(onPressed: () {
+                context.read<AuthCubit>().showSignUp();
+              }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Form(

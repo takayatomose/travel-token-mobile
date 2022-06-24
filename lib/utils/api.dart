@@ -8,7 +8,7 @@ class ApiService {
   final Client httpClient =
       InterceptedClient.build(interceptors: [ApiInterceptor()]);
   static getHttpClient() {
-    return Uri.https(
+    return Uri.http(
         dotenv.get('API_URL', fallback: 'https://api-prod.xtrip.travel'), '');
   }
 
