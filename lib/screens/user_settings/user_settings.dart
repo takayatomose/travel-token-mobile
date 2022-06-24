@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
@@ -152,7 +153,9 @@ class UserSettingsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        AppSettings.openLocationSettings();
+                      },
                       child: const Text(
                         'Grant GPS access permission',
                         style: TextStyle(
