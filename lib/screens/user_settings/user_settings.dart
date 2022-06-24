@@ -40,7 +40,25 @@ class UserSettingsScreen extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => showDialog(
+                        context: context,
+                        builder: (BuildContext _context) => AlertDialog(
+                              title: const Text('Confirm Sign Out'),
+                              content: const Text('Are you want to sign out'),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(_context).pop();
+                                      context.read<SessionCubit>().signOut();
+                                    },
+                                    child: const Text('Ok')),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(_context).pop();
+                                    },
+                                    child: const Text('Cancel'))
+                              ],
+                            )),
                     child: Column(
                       children: const [
                         Icon(
@@ -116,6 +134,31 @@ class UserSettingsScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              if (_sessionState.locationPermission == false)
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  child: Image(
+                      image: AssetImage('assets/images/gps_permission.png')),
+                ),
+              if (_sessionState.locationPermission == false)
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 35, vertical: 15),
+                        primary: const Color.fromRGBO(255, 128, 8, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        'Grant GPS access permission',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w700),
+                      )),
+                ),
               ListView(
                 primary: false,
                 shrinkWrap: true,
