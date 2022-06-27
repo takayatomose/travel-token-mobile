@@ -16,6 +16,10 @@ class ApiService {
     return httpClient.post(Uri.parse('${getHttpClient()}$uri'), body: body);
   }
 
+  Future<http.Response> patchApi({required String uri, Object? body}) {
+    return httpClient.patch(Uri.parse('${getHttpClient()}$uri'), body: body);
+  }
+
   Future<http.Response> getApi({required String uri}) {
     return httpClient.get(Uri.parse('${getHttpClient()}$uri'));
   }

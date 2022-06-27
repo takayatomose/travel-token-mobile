@@ -21,11 +21,20 @@ class UserRepository {
 
   Future<Response> changePassowrd(
       {required String currentPassword, required String newPassword}) async {
-    final response = await apiService.postAPI(
+    final response = await apiService.patchApi(
         uri: '/user/change-password',
         body: json.encode({
           'currentPassword': currentPassword,
           'newPassword': newPassword,
+        }));
+    return response;
+  }
+
+  Future<Response> updateInfo({required String fullName}) async {
+    final response = await apiService.patchApi(
+        uri: '/user/info',
+        body: json.encode({
+          'fullName': fullName,
         }));
     return response;
   }
