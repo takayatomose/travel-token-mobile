@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:http/http.dart';
 import 'package:xtrip_mobile/models/user.dart';
 import 'package:xtrip_mobile/utils/api.dart';
 
@@ -16,5 +17,16 @@ class UserRepository {
     } on Exception {
       return null;
     }
+  }
+
+  Future<Response> changePassowrd(
+      {required String currentPassword, required String newPassword}) async {
+    final response = await apiService.postAPI(
+        uri: '/user/change-password',
+        body: json.encode({
+          'currentPassword': currentPassword,
+          'newPassword': newPassword,
+        }));
+    return response;
   }
 }

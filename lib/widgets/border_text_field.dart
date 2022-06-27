@@ -10,19 +10,23 @@ class BorderTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final bool? requiredField;
   final String? requiredMessage;
+  final double borderRadius;
+  final bool hasIcon;
 
-  const BorderTextField({
-    Key? key,
-    this.controller,
-    required this.padding,
-    this.icon,
-    this.validator,
-    this.hintText,
-    this.obscureText = false,
-    this.onChanged,
-    this.requiredField,
-    this.requiredMessage,
-  }) : super(key: key);
+  const BorderTextField(
+      {Key? key,
+      this.controller,
+      required this.padding,
+      this.icon,
+      this.validator,
+      this.hintText,
+      this.obscureText = false,
+      this.onChanged,
+      this.requiredField,
+      this.requiredMessage,
+      this.borderRadius = 30,
+      this.hasIcon = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +35,10 @@ class BorderTextField extends StatelessWidget {
       child: TextFormField(
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-            prefixIcon: Icon(icon),
+            prefixIcon: hasIcon ? Icon(icon) : null,
             hintText: hintText,
-            border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(30)))),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(borderRadius)))),
         validator: (value) {
           if (validator != null) {
             return validator!(value);

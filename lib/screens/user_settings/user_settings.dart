@@ -1,6 +1,7 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xtrip_mobile/bloc/user_setting/us_cubit.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
 import 'package:xtrip_mobile/sessions/session_state.dart';
 import 'package:xtrip_mobile/widgets/user_balance_column.dart';
@@ -13,6 +14,7 @@ class UserSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final SessionState _sessionState =
         BlocProvider.of<SessionCubit>(context).state;
+    final USCubit usCubit = BlocProvider.of<USCubit>(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 60),
@@ -169,11 +171,15 @@ class UserSettingsScreen extends StatelessWidget {
                 children: [
                   UserSettingRow(
                     label: 'Your account',
-                    onTap: () {},
+                    onTap: () {
+                      usCubit.accountInfo();
+                    },
                   ),
                   UserSettingRow(
                     label: 'Change password',
-                    onTap: () {},
+                    onTap: () {
+                      usCubit.changePassword();
+                    },
                   ),
                   UserSettingRow(
                     label: 'Invite your friend',
