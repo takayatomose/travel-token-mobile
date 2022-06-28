@@ -1,0 +1,2 @@
+const String USER_TOKEN = 'USER_TOKEN';
+const String USER_REFRESH_TOKEN = 'USER_REFRESH_TOKEN';
