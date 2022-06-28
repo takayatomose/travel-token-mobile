@@ -12,7 +12,7 @@ class UserSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SessionState _sessionState =
+    final SessionState sessionState =
         BlocProvider.of<SessionCubit>(context).state;
     final USCubit usCubit = BlocProvider.of<USCubit>(context);
     return Scaffold(
@@ -29,13 +29,13 @@ class UserSettingsScreen extends StatelessWidget {
                       width: 60,
                       height: 60,
                       image: AssetImage(
-                          'assets/avatars/${_sessionState.user!.profileAvatar}.png'),
+                          'assets/avatars/${sessionState.user!.profileAvatar}.png'),
                     ),
                   ),
                   Expanded(
                     flex: 50,
                     child: Text(
-                      'Welcome,\n${_sessionState.user!.fullName}',
+                      'Welcome,\n${sessionState.user!.fullName}',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
@@ -46,19 +46,19 @@ class UserSettingsScreen extends StatelessWidget {
                   TextButton(
                     onPressed: () => showDialog(
                         context: context,
-                        builder: (BuildContext _context) => AlertDialog(
+                        builder: (BuildContext dialogContext) => AlertDialog(
                               title: const Text('Confirm Sign Out'),
                               content: const Text('Are you want to sign out'),
                               actions: [
                                 TextButton(
                                     onPressed: () {
-                                      Navigator.of(_context).pop();
+                                      Navigator.of(dialogContext).pop();
                                       context.read<SessionCubit>().signOut();
                                     },
                                     child: const Text('Ok')),
                                 TextButton(
                                     onPressed: () {
-                                      Navigator.of(_context).pop();
+                                      Navigator.of(dialogContext).pop();
                                     },
                                     child: const Text('Cancel'))
                               ],
@@ -119,7 +119,7 @@ class UserSettingsScreen extends StatelessWidget {
                           Expanded(
                             flex: 50,
                             child: Text(
-                              _sessionState.user!.fullName,
+                              sessionState.user!.fullName,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 fontSize: 16,
@@ -138,13 +138,13 @@ class UserSettingsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              if (_sessionState.locationPermission == false)
+              if (sessionState.locationPermission == false)
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 15),
                   child: Image(
                       image: AssetImage('assets/images/gps_permission.png')),
                 ),
-              if (_sessionState.locationPermission == false)
+              if (sessionState.locationPermission == false)
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
                   child: ElevatedButton(
@@ -193,7 +193,9 @@ class UserSettingsScreen extends StatelessWidget {
                   ),
                   UserSettingRow(
                     label: 'Guidance',
-                    onTap: () {},
+                    onTap: () {
+                      usCubit.guide();
+                    },
                   ),
                   UserSettingRow(
                     label: 'Contact us',

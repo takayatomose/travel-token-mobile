@@ -13,18 +13,16 @@ class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
       required this.sessionCubit,
       required this.userRepo})
       : super(UserInfoState(fullName: fullName)) {
-    on<UserInfoEditableChanged>(
-        (event, emit) => emit(state.copyWith(editing: event.editabled)));
+    on<UserInfoEditableChanged>((event, emit) => emit(state.copyWith(
+        editing: event.editabled, formStatus: const InitialFormStatus())));
     on<UserInfoFullNameChanged>(
         (event, emit) => emit(state.copyWith(fullName: event.fullName)));
     on<UserInfoSubmitted>((event, emit) async {
       try {
         final response = await userRepo.updateInfo(fullName: state.fullName);
-        print(response.statusCode);
         if (response.statusCode == 200) {
           await sessionCubit.fetchUserInfo();
-          emit(state.copyWith(
-              editing: false, formStatus: const InitialFormStatus()));
+          emit(state.copyWith(editing: false, formStatus: SubmissionSuccess()));
         } else {}
       } on Exception catch (e) {}
     });
