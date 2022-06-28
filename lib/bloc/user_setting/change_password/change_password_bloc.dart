@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/change_password/change_password_event.dart';
 import 'package:xtrip_mobile/bloc/user_setting/change_password/change_password_state.dart';
-import 'package:xtrip_mobile/cubits/auth_cubit.dart';
 import 'package:xtrip_mobile/repositories/user_repository.dart';
 import 'package:xtrip_mobile/sessions/form_submission_status.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xtrip_mobile/bloc/user_setting/us_cubit.dart';
 import 'package:xtrip_mobile/bloc/user_setting/user_info/user_info_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/user_info/user_info_event.dart';
 import 'package:xtrip_mobile/bloc/user_setting/user_info/user_info_state.dart';
@@ -8,6 +7,7 @@ import 'package:xtrip_mobile/repositories/user_repository.dart';
 import 'package:xtrip_mobile/sessions/form_submission_status.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
 import 'package:xtrip_mobile/sessions/session_state.dart';
+import 'package:xtrip_mobile/utils/toast_notification.dart';
 import 'package:xtrip_mobile/widgets/user_setting_wrapper.dart';
 
 class AccountInfoScreen extends StatefulWidget {
@@ -28,17 +28,29 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final USCubit usCubit = BlocProvider.of<USCubit>(context);
     final SessionState sessionState =
         BlocProvider.of<SessionCubit>(context).state;
-    GlobalKey<FormState> _infoFormKey = GlobalKey<FormState>();
+    GlobalKey<FormState> infoFormKey = GlobalKey<FormState>();
     return BlocProvider(
       create: (context) => UserInfoBloc(
           fullName: sessionState.user!.fullName,
           sessionCubit: context.read<SessionCubit>(),
           userRepo: context.read<UserRepository>()),
       child: BlocConsumer<UserInfoBloc, UserInfoState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state.formStatus is SubmissionSuccess) {
+            ToastNotification.showToast(context,
+                type: 'success',
+                title: 'User Info updated',
+                message: 'You have updated your information');
+          }
+          if (state.formStatus is SubmissionFailed) {
+            ToastNotification.showToast(context,
+                type: 'error',
+                title: 'Error',
+                message: 'Something went wrong. Please try again later');
+          }
+        },
         builder: (context, state) {
           return UserSettingWrapper(
             title: 'Your account',
@@ -65,7 +77,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                         ),
                         Expanded(
                           child: Form(
-                            key: _infoFormKey,
+                            key: infoFormKey,
                             child: TextFormField(
                               focusNode: fullNameFocus,
                               enabled: state.editing,
@@ -98,7 +110,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                                     .requestFocus(fullNameFocus);
                               } else {
                                 if (state.formStatus is FormSubmitting) {
-                                } else if (_infoFormKey.currentState!
+                                } else if (infoFormKey.currentState!
                                     .validate()) {
                                   context
                                       .read<UserInfoBloc>()
@@ -140,17 +152,18 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                 ),
               ),
               Positioned(
-                  top: 20,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: Image(
-                      width: 80,
-                      height: 80,
-                      image: AssetImage(
-                          'assets/avatars/${sessionState.user!.profileAvatar}.png'),
-                    ),
-                  ))
+                top: 20,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: Image(
+                    width: 80,
+                    height: 80,
+                    image: AssetImage(
+                        'assets/avatars/${sessionState.user!.profileAvatar}.png'),
+                  ),
+                ),
+              ),
             ]),
           );
         },

@@ -6,6 +6,7 @@ import 'package:xtrip_mobile/bloc/user_setting/change_password/change_password_s
 import 'package:xtrip_mobile/repositories/user_repository.dart';
 import 'package:xtrip_mobile/sessions/form_submission_status.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
+import 'package:xtrip_mobile/utils/toast_notification.dart';
 import 'package:xtrip_mobile/widgets/border_text_field.dart';
 import 'package:xtrip_mobile/widgets/form_label.dart';
 import 'package:xtrip_mobile/widgets/loading_indicator.dart';
@@ -31,7 +32,15 @@ class _ChangePasswordState extends State<ChangePassword> {
         userRepo: context.read<UserRepository>(),
       ),
       child: BlocConsumer<ChangePasswordBloc, ChangePasswordState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          final FormSubmissionStatus formStatus = state.formStatus;
+          if (formStatus is SubmissionSuccess) {
+            ToastNotification.showToast(context,
+                type: 'success',
+                message: 'Your password has been updated',
+                title: 'Password Changed!');
+          }
+        },
         builder: (context, state) {
           return UserSettingWrapper(
             title: 'Change password',

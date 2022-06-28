@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/us_state.dart';
 
@@ -22,5 +21,9 @@ class USCubit extends Cubit<USState> {
 
   void contactUs() {
     emit(USContactState());
+  }
+
+  void guide() {
+    emit(USGuideState());
   }
 }

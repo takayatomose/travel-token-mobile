@@ -15,6 +15,7 @@ class UserSettingWrapper extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        centerTitle: true,
         title: Text(title),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
