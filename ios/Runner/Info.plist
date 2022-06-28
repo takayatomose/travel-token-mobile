@@ -56,5 +56,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>ProvisionedDevices</key>
+	<array>
+		<string>00008030-000415942E40802E</string>
+	</array>
 </dict>
 </plist>
