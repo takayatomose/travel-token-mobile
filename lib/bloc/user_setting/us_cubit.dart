@@ -15,4 +15,12 @@ class USCubit extends Cubit<USState> {
   void userSetting() {
     emit(USSettingState());
   }
+
+  void tos() {
+    emit(USTosState());
+  }
+
+  void contactUs() {
+    emit(USContactState());
+  }
 }

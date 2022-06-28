@@ -187,7 +187,9 @@ class UserSettingsScreen extends StatelessWidget {
                   ),
                   UserSettingRow(
                     label: 'Disclosure',
-                    onTap: () {},
+                    onTap: () {
+                      usCubit.tos();
+                    },
                   ),
                   UserSettingRow(
                     label: 'Guidance',
@@ -195,7 +197,9 @@ class UserSettingsScreen extends StatelessWidget {
                   ),
                   UserSettingRow(
                     label: 'Contact us',
-                    onTap: () {},
+                    onTap: () {
+                      usCubit.contactUs();
+                    },
                   ),
                   UserSettingRow(
                     label: 'Version',

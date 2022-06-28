@@ -52,6 +52,13 @@ class SessionCubit extends Cubit<SessionState> {
     }
   }
 
+  Future<void> fetchUserInfo() async {
+    try {
+      final user = await userRepo.getUserInfo();
+      emit(state.copyWith(user: user));
+    } on Exception catch (e) {}
+  }
+
   void setSession(AuthCredentials authCredentials) async {
     try {
       await _secureStorage.write(key: USER_TOKEN, value: authCredentials.token);

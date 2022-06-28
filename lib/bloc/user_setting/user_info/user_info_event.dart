@@ -5,4 +5,9 @@ class UserInfoFullNameChanged extends UserInfoEvent {
   UserInfoFullNameChanged({required this.fullName});
 }
 
+class UserInfoEditableChanged extends UserInfoEvent {
+  final bool editabled;
+  UserInfoEditableChanged({required this.editabled});
+}
+
 class UserInfoSubmitted extends UserInfoEvent {}

@@ -4,6 +4,8 @@ import 'package:xtrip_mobile/bloc/user_setting/us_cubit.dart';
 import 'package:xtrip_mobile/bloc/user_setting/us_state.dart';
 import 'package:xtrip_mobile/screens/user_settings/account_info.dart';
 import 'package:xtrip_mobile/screens/user_settings/change_password.dart';
+import 'package:xtrip_mobile/screens/user_settings/contactus_screen.dart';
+import 'package:xtrip_mobile/screens/user_settings/tos.dart';
 import 'package:xtrip_mobile/screens/user_settings/user_settings.dart';
 
 class UserNavigator extends StatelessWidget {
@@ -22,6 +24,9 @@ class UserNavigator extends StatelessWidget {
                   const MaterialPage(child: AccountInfoScreen()),
                 if (state is USPasswordState)
                   const MaterialPage(child: ChangePassword()),
+                if (state is USTosState) const MaterialPage(child: TOSScreen()),
+                if (state is USContactState)
+                  const MaterialPage(child: ContactUsScreen())
               ],
               onPopPage: (router, result) => router.didPop(result),
             )),
