@@ -1,6 +1,8 @@
 abstract class USState {}
 
-class USSettingState extends USState {}
+class USSettingState extends USState {
+  
+}
 
 class USInfoState extends USState {}
 
