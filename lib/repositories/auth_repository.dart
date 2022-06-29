@@ -22,31 +22,27 @@ class AuthRepository {
 
   Future<http.Response?> signin(
       {required String email, required String password}) async {
-    return apiService.postAPI(
+    final response = await apiService.postAPI(
         uri: '/auth/login',
         body: json.encode({'email': email, 'password': password}));
+    return response;
   }
 
   Future<http.Response> forgotPassword({required String email}) async {
-    return http.post(
-        Uri.parse('${ApiService.getHttpClient()}/auth/forgot-password'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: json.encode({'email': email}));
+    final response = await apiService.postAPI(
+        uri: '/auth/forgot-password', body: json.encode({'email': email}));
+    return response;
   }
 
   Future<http.Response> resetPassword(
       {required String email,
       required String code,
       required String password}) async {
-    return http.post(
-        Uri.parse('${ApiService.getHttpClient()}/auth/reset-password'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
+    final response = await apiService.patchAPI(
+        uri: '/auth/reset-password',
         body:
             json.encode({'email': email, 'password': password, 'code': code}));
+    return response;
   }
 
   Future attemptAutoLogin() async {
@@ -55,10 +51,9 @@ class AuthRepository {
 
   Future<http.Response> activateUser(
       {required String email, required String code}) async {
-    return http.post(Uri.parse('${ApiService.getHttpClient()}/auth/activate'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
+    final response = await apiService.patchAPI(
+        uri: '/auth/activate',
         body: json.encode({'email': email, 'activationCode': code}));
+    return response;
   }
 }

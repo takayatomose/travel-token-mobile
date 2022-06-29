@@ -183,7 +183,9 @@ class UserSettingsScreen extends StatelessWidget {
                   ),
                   UserSettingRow(
                     label: 'Invite your friend',
-                    onTap: () {},
+                    onTap: () {
+                      usCubit.inviteFriend();
+                    },
                   ),
                   UserSettingRow(
                     label: 'Disclosure',

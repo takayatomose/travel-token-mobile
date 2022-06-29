@@ -8,7 +8,7 @@ class ApiService {
   final Client httpClient =
       InterceptedClient.build(interceptors: [ApiInterceptor()]);
   static getHttpClient() {
-    return Uri.http(
+    return Uri.https(
         dotenv.get('API_URL', fallback: 'https://api-prod.xtrip.travel'), '');
   }
 
@@ -16,11 +16,11 @@ class ApiService {
     return httpClient.post(Uri.parse('${getHttpClient()}$uri'), body: body);
   }
 
-  Future<http.Response> patchApi({required String uri, Object? body}) {
+  Future<http.Response> patchAPI({required String uri, Object? body}) {
     return httpClient.patch(Uri.parse('${getHttpClient()}$uri'), body: body);
   }
 
-  Future<http.Response> getApi({required String uri}) {
+  Future<http.Response> getAPI({required String uri}) {
     return httpClient.get(Uri.parse('${getHttpClient()}$uri'));
   }
 }
