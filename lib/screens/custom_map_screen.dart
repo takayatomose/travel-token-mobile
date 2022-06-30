@@ -30,8 +30,7 @@ class CustomMap extends StatefulWidget {
 
 class _CustomMapState extends State<CustomMap> {
   final PopupController _popupController = PopupController();
-  MapController _mapController = MapController();
-  double _zoom = 7;
+  final MapController _mapController = MapController();
   int activeIndex = 0;
   List<Marker> _markers = [];
   @override
@@ -41,7 +40,7 @@ class _CustomMapState extends State<CustomMap> {
               point: item.point,
               width: 60,
               height: 60,
-              builder: (context) => Icon(
+              builder: (context) => const Icon(
                 Icons.pin_drop,
                 size: 60,
                 color: Colors.blueAccent,
@@ -56,12 +55,8 @@ class _CustomMapState extends State<CustomMap> {
     return BlocProvider(
       create: (context) => MapBloc(),
       child: BlocConsumer<MapBloc, MapState>(
-        listener: (context, state) {
-          print('listener:' + state.selectedIndex.toString());
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
-          print('map state: ' + state.selectedIndex.toString());
           return Scaffold(
             appBar: AppBar(
               title: Text(state.selectedIndex.toString()),
@@ -99,12 +94,12 @@ class _CustomMapState extends State<CustomMap> {
                   MarkerClusterLayerOptions(
                     maxClusterRadius: 190,
                     disableClusteringAtZoom: 16,
-                    size: Size(50, 50),
-                    fitBoundsOptions: FitBoundsOptions(
+                    size: const Size(50, 50),
+                    fitBoundsOptions: const FitBoundsOptions(
                       padding: EdgeInsets.all(50),
                     ),
                     markers: _markers,
-                    polygonOptions: PolygonOptions(
+                    polygonOptions: const PolygonOptions(
                         borderColor: Colors.blueAccent,
                         color: Colors.black12,
                         borderStrokeWidth: 3),
@@ -113,12 +108,12 @@ class _CustomMapState extends State<CustomMap> {
                         popupController: _popupController,
                         popupBuilder: (_, marker) => Container(
                               color: Colors.amberAccent,
-                              child: Text('Popup'),
+                              child: const Text('Popup'),
                             )),
                     builder: (context, markers) {
                       return Container(
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: Colors.orange, shape: BoxShape.circle),
                         child: Text('${markers.length}'),
                       );

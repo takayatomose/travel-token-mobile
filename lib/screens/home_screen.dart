@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xtrip_mobile/screens/custom_map_screen.dart';
 import 'package:xtrip_mobile/screens/user_settings/user_navigation.dart';
-import 'package:xtrip_mobile/screens/user_settings/user_settings.dart';
 
 // void main() => runApp(const Home());
 
