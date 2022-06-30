@@ -3,7 +3,9 @@ import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:xtrip_mobile/bloc/auth/map/map_bloc.dart';
+import 'package:xtrip_mobile/widgets/ability_button.dart';
 
 class SuggestItem {
   String name = "";
@@ -69,57 +71,122 @@ class _CustomMapState extends State<CustomMap> {
                     icon: const Icon(Icons.search))
               ],
             ),
-            body: FlutterMap(
-                mapController: _mapController,
-                options: MapOptions(
-                  // center: listSuggestItems[context.watch<MarkerIndexProvider>().index]
-                  //     .point,
-                  center: listSuggestItems[activeIndex].point,
+            body: Stack(
+              children: [
+                FlutterMap(
+                  mapController: _mapController,
+                  options: MapOptions(
+                    // center: listSuggestItems[context.watch<MarkerIndexProvider>().index]
+                    //     .point,
+                    center: listSuggestItems[activeIndex].point,
 
-                  // bounds: LatLngBounds.fromPoints(listSuggestItems),
-                  zoom: 13.0,
-                  plugins: [
-                    MarkerClusterPlugin(),
+                    // bounds: LatLngBounds.fromPoints(listSuggestItems),
+                    zoom: 13.0,
+                    plugins: [
+                      MarkerClusterPlugin(),
+                    ],
+                  ),
+                  layers: [
+                    TileLayerOptions(
+                      minZoom: 1,
+                      maxZoom: 14,
+                      backgroundColor: Colors.black,
+                      urlTemplate:
+                          'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      subdomains: ['a', 'b', 'c'],
+                    ),
+                    MarkerClusterLayerOptions(
+                      maxClusterRadius: 190,
+                      disableClusteringAtZoom: 16,
+                      size: const Size(50, 50),
+                      fitBoundsOptions: const FitBoundsOptions(
+                        padding: EdgeInsets.all(50),
+                      ),
+                      markers: _markers,
+                      polygonOptions: const PolygonOptions(
+                          borderColor: Colors.blueAccent,
+                          color: Colors.black12,
+                          borderStrokeWidth: 3),
+                      popupOptions: PopupOptions(
+                          popupSnap: PopupSnap.markerTop,
+                          popupController: _popupController,
+                          popupBuilder: (_, marker) => Container(
+                                color: Colors.amberAccent,
+                                child: const Text('Popup'),
+                              )),
+                      builder: (context, markers) {
+                        return Container(
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                              color: Colors.orange, shape: BoxShape.circle),
+                          child: Text('${markers.length}'),
+                        );
+                      },
+                    ),
                   ],
                 ),
-                layers: [
-                  TileLayerOptions(
-                    minZoom: 1,
-                    maxZoom: 14,
-                    backgroundColor: Colors.black,
-                    urlTemplate:
-                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    subdomains: ['a', 'b', 'c'],
-                  ),
-                  MarkerClusterLayerOptions(
-                    maxClusterRadius: 190,
-                    disableClusteringAtZoom: 16,
-                    size: const Size(50, 50),
-                    fitBoundsOptions: const FitBoundsOptions(
-                      padding: EdgeInsets.all(50),
+                Positioned(
+                  bottom: 20,
+                  right: 0,
+                  left: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: SizedBox(
+                      height: 120,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          AbilityButton(
+                            children: const [
+                              Image(
+                                  image: AssetImage(
+                                      'assets/images/btc_icon_1.png')),
+                            ],
+                            onTap: () {},
+                          ),
+                          AbilityButton(children: [
+                            SizedBox(
+                              child: CircularPercentIndicator(
+                                fillColor: Colors.white,
+                                radius: 25.0,
+                                percent: 0.8,
+                                lineWidth: 10,
+                                backgroundColor:
+                                    const Color.fromRGBO(238, 238, 238, 1),
+                                progressColor:
+                                    const Color.fromRGBO(6, 133, 3, 0.7),
+                              ),
+                            ),
+                          ]),
+                          AbilityButton(children: [
+                            SizedBox(
+                              child: CircularPercentIndicator(
+                                fillColor: Colors.white,
+                                radius: 25.0,
+                                percent: 0.8,
+                                lineWidth: 10,
+                                backgroundColor:
+                                    const Color.fromRGBO(238, 238, 238, 1),
+                                progressColor:
+                                    const Color.fromRGBO(255, 128, 8, 1),
+                              ),
+                            ),
+                          ]),
+                          AbilityButton(
+                            children: const [
+                              Image(
+                                  image: AssetImage(
+                                      'assets/images/place_icon_1.png'))
+                            ],
+                            onTap: () {},
+                          )
+                        ],
+                      ),
                     ),
-                    markers: _markers,
-                    polygonOptions: const PolygonOptions(
-                        borderColor: Colors.blueAccent,
-                        color: Colors.black12,
-                        borderStrokeWidth: 3),
-                    popupOptions: PopupOptions(
-                        popupSnap: PopupSnap.markerTop,
-                        popupController: _popupController,
-                        popupBuilder: (_, marker) => Container(
-                              color: Colors.amberAccent,
-                              child: const Text('Popup'),
-                            )),
-                    builder: (context, markers) {
-                      return Container(
-                        alignment: Alignment.center,
-                        decoration: const BoxDecoration(
-                            color: Colors.orange, shape: BoxShape.circle),
-                        child: Text('${markers.length}'),
-                      );
-                    },
                   ),
-                ]),
+                )
+              ],
+            ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 // Add your onPressed code here!
