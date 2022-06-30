@@ -1,7 +1,10 @@
+import 'package:xtrip_mobile/models/wallet.dart';
+
 abstract class USState {}
 
 class USSettingState extends USState {
-  
+  final List<Wallet> wallets;
+  USSettingState({this.wallets = const []});
 }
 
 class USInfoState extends USState {}

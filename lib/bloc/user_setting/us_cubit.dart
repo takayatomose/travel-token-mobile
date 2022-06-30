@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/us_state.dart';
+import 'package:xtrip_mobile/models/wallet.dart';
 import 'package:xtrip_mobile/repositories/user_repository.dart';
 
 class USCubit extends Cubit<USState> {
@@ -40,6 +41,17 @@ class USCubit extends Cubit<USState> {
       final response = await userRepository.getInvitationCode();
       Map<String, dynamic> inviteCode = jsonDecode(response.body);
       emit(USInviteState(invitationCode: inviteCode['code']));
+    } on Exception catch (e) {}
+  }
+
+  void fetchUserWallets() async {
+    UserRepository userRepository = UserRepository();
+    try {
+      final response = await userRepository.fetchUserWallets();
+      Iterable l = json.decode(response.body);
+      List<Wallet> wallets =
+          List<Wallet>.from(l.map((e) => Wallet.fromJson(e)));
+      emit(USSettingState(wallets: wallets));
     } on Exception catch (e) {}
   }
 }

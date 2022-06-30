@@ -43,4 +43,9 @@ class UserRepository {
     final response = await apiService.getAPI(uri: '/user/invitation-code');
     return response;
   }
+
+  Future<Response> fetchUserWallets() async {
+    final response = await apiService.getAPI(uri: '/wallets');
+    return response;
+  }
 }
