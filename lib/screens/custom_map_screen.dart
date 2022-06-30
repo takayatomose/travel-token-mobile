@@ -142,43 +142,50 @@ class _CustomMapState extends State<CustomMap> {
                                   image: AssetImage(
                                       'assets/images/btc_icon_1.png')),
                             ],
-                            onTap: () {},
+                            onPressed: () {},
                           ),
-                          AbilityButton(children: [
-                            SizedBox(
-                              child: CircularPercentIndicator(
-                                fillColor: Colors.white,
-                                radius: 25.0,
-                                percent: 0.8,
-                                lineWidth: 10,
-                                backgroundColor:
-                                    const Color.fromRGBO(238, 238, 238, 1),
-                                progressColor:
-                                    const Color.fromRGBO(6, 133, 3, 0.7),
+                          AbilityButton(
+                            children: [
+                              SizedBox(
+                                child: CircularPercentIndicator(
+                                  fillColor: Colors.white,
+                                  radius: 20.0,
+                                  percent: 0.8,
+                                  lineWidth: 10,
+                                  backgroundColor:
+                                      const Color.fromRGBO(238, 238, 238, 1),
+                                  progressColor:
+                                      const Color.fromRGBO(6, 133, 3, 0.7),
+                                ),
                               ),
-                            ),
-                          ]),
-                          AbilityButton(children: [
-                            SizedBox(
-                              child: CircularPercentIndicator(
-                                fillColor: Colors.white,
-                                radius: 25.0,
-                                percent: 0.8,
-                                lineWidth: 10,
-                                backgroundColor:
-                                    const Color.fromRGBO(238, 238, 238, 1),
-                                progressColor:
-                                    const Color.fromRGBO(255, 128, 8, 1),
+                              Text('text')
+                            ],
+                            onPressed: () {},
+                          ),
+                          AbilityButton(
+                            children: [
+                              SizedBox(
+                                child: CircularPercentIndicator(
+                                  fillColor: Colors.white,
+                                  radius: 20.0,
+                                  percent: 0.8,
+                                  lineWidth: 10,
+                                  backgroundColor:
+                                      const Color.fromRGBO(238, 238, 238, 1),
+                                  progressColor:
+                                      const Color.fromRGBO(255, 128, 8, 1),
+                                ),
                               ),
-                            ),
-                          ]),
+                            ],
+                            onPressed: () {},
+                          ),
                           AbilityButton(
                             children: const [
                               Image(
                                   image: AssetImage(
                                       'assets/images/place_icon_1.png'))
                             ],
-                            onTap: () {},
+                            onPressed: () {},
                           )
                         ],
                       ),

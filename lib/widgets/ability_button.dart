@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AbilityButton extends StatelessWidget {
-  // final String imageName;
-  final VoidCallback? onTap;
-  // final String text;
-
+  final VoidCallback? onPressed;
   final List<Widget> children;
 
   const AbilityButton({
     Key? key,
-    this.onTap,
+    this.onPressed,
     required this.children,
   }) : super(key: key);
 
@@ -21,8 +18,9 @@ class AbilityButton extends StatelessWidget {
         width: 110,
         height: 110,
         child: ElevatedButton(
-          onPressed: onTap,
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
               primary: Colors.white,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8))),
