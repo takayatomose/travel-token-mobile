@@ -264,9 +264,9 @@ class _CustomMapState extends State<CustomMap> {
     );
   }
 
-  PersistentBottomSheetController<dynamic> onOpenBottomSheet(
+  onOpenBottomSheet(
       {required BuildContext context, required WidgetBuilder builder}) {
-    return showBottomSheet(
+    showModalBottomSheet<void>(
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
