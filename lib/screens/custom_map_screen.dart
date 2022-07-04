@@ -3,7 +3,6 @@ import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:xtrip_mobile/bloc/auth/map/map_bloc.dart';
 import 'package:xtrip_mobile/widgets/map_bottom_sheet/map_bottom_sheet.dart';
 
@@ -76,11 +75,7 @@ class _CustomMapState extends State<CustomMap> {
                 FlutterMap(
                   mapController: _mapController,
                   options: MapOptions(
-                    // center: listSuggestItems[context.watch<MarkerIndexProvider>().index]
-                    //     .point,
                     center: listSuggestItems[activeIndex].point,
-
-                    // bounds: LatLngBounds.fromPoints(listSuggestItems),
                     zoom: 13.0,
                     plugins: [
                       MarkerClusterPlugin(),
