@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class AbilityButton extends StatelessWidget {
+class StatisticButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final List<Widget> children;
 
-  const AbilityButton({
+  const StatisticButton({
     Key? key,
     this.onPressed,
     required this.children,
@@ -15,8 +15,8 @@ class AbilityButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 15),
       child: SizedBox(
-        width: 110,
-        height: 110,
+        width: 120,
+        height: 140,
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
