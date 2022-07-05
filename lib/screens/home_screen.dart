@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xtrip_mobile/screens/custom_map_screen.dart';
+import 'package:xtrip_mobile/screens/items/my_item_navigator.dart';
 import 'package:xtrip_mobile/screens/user_settings/user_navigation.dart';
 
 // void main() => runApp(const Home());
@@ -34,10 +35,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'Index 0: Repair',
       style: optionStyle,
     ),
-    Text(
-      'Index 1: Item',
-      style: optionStyle,
-    ),
+    MyItemNavigator(),
     CustomMap(),
     Text(
       'Index 3: Shop',
