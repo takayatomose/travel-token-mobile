@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xtrip_mobile/screens/custom_map_screen.dart';
 import 'package:xtrip_mobile/screens/user_settings/user_navigation.dart';
 import 'package:xtrip_mobile/screens/user_settings/user_settings.dart';
+import 'package:xtrip_mobile/screens/shop/shop.dart';
 
 // void main() => runApp(const Home());
 
@@ -35,10 +36,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'Index 0: Repair',
       style: optionStyle,
     ),
-    Text(
-      'Index 1: Item',
-      style: optionStyle,
-    ),
+    ShopScreen(),
     CustomMap(),
     Text(
       'Index 3: Shop',

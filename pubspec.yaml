@@ -63,7 +63,8 @@ dependencies:
   package_info_plus: ^1.4.2
   app_settings: ^4.1.8
   fluttertoast: ^8.0.9
-
+  bloc_concurrency: ^0.2.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
