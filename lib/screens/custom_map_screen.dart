@@ -132,6 +132,7 @@ class _CustomMapState extends State<CustomMap> {
                         scrollDirection: Axis.horizontal,
                         children: [
                           StatisticButton(
+                            padding: const EdgeInsets.only(right: 15),
                             children: const [
                               Padding(
                                 padding: EdgeInsets.only(bottom: 15),

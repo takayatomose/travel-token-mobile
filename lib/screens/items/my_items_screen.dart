@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xtrip_mobile/widgets/map_bottom_sheet/map_bottom_sheet.dart';
+import 'package:xtrip_mobile/widgets/user_items/user_items.dart';
 
 class MyItemsScreen extends StatelessWidget {
   const MyItemsScreen({Key? key}) : super(key: key);
@@ -8,64 +9,160 @@ class MyItemsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text("Token balance"),
-            Row(
-              children: const [
-                Image(image: AssetImage('assets/images/token_btc.png')),
-                Text('0')
-              ],
-            ),
-            Row(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 15),
-                      decoration: BoxDecoration(
-                          color: const Color.fromRGBO(250, 250, 250, 1),
-                          borderRadius: BorderRadius.circular(6)),
-                      child: Row(
-                        children: [
-                          Image(
-                              image: AssetImage(
-                                  'assets/images/efficiency_icon.png')),
-                          Text('Efficiency'),
-                          Text('0')
-                        ],
-                      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Token balance",
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 20),
+                child: Row(
+                  children: const [
+                    Image(
+                      image: AssetImage('assets/images/token_btc.png'),
+                      width: 50,
+                      height: 50,
+                    ),
+                    Text(
+                      '0',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromRGBO(33, 38, 48, 1)),
                     )
                   ],
                 ),
-                AbilityButton(
-                  text: 'Ability',
-                  detailText: '0 km',
-                  backgroundColor: const Color.fromRGBO(238, 238, 238, 1),
-                  progressColor: const Color.fromRGBO(255, 128, 8, 1),
-                  percent: 0.4,
-                  onPressed: () {},
-                )
-              ],
-            ),
-            Row(
-              children: [
-                Column(),
-                AbilityButton(
-                  text: 'Condition',
-                  detailText: '0',
-                  backgroundColor: const Color.fromRGBO(238, 238, 238, 1),
-                  progressColor: const Color.fromRGBO(23, 173, 20, 1),
-                  percent: 0.6,
-                  onPressed: () {},
-                )
-              ],
-            ),
-          ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: const [
+                          UserItemAttributeRow(
+                            margin: EdgeInsets.only(bottom: 20),
+                            assetName: 'assets/images/efficiency_icon.png',
+                            attributeName: 'Efficiency',
+                            attributeVal: '0',
+                          ),
+                          UserItemAttributeRow(
+                            assetName: 'assets/images/durability_icon.png',
+                            attributeName: 'Durability',
+                            attributeVal: '0',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  StatisticButton(
+                    width: 120,
+                    height: 120,
+                    children: const [
+                      AttributeCircularPercentIndicator(
+                        percent: 0.7,
+                        progressColor: Color.fromRGBO(255, 128, 8, 1),
+                      ),
+                      Text(
+                        'Ability',
+                        style: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 0.5),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      Text(
+                        '55/10.000 km',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                            color: Color.fromRGBO(33, 38, 48, 1)),
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: const [
+                            UserItemAttributeRow(
+                              margin: EdgeInsets.only(bottom: 15),
+                              assetName: 'assets/images/luck_icon.png',
+                              attributeName: 'Luck',
+                              attributeVal: '0',
+                            ),
+                            UserItemAttributeRow(
+                              assetName: 'assets/images/distance_icon.png',
+                              attributeName: 'Distance',
+                              attributeVal: '0',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    StatisticButton(
+                      width: 120,
+                      height: 120,
+                      children: const [
+                        AttributeCircularPercentIndicator(
+                            percent: 0.4,
+                            progressColor: Color.fromRGBO(6, 133, 3, 0.7)),
+                        Text(
+                          'Condition',
+                          style: TextStyle(
+                              color: Color.fromRGBO(0, 0, 0, 0.5),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        Text('0',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
+                                color: Color.fromRGBO(33, 38, 48, 1)))
+                      ],
+                      onPressed: () {},
+                    )
+                  ],
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 30),
+                child: Text(
+                  'My Items',
+                  style: TextStyle(
+                      color: Color.fromRGBO(33, 38, 48, 1),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    itemBuilder: (BuildContext context, intindex) {
+                      return const SingleOwnerItem();
+                    }),
+              ),
+            ],
+          ),
         ),
       ),
     );
