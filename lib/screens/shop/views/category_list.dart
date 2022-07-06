@@ -23,10 +23,10 @@ class _CategoryListState extends State<CategoryList> {
       builder: (context, state) {
         print(state.categories.length);
         return Container(
-          height: 150,
+          height: 120,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.only(left: 20, top: 16),
               itemCount: state.categories.length,
               itemBuilder: (BuildContext context, int index) {
                 return CategoryItem(

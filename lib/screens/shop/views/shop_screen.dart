@@ -15,6 +15,7 @@ class _ShopScreenState extends State<ShopScreen> {
   @override
   void initState() {
     shopBloc.add(FetchCategories());
+    shopBloc.add(FetchItems());
     super.initState();
   }
 
@@ -47,6 +48,10 @@ class _ShopScreenState extends State<ShopScreen> {
               ),
             ),
             CategoryList(),
+            Expanded(
+              // wrap in Expanded
+              child: ItemList(),
+            ),
           ],
         ),
       ),

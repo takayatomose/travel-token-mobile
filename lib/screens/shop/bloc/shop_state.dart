@@ -8,33 +8,38 @@ class ShopState {
   final List<Item> items;
   final List<Category> categories;
   final int selectedCategoryIndex;
+  final bool hasReachedMax;
 
-   ShopState(
-      {this.fetchItemStatus = FetchStatus.initial,
-      this.fetchCategoryStatus = FetchStatus.initial,
-      this.items = const <Item>[],
-      this.selectedCategoryIndex = -1,
-      this.categories = const <Category>[]}
-    );
+  ShopState({
+    this.fetchItemStatus = FetchStatus.initial,
+    this.fetchCategoryStatus = FetchStatus.initial,
+    this.items = const <Item>[],
+    this.selectedCategoryIndex = -1,
+    this.categories = const <Category>[],
+    this.hasReachedMax = false,
+  });
   ShopState copyWith({
     FetchStatus? fetchCategoryStatus,
     FetchStatus? fetchItemStatus,
     List<Item>? items,
     List<Category>? categories,
-    int? selectedCategoryIndex
-  }){
+    int? selectedCategoryIndex,
+    bool? hasReachedMax,
+  }) {
     return ShopState(
       fetchItemStatus: fetchItemStatus ?? this.fetchItemStatus,
       fetchCategoryStatus: fetchCategoryStatus ?? this.fetchCategoryStatus,
       items: items ?? this.items,
       categories: categories ?? this.categories,
-      selectedCategoryIndex: selectedCategoryIndex ?? this.selectedCategoryIndex,
+      selectedCategoryIndex:
+          selectedCategoryIndex ?? this.selectedCategoryIndex,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
     );
   }
 
   @override
   String toString() {
     // TODO: implement toString
-    return "categories length: ${categories.length}";
+    return "hasReachedMax : ${hasReachedMax}";
   }
 }

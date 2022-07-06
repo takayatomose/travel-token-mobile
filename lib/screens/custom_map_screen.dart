@@ -61,7 +61,6 @@ class _CustomMapState extends State<CustomMap> {
           // TODO: implement listener
         },
         builder: (context, state) {
-          print('map state: ' + state.selectedIndex.toString());
           return Scaffold(
             appBar: AppBar(
               title: Text(state.selectedIndex.toString()),
