@@ -3,20 +3,25 @@ import 'package:flutter/material.dart';
 class StatisticButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final List<Widget> children;
-
+  final double width;
+  final double height;
+  final EdgeInsetsGeometry? padding;
   const StatisticButton({
     Key? key,
     this.onPressed,
     required this.children,
+    this.width = 120,
+    this.height = 140,
+    this.padding,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 15),
+    return Container(
+      padding: padding,
       child: SizedBox(
-        width: 120,
-        height: 140,
+        width: width,
+        height: height,
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
