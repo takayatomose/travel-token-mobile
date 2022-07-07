@@ -10,17 +10,19 @@ class MyItemsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+          scrollDirection: Axis.vertical,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
                 "Token balance",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 20),
+                padding: const EdgeInsets.only(top: 5, bottom: 5),
                 child: Row(
                   children: const [
                     Image(
@@ -153,13 +155,16 @@ class MyItemsScreen extends StatelessWidget {
                       fontSize: 16),
                 ),
               ),
-              Expanded(
+              SizedBox(
+                height: 300,
                 child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (BuildContext context, intindex) {
-                      return const SingleOwnerItem();
-                    }),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 10,
+                  itemBuilder: (BuildContext context, intindex) {
+                    return const SingleOwnerItem();
+                  },
+                ),
               ),
             ],
           ),
