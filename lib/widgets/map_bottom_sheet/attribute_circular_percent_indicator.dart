@@ -29,18 +29,20 @@ class AttributeCircularPercentIndicator extends StatelessWidget {
         backgroundColor: backgroundColor,
         progressColor: progressColor,
         center: Container(
-            width: radius,
-            height: radius,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: centerColor,
-                boxShadow: const [
-                  BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.25),
-                      offset: Offset(0, 1),
-                      blurRadius: 3,
-                      spreadRadius: 2)
-                ])),
+          width: radius,
+          height: radius,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: centerColor,
+            boxShadow: const [
+              BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, 0.25),
+                  offset: Offset(0, 1),
+                  blurRadius: 3,
+                  spreadRadius: 2)
+            ],
+          ),
+        ),
       ),
     );
   }
