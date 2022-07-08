@@ -26,7 +26,7 @@ class _ShopScreenState extends State<ShopScreen> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: false,
-          title: const Text('Welcome to Xtrip shop',
+          title: const Text('WELCOME TO XTRIP SHOP',
               style: const TextStyle(color: Colors.black),
               textAlign: TextAlign.left),
           backgroundColor: Colors.white,

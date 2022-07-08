@@ -8,7 +8,7 @@ class UserRepository {
   final apiService = ApiService();
   Future<UserModel?> getUserInfo() async {
     try {
-      final response = await apiService.getApi(uri: '/user/info');
+      final response = await apiService.getAPI(uri: '/user/info');
       if (response.statusCode != 200) {
         throw Exception('not found');
       }
@@ -21,7 +21,7 @@ class UserRepository {
 
   Future<Response> changePassowrd(
       {required String currentPassword, required String newPassword}) async {
-    final response = await apiService.patchApi(
+    final response = await apiService.patchAPI(
         uri: '/user/change-password',
         body: json.encode({
           'currentPassword': currentPassword,
@@ -31,11 +31,21 @@ class UserRepository {
   }
 
   Future<Response> updateInfo({required String fullName}) async {
-    final response = await apiService.patchApi(
+    final response = await apiService.patchAPI(
         uri: '/user/info',
         body: json.encode({
           'fullName': fullName,
         }));
+    return response;
+  }
+
+  Future<Response> getInvitationCode() async {
+    final response = await apiService.getAPI(uri: '/user/invitation-code');
+    return response;
+  }
+
+  Future<Response> fetchUserWallets() async {
+    final response = await apiService.getAPI(uri: '/wallets');
     return response;
   }
 }

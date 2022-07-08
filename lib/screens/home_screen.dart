@@ -36,12 +36,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'Index 0: Repair',
       style: optionStyle,
     ),
-    ShopScreen(),
-    CustomMap(),
     Text(
-      'Index 3: Shop',
+      'Index 1: item',
       style: optionStyle,
     ),
+    Text(
+      'Index 2: map',
+      style: optionStyle,
+    ),
+    // CustomMap();
+    ShopScreen(),
     UserNavigator(),
   ];
 

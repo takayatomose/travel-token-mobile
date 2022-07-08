@@ -2,14 +2,15 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:xtrip_mobile/screens/shop/shop.dart';
+import 'package:xtrip_mobile/models/paginateDocument.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:stream_transform/stream_transform.dart';
+import 'package:xtrip_mobile/utils/api.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 part 'shop_event.dart';
 part 'shop_state.dart';
 
-const _postLimit = 20;
 const throttleDuration = Duration(milliseconds: 100);
 
 EventTransformer<E> throttleDroppable<E>(Duration duration) {
@@ -20,6 +21,7 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 
 class ShopBloc extends Bloc<ShopEvent, ShopState> {
   final http.Client httpClient;
+  final apiService = ApiService();
 
   ShopBloc({required this.httpClient}) : super(ShopState()) {
     on<FetchCategories>((event, emit) async {
@@ -30,9 +32,17 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
         ));
       } catch (e) {}
     });
-    on<SelectCategory>((event, emit) {
+    on<SelectCategory>((event, emit) async {
+      print("SelectCategory");
+      final items = await _fetchItems(
+          1, state.categories[event.selectedCategoryIndex].id);
+      print(
+          'items: ' + items.length.toString() + (items.length < 5).toString());
       return emit(state.copyWith(
+        fetchItemStatus: FetchStatus.success,
         selectedCategoryIndex: event.selectedCategoryIndex,
+        items: items,
+        hasReachedMax: items.length < 5,
       ));
     });
 
@@ -40,18 +50,24 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
       (event, emit) async {
         try {
           if (state.fetchItemStatus == FetchStatus.initial) {
-            final items = await _fetchItems();
+            final items = await _fetchItems(1);
             return emit(state.copyWith(
               fetchItemStatus: FetchStatus.success,
               items: items,
-              hasReachedMax: false,
+              hasReachedMax: items.length < 5,
             ));
           }
           print("FetchItems " +
               state.fetchItemStatus.toString() +
               state.items.length.toString());
 
-          final items = await _fetchItems(state.items.length);
+          final items;
+          if (state.selectedCategoryIndex == -1) {
+            items = await _fetchItems((state.items.length / 5).floor() + 1, -1);
+          } else {
+            items = await _fetchItems((state.items.length / 5).floor() + 1,
+                state.categories[state.selectedCategoryIndex].id);
+          }
 
           items.isEmpty
               ? emit(state.copyWith(hasReachedMax: true))
@@ -70,13 +86,8 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
       transformer: throttleDroppable(throttleDuration),
     );
   }
-  Future<List<Category>> _fetchCategories([int startIndex = 0]) async {
-    final response = await httpClient.get(
-      Uri.http(
-        dotenv.get('API_URL'),
-        '/item-category',
-      ),
-    );
+  Future<List<Category>> _fetchCategories() async {
+    final response = await apiService.getAPI(uri: '/item-category');
     if (response.statusCode == 200) {
       final body = json.decode(response.body) as List;
       print(
@@ -85,30 +96,23 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
       return body.map((dynamic json) {
         return Category(
           name: json['name'] as String,
+          id: json['id'] as int,
         );
       }).toList();
     }
     throw Exception('error fetching posts');
   }
 
-  Future<List<Item>> _fetchItems([int startIndex = 0]) async {
-    final response = await httpClient.get(
-      Uri.http(
-        dotenv.get('API_URL'),
-        '/item',
-      ),
-    );
+  Future<List<Item>> _fetchItems([int page = 1, itemCategeryId = -1]) async {
+    var uri = '/item?page=${page}';
+    if (itemCategeryId != -1) {
+      uri = '/item?page=${page}&item_category_id=${itemCategeryId}';
+    }
+    print("uri: " + uri);
+    final response = await apiService.getAPI(uri: uri);
     if (response.statusCode == 200) {
-      // final body = json.decode(response.body);
-      // final items = body.items as List<Item>;
-      // return body.map((dynamic json) {
-      //   return Item(id: json['id'] as int, name: json['title'] as String);
-      // }).toList();
-
-      Iterable itemList = json.decode(response.body).items;
-      List<Item> items =
-          List<Item>.from(itemList.map((model) => Item.fromJson(model)));
-          return items;
+      Map<String, dynamic> map = json.decode(response.body);
+      return map["items"].map<Item>((model) => Item.fromJson(model)).toList();
     }
     throw Exception('error fetching posts');
   }

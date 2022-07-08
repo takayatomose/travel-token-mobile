@@ -22,10 +22,10 @@ class _ItemListState extends State<ItemList> {
       builder: (context, state) {
         switch (state.fetchItemStatus) {
           case FetchStatus.failure:
-            return const Center(child: Text('failed to fetch posts'));
+            return const Center(child: Text('failed to fetch items'));
           case FetchStatus.success:
             if (state.items.isEmpty) {
-              return const Center(child: Text('no posts'));
+              return const Center(child: Text('no items'));
             }
             return GridView.builder(
               padding: EdgeInsets.only(right: 20, left: 20),

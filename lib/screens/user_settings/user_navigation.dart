@@ -6,6 +6,7 @@ import 'package:xtrip_mobile/screens/user_settings/account_info.dart';
 import 'package:xtrip_mobile/screens/user_settings/change_password.dart';
 import 'package:xtrip_mobile/screens/user_settings/contactus_screen.dart';
 import 'package:xtrip_mobile/screens/user_settings/guide_screen.dart';
+import 'package:xtrip_mobile/screens/user_settings/invitation_screen.dart';
 import 'package:xtrip_mobile/screens/user_settings/tos.dart';
 import 'package:xtrip_mobile/screens/user_settings/user_settings.dart';
 
@@ -30,6 +31,8 @@ class UserNavigator extends StatelessWidget {
                   const MaterialPage(child: ContactUsScreen()),
                 if (state is USGuideState)
                   const MaterialPage(child: GuideScreen()),
+                if (state is USInviteState)
+                  const MaterialPage(child: UserInvitationScreen())
               ],
               onPopPage: (router, result) => router.didPop(result),
             )),

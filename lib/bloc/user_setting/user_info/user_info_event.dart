@@ -10,4 +10,6 @@ class UserInfoEditableChanged extends UserInfoEvent {
   UserInfoEditableChanged({required this.editabled});
 }
 
+class FetchInvitationCode extends UserInfoEvent {}
+
 class UserInfoSubmitted extends UserInfoEvent {}
