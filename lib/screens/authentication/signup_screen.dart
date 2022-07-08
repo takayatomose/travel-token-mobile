@@ -56,10 +56,11 @@ class _SignUpScreen extends State<SignUpScreen> {
                                 _secondHeaderText(),
                                 BorderTextField(
                                   padding: const EdgeInsets.only(bottom: 15),
-                                  hintText: 'Your full name',
+                                  hintText: S.of(context).fullNameHint,
                                   icon: Icons.person,
                                   requiredField: true,
-                                  requiredMessage: 'Please enter your name',
+                                  requiredMessage:
+                                      S.of(context).fullNameEmptyError,
                                   onChanged: (value) => context
                                       .read<SignUpBloc>()
                                       .add(SignUpFullNameChanged(
@@ -67,7 +68,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                 ),
                                 BorderTextField(
                                   padding: const EdgeInsets.only(bottom: 15),
-                                  hintText: 'Your email address',
+                                  hintText: S.of(context).emailHint,
                                   requiredField: true,
                                   requiredMessage:
                                       S.of(context).emailEmptyError,
