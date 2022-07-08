@@ -6,12 +6,6 @@ class Unauthenticated extends AuthSessionState {}
 
 class Authenticated extends AuthSessionState {}
 
-// enum AuthSessionState {
-//   unknownSessionState,
-//   unauthenticated,
-//   authenticated,
-// }
-
 class SessionState {
   final bool locationPermission;
   final dynamic user;

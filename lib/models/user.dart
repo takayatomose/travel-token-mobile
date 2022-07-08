@@ -10,6 +10,7 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         email: json['email'] as String,
         fullName: json['fullName'] as String,
-        profileAvatar: json['profileAvatar'] as String,
+        profileAvatar:
+            json['profileAvatar'] != '' ? json['profileAvatar'] : 'avatar_1',
       );
 }
