@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:xtrip_mobile/screens/custom_map_screen.dart';
 import 'package:xtrip_mobile/screens/items/my_item_navigator.dart';
 import 'package:xtrip_mobile/screens/user_settings/user_navigation.dart';
+import 'package:xtrip_mobile/screens/user_settings/user_settings.dart';
+import 'package:xtrip_mobile/screens/shop/shop.dart';
 
 // void main() => runApp(const Home());
 
@@ -37,10 +39,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ),
     MyItemNavigator(),
     CustomMap(),
-    Text(
-      'Index 3: Shop',
-      style: optionStyle,
-    ),
+    // Text(
+    //   'Index 2: map',
+    //   style: optionStyle,
+    // ),
+    // CustomMap();
+    ShopScreen(),
     UserNavigator(),
   ];
 
