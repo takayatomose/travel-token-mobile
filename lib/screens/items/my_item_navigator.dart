@@ -6,7 +6,7 @@ class MyItemNavigator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Navigator(
+    return const Navigator(
       pages: [MaterialPage(child: MyItemsScreen())],
     );
   }

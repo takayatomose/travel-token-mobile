@@ -49,6 +49,86 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `A Product of TASTECH. LTD. CO`
+  String get copyright {
+    return Intl.message(
+      'A Product of TASTECH. LTD. CO',
+      name: 'copyright',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account`
+  String get yourAccount {
+    return Intl.message(
+      'Your account',
+      name: 'yourAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get login {
+    return Intl.message(
+      'Login',
+      name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Repair`
+  String get repair {
+    return Intl.message(
+      'Repair',
+      name: 'repair',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shop`
+  String get shop {
+    return Intl.message(
+      'Shop',
+      name: 'shop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Items`
+  String get items {
+    return Intl.message(
+      'Items',
+      name: 'items',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get account {
+    return Intl.message(
+      'Account',
+      name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Map`
+  String get map {
+    return Intl.message(
+      'Map',
+      name: 'map',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

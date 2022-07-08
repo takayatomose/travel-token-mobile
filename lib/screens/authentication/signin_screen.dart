@@ -5,6 +5,7 @@ import 'package:xtrip_mobile/bloc/auth/signin/sigin_bloc.dart';
 import 'package:xtrip_mobile/bloc/auth/signin/signin_event.dart';
 import 'package:xtrip_mobile/bloc/auth/signin/signin_state.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
 import 'package:xtrip_mobile/sessions/form_submission_status.dart';
 import 'package:xtrip_mobile/widgets/border_text_field.dart';
@@ -51,12 +52,12 @@ class _SignInScreenState extends State<SignInScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(bottom: 10),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 10),
                                   child: Text(
-                                    'Login',
+                                    S.of(context).login,
                                     textAlign: TextAlign.left,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.w700),
                                   ),
