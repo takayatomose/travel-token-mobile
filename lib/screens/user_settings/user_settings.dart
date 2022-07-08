@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +30,6 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
   Widget build(BuildContext context) {
     final SessionState sessionState =
         BlocProvider.of<SessionCubit>(context).state;
-    // final USCubit usCubit = BlocProvider.of<USCubit>(context);
     return BlocConsumer<USCubit, USState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -252,13 +249,12 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
 
   String getWalletBalance(
       {required List<Wallet> wallets, required String token}) {
-    if (wallets == null || wallets.length == 0) {
+    if (wallets.isEmpty) {
       return '0';
     }
     final Wallet tokenWallet = wallets.firstWhere(
         (element) => element.token == token,
         orElse: () => Wallet(token: token, balance: 0));
-    if (tokenWallet == null) return '0';
-    return tokenWallet!.balance!.toString();
+    return tokenWallet.balance.toString();
   }
 }
