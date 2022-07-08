@@ -5,6 +5,7 @@ import 'package:xtrip_mobile/bloc/auth/sign_up/signup_bloc.dart';
 import 'package:xtrip_mobile/bloc/auth/sign_up/signup_event.dart';
 import 'package:xtrip_mobile/bloc/auth/sign_up/signup_state.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
 import 'package:xtrip_mobile/sessions/form_submission_status.dart';
 import 'package:xtrip_mobile/widgets/border_text_field.dart';
@@ -69,7 +70,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                   hintText: 'Your email address',
                                   requiredField: true,
                                   requiredMessage:
-                                      'Please enter your email address',
+                                      S.of(context).emailEmptyError,
                                   icon: Icons.email,
                                   onChanged: (value) => context
                                       .read<SignUpBloc>()

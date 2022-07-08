@@ -129,6 +129,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Please enter your email address`
+  String get emailEmptyError {
+    return Intl.message(
+      'Please enter your email address',
+      name: 'emailEmptyError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your full name`
+  String get fullNameHint {
+    return Intl.message(
+      'Your full name',
+      name: 'fullNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your name`
+  String get fullNameEmptyError {
+    return Intl.message(
+      'Please enter your name',
+      name: 'fullNameEmptyError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your email address`
+  String get emailHint {
+    return Intl.message(
+      'Your email address',
+      name: 'emailHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your password`
+  String get passwordHint {
+    return Intl.message(
+      'Your password',
+      name: 'passwordHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm your password`
+  String get confirmPasswordHint {
+    return Intl.message(
+      'Confirm your password',
+      name: 'confirmPasswordHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

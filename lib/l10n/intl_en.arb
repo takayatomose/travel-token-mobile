@@ -6,5 +6,11 @@
     "shop": "Shop",
     "items": "Items",
     "account": "Account",
-    "map": "Map"
+    "map": "Map",
+    "emailEmptyError": "Please enter your email address",
+    "fullNameHint": "Your full name",
+    "fullNameEmptyError": "Please enter your name",
+    "emailHint": "Your email address",
+    "passwordHint": "Your password",
+    "confirmPasswordHint": "Confirm your password"
 }
