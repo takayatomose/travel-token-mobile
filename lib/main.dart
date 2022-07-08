@@ -10,6 +10,7 @@ import 'package:xtrip_mobile/repositories/user_repository.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:xtrip_mobile/simple_bloc_observer.dart';
 
 Future main() async {
   await runZonedGuarded(() async {
@@ -18,7 +19,11 @@ Future main() async {
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    runApp(const MyApp());
+    // runApp(const MyApp());
+    BlocOverrides.runZoned(
+      () => runApp(MyApp()),
+      blocObserver: SimpleBlocObserver(),
+    );
   }, (error, stackTrace) {
     FirebaseCrashlytics.instance.recordError(error, stackTrace);
   });
