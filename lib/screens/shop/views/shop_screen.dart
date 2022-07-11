@@ -11,7 +11,7 @@ class ShopScreen extends StatefulWidget {
 
 class _ShopScreenState extends State<ShopScreen> {
   final ShopBloc shopBloc = ShopBloc(httpClient: http.Client());
-var items = [   
+  var items = [
     'Item 1',
     'Item 2',
     'Item 3',
@@ -33,35 +33,31 @@ var items = [
         appBar: AppBar(
           centerTitle: false,
           title: const Text('WELCOME TO XTRIP SHOP',
-              style: const TextStyle(color: Colors.black),
-              textAlign: TextAlign.left),
+              style: TextStyle(color: Colors.black), textAlign: TextAlign.left),
           backgroundColor: Colors.white,
         ),
         body: Column(
           children: [
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
-              child: Container(
-                child: Padding(
-                    padding: EdgeInsets.only(top: 8, left: 21),
-                    child: Text('Have a nice shopping',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
-                        ),
-                        textAlign: TextAlign.left)),
-              ),
+              child: Padding(
+                  padding: EdgeInsets.only(top: 8, left: 21),
+                  child: Text('Have a nice shopping',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
+                      ),
+                      textAlign: TextAlign.left)),
             ),
-            CategoryList(),
-             DropdownButton(
-               
+            const CategoryList(),
+            DropdownButton(
               // Initial Value
               // value: dropdownvalue,
-               
+
               // Down Arrow Icon
-              icon: const Icon(Icons.keyboard_arrow_down),   
-               
+              icon: const Icon(Icons.keyboard_arrow_down),
+
               // Array list of items
               items: items.map((String items) {
                 return DropdownMenuItem(

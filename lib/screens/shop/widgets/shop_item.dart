@@ -79,7 +79,7 @@ class ShopItem extends StatelessWidget {
                   Padding(
                       padding: const EdgeInsets.only(top: 4),
                       child: Text(
-                          'E${item.eficiency.toString()} D${item.durability.toString()} L${item.luck.toString()} D${item.distance.toString()} ',
+                          'E${item.efficiency.toString()} D${item.durability.toString()} L${item.luck.toString()} D${item.distance.toString()} ',
                           style: const TextStyle(
                               fontSize: 12, color: Color(0xffABABAB)))),
                 ],
