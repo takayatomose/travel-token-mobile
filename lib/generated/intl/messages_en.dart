@@ -22,11 +22,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "ability": MessageLookupByLibrary.simpleMessage("Ability"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "condition": MessageLookupByLibrary.simpleMessage("Condition"),
         "confirmPasswordHint":
             MessageLookupByLibrary.simpleMessage("Confirm your password"),
         "copyright": MessageLookupByLibrary.simpleMessage(
             "A Product of TASTECH. LTD. CO"),
+        "distance": MessageLookupByLibrary.simpleMessage("Distance"),
+        "durability": MessageLookupByLibrary.simpleMessage("Durability"),
+        "efficiency": MessageLookupByLibrary.simpleMessage("Efficiency"),
         "emailEmptyError": MessageLookupByLibrary.simpleMessage(
             "Please enter your email address"),
         "emailHint": MessageLookupByLibrary.simpleMessage("Your email address"),
@@ -35,10 +40,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "fullNameHint": MessageLookupByLibrary.simpleMessage("Your full name"),
         "items": MessageLookupByLibrary.simpleMessage("Items"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "luck": MessageLookupByLibrary.simpleMessage("Luck"),
         "map": MessageLookupByLibrary.simpleMessage("Map"),
+        "myItems": MessageLookupByLibrary.simpleMessage("My Items"),
         "passwordHint": MessageLookupByLibrary.simpleMessage("Your password"),
         "repair": MessageLookupByLibrary.simpleMessage("Repair"),
         "shop": MessageLookupByLibrary.simpleMessage("Shop"),
+        "tokenBalance": MessageLookupByLibrary.simpleMessage("Token balance"),
         "yourAccount": MessageLookupByLibrary.simpleMessage("Your account")
       };
 }

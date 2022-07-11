@@ -189,6 +189,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Token balance`
+  String get tokenBalance {
+    return Intl.message(
+      'Token balance',
+      name: 'tokenBalance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Efficiency`
+  String get efficiency {
+    return Intl.message(
+      'Efficiency',
+      name: 'efficiency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Durability`
+  String get durability {
+    return Intl.message(
+      'Durability',
+      name: 'durability',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ability`
+  String get ability {
+    return Intl.message(
+      'Ability',
+      name: 'ability',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Luck`
+  String get luck {
+    return Intl.message(
+      'Luck',
+      name: 'luck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Distance`
+  String get distance {
+    return Intl.message(
+      'Distance',
+      name: 'distance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Condition`
+  String get condition {
+    return Intl.message(
+      'Condition',
+      name: 'condition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Items`
+  String get myItems {
+    return Intl.message(
+      'My Items',
+      name: 'myItems',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

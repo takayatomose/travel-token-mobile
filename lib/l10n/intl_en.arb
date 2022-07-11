@@ -12,5 +12,13 @@
     "fullNameEmptyError": "Please enter your name",
     "emailHint": "Your email address",
     "passwordHint": "Your password",
-    "confirmPasswordHint": "Confirm your password"
+    "confirmPasswordHint": "Confirm your password",
+    "tokenBalance": "Token balance",
+    "efficiency": "Efficiency",
+    "durability": "Durability",
+    "ability": "Ability",
+    "luck": "Luck",
+    "distance": "Distance",
+    "condition": "Condition",
+    "myItems": "My Items"
 }
