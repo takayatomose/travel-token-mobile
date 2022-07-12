@@ -260,11 +260,21 @@ class S {
     );
   }
 
-  /// `My Items`
-  String get myItems {
+  /// `My Items ({numOfItems})`
+  String myItems(Object numOfItems) {
     return Intl.message(
-      'My Items',
+      'My Items ($numOfItems)',
       name: 'myItems',
+      desc: '',
+      args: [numOfItems],
+    );
+  }
+
+  /// `Go go shop`
+  String get goToShop {
+    return Intl.message(
+      'Go go shop',
+      name: 'goToShop',
       desc: '',
       args: [],
     );

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:xtrip_mobile/screens/shop/shop.dart';
-import 'package:xtrip_mobile/models/paginateDocument.dart';
+import 'package:xtrip_mobile/models/paginate_document.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:stream_transform/stream_transform.dart';
 import 'package:xtrip_mobile/utils/api.dart';
@@ -98,7 +98,6 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
     if (itemCategeryId != -1) {
       uri = '/item?page=${page}&item_category_id=${itemCategeryId}';
     }
-    print("uri: " + uri);
     final response = await apiService.getAPI(uri: uri);
     if (response.statusCode == 200) {
       Map<String, dynamic> map = json.decode(response.body);

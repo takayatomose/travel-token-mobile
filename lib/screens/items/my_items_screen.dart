@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/screens/items/bloc/my_item_bloc.dart';
+import 'package:xtrip_mobile/sessions/list_submission_status.dart';
 import 'package:xtrip_mobile/widgets/map_bottom_sheet/map_bottom_sheet.dart';
 import 'package:xtrip_mobile/widgets/user_items/user_items.dart';
 
@@ -89,8 +90,8 @@ class _MyItemsScreenState extends State<MyItemsScreen> {
                           ),
                         ),
                         StatisticButton(
-                          width: 120,
-                          height: 120,
+                          width: 140,
+                          height: 140,
                           children: [
                             const AttributeCircularPercentIndicator(
                               percent: 0.7,
@@ -146,8 +147,8 @@ class _MyItemsScreenState extends State<MyItemsScreen> {
                             ),
                           ),
                           StatisticButton(
-                            width: 120,
-                            height: 120,
+                            width: 140,
+                            height: 140,
                             children: [
                               const AttributeCircularPercentIndicator(
                                   percent: 0.4,
@@ -174,24 +175,58 @@ class _MyItemsScreenState extends State<MyItemsScreen> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 30),
                       child: Text(
-                        S.of(context).myItems,
+                        S
+                            .of(context)
+                            .myItems(state.numOfItems.toString())
+                            .toUpperCase(),
                         style: const TextStyle(
                             color: Color.fromRGBO(33, 38, 48, 1),
                             fontWeight: FontWeight.w700,
                             fontSize: 16),
                       ),
                     ),
-                    SizedBox(
-                      height: 300,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 10,
-                        itemBuilder: (BuildContext context, intindex) {
-                          return const SingleOwnerItem();
-                        },
+                    if (state.numOfItems == 0 &&
+                        state.listSubmissionStatus is! FetchingDataListStatus)
+                      Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(bottom: 20),
+                              child: Image(
+                                width: 150,
+                                height: 150,
+                                image: AssetImage('assets/images/no_items.png'),
+                              ),
+                            ),
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 25, vertical: 15),
+                                    primary:
+                                        const Color.fromRGBO(255, 128, 8, 1),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8))),
+                                onPressed: () {},
+                                child: Text(S.of(context).goToShop))
+                          ],
+                        ),
                       ),
-                    ),
+                    if (state.numOfItems != 0)
+                      SizedBox(
+                        height: 300,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.numOfItems,
+                          itemBuilder: (BuildContext context, int index) {
+                            return SingleOwnerItem(
+                                userItem: state.items[index]);
+                          },
+                        ),
+                      ),
                   ],
                 ),
               ),

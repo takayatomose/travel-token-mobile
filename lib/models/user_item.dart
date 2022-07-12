@@ -6,6 +6,8 @@ class UserItem extends Item {
   final int lockState;
   final int level;
   final DateTime lockExpired;
+  final int numOfMints;
+  final String code;
   UserItem({
     required super.id,
     required super.name,
@@ -19,19 +21,25 @@ class UserItem extends Item {
     required this.lockState,
     required this.level,
     required this.lockExpired,
+    required this.numOfMints,
+    required this.code,
   });
 
   factory UserItem.fromJson(Map<String, dynamic> json) => UserItem(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      price: json['price'] as int,
-      efficiency: json['efficiency'] as int,
-      durability: json['durability'] as int,
-      luck: json['luck'] as int,
-      distance: json['distance'] as int,
-      userId: json['user_id'] as int,
-      equippedState: json['equippedState'] as int,
-      lockState: json['lockState'] as int,
-      level: json['level'] as int,
-      lockExpired: json['lockExpired'] as DateTime);
+      id: json['id'] ?? 0,
+      name: json['name'].toString(),
+      price: json['price'] ?? 0,
+      efficiency: json['efficiency'],
+      durability: json['durability'],
+      luck: json['luck'],
+      distance: json['distance'],
+      userId: json['user_id'],
+      equippedState: json['equipped_state'],
+      lockState: json['lock_state'],
+      level: json['level'],
+      numOfMints: json['num_of_mints'],
+      code: json['code'].toString(),
+      lockExpired: json['lock_expired'] != null
+          ? json['lock_expired'] as DateTime
+          : DateTime.now());
 }

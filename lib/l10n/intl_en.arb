@@ -20,5 +20,6 @@
     "luck": "Luck",
     "distance": "Distance",
     "condition": "Condition",
-    "myItems": "My Items"
+    "myItems": "My Items ({numOfItems})",
+    "goToShop": "Go go shop"
 }

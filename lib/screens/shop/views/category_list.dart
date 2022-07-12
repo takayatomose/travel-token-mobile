@@ -21,7 +21,6 @@ class _CategoryListState extends State<CategoryList> {
   Widget build(BuildContext context) {
     return BlocBuilder<ShopBloc, ShopState>(
       builder: (context, state) {
-        print(state.categories.length);
         return Container(
           height: 120,
           child: ListView.builder(
