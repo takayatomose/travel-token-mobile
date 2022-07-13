@@ -10,80 +10,117 @@ class SingleOwnerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-          margin: const EdgeInsets.only(right: 10),
-          decoration: BoxDecoration(
-              image: const DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/item_background.png')),
-              borderRadius: BorderRadius.circular(16)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                userItem.name,
-                style: const TextStyle(
-                    color: Color.fromRGBO(255, 255, 255, 1),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  userItem.code,
+    return InkWell(
+      onTap: () => {
+        showDialog(
+            context: context,
+            builder: (context) => Dialog(
+                  child: SizedBox(
+                    width: double.infinity,
+                    // height: 500,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                            userItem.name,
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                        ),
+                        const Image(
+                          image:
+                              AssetImage('assets/images/sneaker_example.png'),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {}, child: Text('Equipe')),
+                            ElevatedButton(
+                                onPressed: () {}, child: Text('Main Equipe')),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ))
+      },
+      child: Stack(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+            margin: const EdgeInsets.only(right: 10),
+            decoration: BoxDecoration(
+                image: const DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage('assets/images/item_background.png')),
+                borderRadius: BorderRadius.circular(16)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  userItem.name,
                   style: const TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 0.5),
+                      color: Color.fromRGBO(255, 255, 255, 1),
                       fontSize: 14,
-                      fontWeight: FontWeight.w400),
+                      fontWeight: FontWeight.w700),
                 ),
-              ),
-              const Image(
-                  image: AssetImage('assets/images/sneaker_example.png')),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  S.of(context).condition,
-                  style: const TextStyle(
-                      fontSize: 12, color: Color.fromRGBO(255, 255, 255, 1)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    userItem.code,
+                    style: const TextStyle(
+                        color: Color.fromRGBO(255, 255, 255, 0.5),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400),
+                  ),
                 ),
-              ),
-              const Text(
-                '90%',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Color.fromRGBO(255, 255, 255, 1)),
-              ),
-            ],
-          ),
-        ),
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: Center(
-            child: SizedBox(
-              width: 100,
-              height: 30,
-              child: CustomPaint(
-                painter: TrapezoidPainter(
-                    color: const Color.fromRGBO(255, 128, 8, 1)),
-                size: const Size(100, 30),
-                child: Center(
-                    child: Text(
-                  'Level ${userItem.level}',
-                  style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w700),
-                )),
-              ),
+                const Image(
+                    image: AssetImage('assets/images/sneaker_example.png')),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    S.of(context).condition,
+                    style: const TextStyle(
+                        fontSize: 12, color: Color.fromRGBO(255, 255, 255, 1)),
+                  ),
+                ),
+                const Text(
+                  '90%',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Color.fromRGBO(255, 255, 255, 1)),
+                ),
+              ],
             ),
           ),
-        )
-      ],
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: SizedBox(
+                width: 100,
+                height: 30,
+                child: CustomPaint(
+                  painter: TrapezoidPainter(
+                      color: const Color.fromRGBO(255, 128, 8, 1)),
+                  size: const Size(100, 30),
+                  child: Center(
+                      child: Text(
+                    'Level ${userItem.level}',
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w700),
+                  )),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

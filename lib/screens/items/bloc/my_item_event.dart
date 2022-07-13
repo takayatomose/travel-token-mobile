@@ -4,3 +4,5 @@ part of 'my_item_bloc.dart';
 abstract class MyItemEvent {}
 
 class FetchItems extends MyItemEvent {}
+
+class FetchItemEquippedAttributes extends MyItemEvent {}
