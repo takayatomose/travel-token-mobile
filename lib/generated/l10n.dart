@@ -709,6 +709,186 @@ class S {
       args: [],
     );
   }
+
+  /// `Your email`
+  String get yourEmail {
+    return Intl.message(
+      'Your email',
+      name: 'yourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your name`
+  String get yourName {
+    return Intl.message(
+      'Your name',
+      name: 'yourName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong. Please try again later`
+  String get somethingWrong {
+    return Intl.message(
+      'Something went wrong. Please try again later',
+      name: 'somethingWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User Info updated`
+  String get userInfoUpdated {
+    return Intl.message(
+      'User Info updated',
+      name: 'userInfoUpdated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have updated your information`
+  String get userInfoUpdatedMsg {
+    return Intl.message(
+      'You have updated your information',
+      name: 'userInfoUpdatedMsg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign out`
+  String get signOut {
+    return Intl.message(
+      'Sign out',
+      name: 'signOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version`
+  String get version {
+    return Intl.message(
+      'Version',
+      name: 'version',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact us`
+  String get contactUs {
+    return Intl.message(
+      'Contact us',
+      name: 'contactUs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Guidance`
+  String get guidance {
+    return Intl.message(
+      'Guidance',
+      name: 'guidance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Disclosure`
+  String get disclosure {
+    return Intl.message(
+      'Disclosure',
+      name: 'disclosure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invite your friend`
+  String get inviteFriend {
+    return Intl.message(
+      'Invite your friend',
+      name: 'inviteFriend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change password`
+  String get changePassword {
+    return Intl.message(
+      'Change password',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{token} balance`
+  String xTokenBalance(Object token) {
+    return Intl.message(
+      '$token balance',
+      name: 'xTokenBalance',
+      desc: '',
+      args: [token],
+    );
+  }
+
+  /// `Invite`
+  String get invite {
+    return Intl.message(
+      'Invite',
+      name: 'invite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your invitation code`
+  String get yourInviteCode {
+    return Intl.message(
+      'Your invitation code',
+      name: 'yourInviteCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invitation code copied!`
+  String get copiedInviteCode {
+    return Intl.message(
+      'Invitation code copied!',
+      name: 'copiedInviteCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have copied invitation code!`
+  String get copiedInviteCodeMsg {
+    return Intl.message(
+      'You have copied invitation code!',
+      name: 'copiedInviteCodeMsg',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

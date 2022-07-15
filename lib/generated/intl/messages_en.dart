@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(numOfItems) => "My Items (${numOfItems})";
 
+  static String m1(token) => "${token} balance";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "ability": MessageLookupByLibrary.simpleMessage("Ability"),
@@ -37,6 +39,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "By creating the account, you agree with our "),
         "alreadyHadAccount":
             MessageLookupByLibrary.simpleMessage("Already had account?"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Change password"),
         "condition": MessageLookupByLibrary.simpleMessage("Condition"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmNewPassword":
@@ -45,12 +50,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm your password"),
         "confirmPwd":
             MessageLookupByLibrary.simpleMessage("Confirm your password"),
+        "contactUs": MessageLookupByLibrary.simpleMessage("Contact us"),
+        "copiedInviteCode":
+            MessageLookupByLibrary.simpleMessage("Invitation code copied!"),
+        "copiedInviteCodeMsg": MessageLookupByLibrary.simpleMessage(
+            "You have copied invitation code!"),
         "copyright": MessageLookupByLibrary.simpleMessage(
             "A Product of TASTECH. LTD. CO"),
         "createdAccount":
             MessageLookupByLibrary.simpleMessage("Account has been created!"),
         "creatingAccountToTravel": MessageLookupByLibrary.simpleMessage(
             "Create an account to get earning while traveling"),
+        "disclosure": MessageLookupByLibrary.simpleMessage("Disclosure"),
         "distance": MessageLookupByLibrary.simpleMessage("Distance"),
         "donthaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have account? "),
@@ -79,8 +90,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please enter your name"),
         "fullNameHint": MessageLookupByLibrary.simpleMessage("Your full name"),
         "goToShop": MessageLookupByLibrary.simpleMessage("Go go shop"),
+        "guidance": MessageLookupByLibrary.simpleMessage("Guidance"),
         "invitationCode":
             MessageLookupByLibrary.simpleMessage("Invitation code"),
+        "invite": MessageLookupByLibrary.simpleMessage("Invite"),
+        "inviteFriend":
+            MessageLookupByLibrary.simpleMessage("Invite your friend"),
         "items": MessageLookupByLibrary.simpleMessage("Items"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginHeadline": MessageLookupByLibrary.simpleMessage(
@@ -113,14 +128,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "sentEmailPwdInstruction": MessageLookupByLibrary.simpleMessage(
             "We sent you and an e-mail to instruction to reset password"),
         "shop": MessageLookupByLibrary.simpleMessage("Shop"),
+        "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "signupFailed": MessageLookupByLibrary.simpleMessage("Signup Failed"),
+        "somethingWrong": MessageLookupByLibrary.simpleMessage(
+            "Something went wrong. Please try again later"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "termConditions":
             MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
         "tokenBalance": MessageLookupByLibrary.simpleMessage("Token balance"),
         "travelToEarn": MessageLookupByLibrary.simpleMessage("Travel To Earn"),
+        "userInfoUpdated":
+            MessageLookupByLibrary.simpleMessage("User Info updated"),
+        "userInfoUpdatedMsg": MessageLookupByLibrary.simpleMessage(
+            "You have updated your information"),
+        "version": MessageLookupByLibrary.simpleMessage("Version"),
+        "xTokenBalance": m1,
         "yourAccount": MessageLookupByLibrary.simpleMessage("Your account"),
+        "yourEmail": MessageLookupByLibrary.simpleMessage("Your email"),
+        "yourInviteCode":
+            MessageLookupByLibrary.simpleMessage("Your invitation code"),
+        "yourName": MessageLookupByLibrary.simpleMessage("Your name"),
         "yourNewPassword":
             MessageLookupByLibrary.simpleMessage("Your new password"),
         "yourRecoverCode":

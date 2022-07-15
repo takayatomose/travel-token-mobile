@@ -64,6 +64,24 @@
     "activatedAccountFailed": "Account activate failed",
     "activatedAccount":"Account has been activated!",
     "activatedAccountMsg": "Your account has been activated successfully! You can signin to your account!",
-    "enterActivationCode": "Please enter your activation code"
+    "enterActivationCode": "Please enter your activation code",
+    "yourEmail": "Your email",
+    "yourName": "Your name",
+    "somethingWrong": "Something went wrong. Please try again later",
+    "userInfoUpdated": "User Info updated",
+    "userInfoUpdatedMsg": "You have updated your information",
+    "cancel": "Cancel",
+    "signOut": "Sign out",
+    "version": "Version",
+    "contactUs": "Contact us",
+    "guidance": "Guidance",
+    "disclosure": "Disclosure",
+    "inviteFriend": "Invite your friend",
+    "changePassword": "Change password",
+    "xTokenBalance": "{token} balance",
+    "invite": "Invite",
+    "yourInviteCode": "Your invitation code",
+    "copiedInviteCode": "Invitation code copied!",
+    "copiedInviteCodeMsg": "You have copied invitation code!"
     
 }
