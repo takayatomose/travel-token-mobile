@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
+import 'package:xtrip_mobile/navigators/authenticated_navigator.dart';
 import 'package:xtrip_mobile/screens/authentication/forgot_password_screen.dart';
 import 'package:xtrip_mobile/screens/onboard_screen.dart';
 import 'package:xtrip_mobile/screens/authentication/signin_screen.dart';
 import 'package:xtrip_mobile/screens/authentication/signup_screen.dart';
 import 'package:xtrip_mobile/screens/authentication/user_active_screen.dart';
 import 'package:xtrip_mobile/screens/custom_map_screen.dart';
-import 'package:xtrip_mobile/screens/home_screen.dart';
+// import 'package:xtrip_mobile/screens/home_screen.dart';
 
 class AuthNavigator extends StatelessWidget {
   const AuthNavigator({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class AuthNavigator extends StatelessWidget {
           if (state.screenState == ScreenState.customMap)
             const MaterialPage(child: CustomMap()),
           if (state.screenState == ScreenState.home)
-            const MaterialPage(child: Home())
+            const MaterialPage(child: AuthenticatedNavigator())
         ],
         onPopPage: (router, result) => router.didPop(result),
       );

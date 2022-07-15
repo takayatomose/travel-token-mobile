@@ -54,7 +54,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   void showActivation({required String email}) {
     var screenStack = addScreenToStack(ScreenState.activation);
-    print('activation screenStack: ${screenStack}');
     emit(AuthState(
         screenState: ScreenState.activation,
         email: email,

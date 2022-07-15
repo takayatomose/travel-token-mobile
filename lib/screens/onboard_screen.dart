@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/auth/authentication_bloc.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
 
 class OnBoardScreen extends StatelessWidget {
@@ -83,13 +84,13 @@ class OnBoardScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                const Positioned(
+                Positioned(
                   bottom: 35,
                   right: 0,
                   left: 0,
                   child: Text(
-                    'A Product of TASTECH. LTD. CO',
-                    style: TextStyle(
+                    S.of(context).copyright,
+                    style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         color: Color.fromRGBO(234, 231, 231, 0.7)),

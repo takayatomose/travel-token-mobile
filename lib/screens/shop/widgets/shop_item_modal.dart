@@ -58,7 +58,7 @@ class ShopItemModal extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14,
                             ))),
-                    Text(item.eficiency.toString(),
+                    Text(item.efficiency.toString(),
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,

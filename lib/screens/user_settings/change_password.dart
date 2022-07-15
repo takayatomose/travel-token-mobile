@@ -46,99 +46,102 @@ class _ChangePasswordState extends State<ChangePassword> {
             title: 'Change password',
             child: Stack(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16)),
-                      elevation: 2,
-                      margin: const EdgeInsets.only(
-                          top: 30, right: 20, left: 20, bottom: 60),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 30),
-                        child: Form(
-                            key: _changePwdFormKey,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const FormLabel(text: 'Your current password'),
-                                BorderTextField(
-                                  hasIcon: false,
-                                  padding: const EdgeInsets.only(bottom: 30),
-                                  borderRadius: 8,
-                                  requiredField: true,
-                                  requiredMessage:
-                                      'Please enter your current password',
-                                  onChanged: (value) {
-                                    context.read<ChangePasswordBloc>().add(
-                                        ChangePasswordCurrentChanged(
-                                            currentPassword: value));
-                                  },
-                                  obscureText: true,
-                                ),
-                                const FormLabel(text: 'Your new password'),
-                                BorderTextField(
-                                  padding: const EdgeInsets.only(bottom: 30),
-                                  hasIcon: false,
-                                  borderRadius: 8,
-                                  requiredField: true,
-                                  requiredMessage:
-                                      'Please enter your new password',
-                                  onChanged: (value) {
-                                    context.read<ChangePasswordBloc>().add(
-                                        ChangePasswordNewChanged(
-                                            newPassword: value));
-                                  },
-                                  controller: passwordCtrl,
-                                  obscureText: true,
-                                ),
-                                const FormLabel(text: 'Confirm password'),
-                                BorderTextField(
-                                  obscureText: true,
-                                  padding: const EdgeInsets.only(bottom: 30),
-                                  hasIcon: false,
-                                  borderRadius: 8,
-                                  requiredField: true,
-                                  requiredMessage:
-                                      'Please enter your new password',
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please re-enter password';
-                                    }
-                                    if (passwordCtrl.text != value) {
-                                      return 'Password does not match';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ],
-                            )),
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: const Color.fromRGBO(255, 128, 8, 1),
+                SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16)),
+                        elevation: 2,
+                        margin: const EdgeInsets.only(
+                            top: 30, right: 20, left: 20, bottom: 60),
+                        child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 15)),
-                      onPressed: () {
-                        if (_changePwdFormKey.currentState!.validate()) {
-                          context
-                              .read<ChangePasswordBloc>()
-                              .add(ChangePasswordSubmitted());
-                        }
-                      },
-                      child: const Text(
-                        'Change your password',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Color.fromRGBO(255, 255, 255, 1)),
+                              horizontal: 20, vertical: 30),
+                          child: Form(
+                              key: _changePwdFormKey,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const FormLabel(
+                                      text: 'Your current password'),
+                                  BorderTextField(
+                                    hasIcon: false,
+                                    padding: const EdgeInsets.only(bottom: 30),
+                                    borderRadius: 8,
+                                    requiredField: true,
+                                    requiredMessage:
+                                        'Please enter your current password',
+                                    onChanged: (value) {
+                                      context.read<ChangePasswordBloc>().add(
+                                          ChangePasswordCurrentChanged(
+                                              currentPassword: value));
+                                    },
+                                    obscureText: true,
+                                  ),
+                                  const FormLabel(text: 'Your new password'),
+                                  BorderTextField(
+                                    padding: const EdgeInsets.only(bottom: 30),
+                                    hasIcon: false,
+                                    borderRadius: 8,
+                                    requiredField: true,
+                                    requiredMessage:
+                                        'Please enter your new password',
+                                    onChanged: (value) {
+                                      context.read<ChangePasswordBloc>().add(
+                                          ChangePasswordNewChanged(
+                                              newPassword: value));
+                                    },
+                                    controller: passwordCtrl,
+                                    obscureText: true,
+                                  ),
+                                  const FormLabel(text: 'Confirm password'),
+                                  BorderTextField(
+                                    obscureText: true,
+                                    padding: const EdgeInsets.only(bottom: 30),
+                                    hasIcon: false,
+                                    borderRadius: 8,
+                                    requiredField: true,
+                                    requiredMessage:
+                                        'Please enter your new password',
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please re-enter password';
+                                      }
+                                      if (passwordCtrl.text != value) {
+                                        return 'Password does not match';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ],
+                              )),
+                        ),
                       ),
-                    ),
-                  ],
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: const Color.fromRGBO(255, 128, 8, 1),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 15)),
+                        onPressed: () {
+                          if (_changePwdFormKey.currentState!.validate()) {
+                            context
+                                .read<ChangePasswordBloc>()
+                                .add(ChangePasswordSubmitted());
+                          }
+                        },
+                        child: const Text(
+                          'Change your password',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Color.fromRGBO(255, 255, 255, 1)),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 _showDiglog(context, state),
               ],

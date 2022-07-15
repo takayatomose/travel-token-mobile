@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/us_cubit.dart';
 import 'package:xtrip_mobile/bloc/user_setting/us_state.dart';
 import 'package:xtrip_mobile/utils/toast_notification.dart';
-import 'package:xtrip_mobile/widgets/toast_container.dart';
 import 'package:xtrip_mobile/widgets/user_setting_wrapper.dart';
 
 class UserInvitationScreen extends StatefulWidget {

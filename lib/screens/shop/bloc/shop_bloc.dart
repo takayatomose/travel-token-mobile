@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:xtrip_mobile/screens/shop/shop.dart';
-import 'package:xtrip_mobile/models/paginateDocument.dart';
+import 'package:xtrip_mobile/models/paginate_document.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:stream_transform/stream_transform.dart';
 import 'package:xtrip_mobile/utils/api.dart';
@@ -33,11 +32,8 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
       } catch (e) {}
     });
     on<SelectCategory>((event, emit) async {
-      print("SelectCategory");
       final items = await _fetchItems(
           1, state.categories[event.selectedCategoryIndex].id);
-      print(
-          'items: ' + items.length.toString() + (items.length < 5).toString());
       return emit(state.copyWith(
         fetchItemStatus: FetchStatus.success,
         selectedCategoryIndex: event.selectedCategoryIndex,
@@ -57,9 +53,6 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
               hasReachedMax: items.length < 5,
             ));
           }
-          print("FetchItems " +
-              state.fetchItemStatus.toString() +
-              state.items.length.toString());
 
           final items;
           if (state.selectedCategoryIndex == -1) {
@@ -79,7 +72,6 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
                   ),
                 );
         } catch (_) {
-          print("Error: " + _.toString());
           emit(state.copyWith(fetchItemStatus: FetchStatus.failure));
         }
       },
@@ -90,9 +82,7 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
     final response = await apiService.getAPI(uri: '/item-category');
     if (response.statusCode == 200) {
       final body = json.decode(response.body) as List;
-      print(
-        "body",
-      );
+
       return body.map((dynamic json) {
         return Category(
           name: json['name'] as String,
@@ -108,7 +98,6 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
     if (itemCategeryId != -1) {
       uri = '/item?page=${page}&item_category_id=${itemCategeryId}';
     }
-    print("uri: " + uri);
     final response = await apiService.getAPI(uri: uri);
     if (response.statusCode == 200) {
       Map<String, dynamic> map = json.decode(response.body);

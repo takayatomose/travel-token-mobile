@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/user_info/user_info_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/user_info/user_info_event.dart';
 import 'package:xtrip_mobile/bloc/user_setting/user_info/user_info_state.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/repositories/user_repository.dart';
 import 'package:xtrip_mobile/sessions/form_submission_status.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
@@ -27,9 +28,9 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext bContext) {
     final SessionState sessionState =
-        BlocProvider.of<SessionCubit>(context).state;
+        BlocProvider.of<SessionCubit>(bContext).state;
     GlobalKey<FormState> infoFormKey = GlobalKey<FormState>();
     return BlocProvider(
       create: (context) => UserInfoBloc(
@@ -53,7 +54,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
         },
         builder: (context, state) {
           return UserSettingWrapper(
-            title: 'Your account',
+            title: S.of(context).yourAccount,
             child: Stack(children: [
               Card(
                 elevation: 3,
