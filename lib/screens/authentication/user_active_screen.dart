@@ -4,6 +4,7 @@ import 'package:xtrip_mobile/bloc/auth/user_activation/user_activation_bloc.dart
 import 'package:xtrip_mobile/bloc/auth/user_activation/user_activation_event.dart';
 import 'package:xtrip_mobile/bloc/auth/user_activation/user_activation_state.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
 import 'package:xtrip_mobile/sessions/form_submission_status.dart';
 import 'package:xtrip_mobile/widgets/border_text_field.dart';
@@ -51,20 +52,20 @@ class _UserActiveScreenState extends State<UserActiveScreen> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(bottom: 10),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 10),
                                   child: Text(
-                                    'VERIFICATION CODE',
-                                    style: TextStyle(
+                                    S.of(context).activatedCode,
+                                    style: const TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.w700),
                                   ),
                                 ),
-                                const Padding(
-                                  padding: EdgeInsets.only(bottom: 45),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 45),
                                   child: Text(
-                                    'Please enter code sent to email',
-                                    style: TextStyle(
+                                    S.of(context).enterActivationCode,
+                                    style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400),
                                   ),
@@ -72,8 +73,8 @@ class _UserActiveScreenState extends State<UserActiveScreen> {
                                 BorderTextField(
                                     requiredField: true,
                                     requiredMessage:
-                                        'Please enter your verification code',
-                                    hintText: 'Verification code',
+                                        S.of(context).enterActivationCode,
+                                    hintText: S.of(context).activatedCode,
                                     icon: Icons.copy_rounded,
                                     onChanged: (value) => context
                                         .read<UserActivationBloc>()
@@ -119,29 +120,28 @@ class _UserActiveScreenState extends State<UserActiveScreen> {
     } else if (formStatus is SubmissionSuccess) {
       return OverlayContainer(
         child: AlertDialog(
-          title: const Text('Account has been activated!'),
-          content: const Text(
-              'Your account has been activated successfully! You can signin to your account!'),
+          title: Text(S.of(context).activatedAccount),
+          content: Text(S.of(context).activatedAccountMsg),
           actions: [
             TextButton(
                 onPressed: () {
                   context.read<AuthCubit>().showSignIn();
                 },
-                child: const Text('Confirm'))
+                child: Text(S.of(context).confirm))
           ],
         ),
       );
     } else if (formStatus is SubmissionFailed) {
       return OverlayContainer(
         child: AlertDialog(
-          title: const Text('Account activation failed'),
-          content: const Text('Error'),
+          title: Text(S.of(context).activatedAccountFailed),
+          content: Text(S.of(context).error),
           actions: [
             TextButton(
                 onPressed: () {
                   context.read<UserActivationBloc>().add(ActiveCodeAgain());
                 },
-                child: const Text('Ok'))
+                child: Text(S.of(context).ok))
           ],
         ),
       );

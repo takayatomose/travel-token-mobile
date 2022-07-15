@@ -90,9 +90,9 @@ class _SignUpScreen extends State<SignUpScreen> {
                                           const EdgeInsets.only(bottom: 15),
                                       requiredField: true,
                                       requiredMessage:
-                                          'Please enter your password',
+                                          S.of(context).enterPassword,
                                       icon: Icons.lock,
-                                      hintText: 'Your password',
+                                      hintText: S.of(context).passwordHint,
                                       obscureText: true,
                                       onChanged: (value) => context
                                           .read<SignUpBloc>()
@@ -105,16 +105,16 @@ class _SignUpScreen extends State<SignUpScreen> {
                                           const EdgeInsets.only(bottom: 15),
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
-                                          return 'Please re-enter password';
+                                          return S.of(context).pleaseEnterPwd;
                                         }
                                         if (password.text !=
                                             confirmPassword.text) {
-                                          return 'Password does not match';
+                                          return S.of(context).pwdNotMatched;
                                         }
                                         return null;
                                       },
                                       icon: Icons.lock,
-                                      hintText: 'Confirm your password',
+                                      hintText: S.of(context).confirmPwd,
                                       obscureText: true,
                                     ),
                                     BorderTextField(
@@ -125,9 +125,9 @@ class _SignUpScreen extends State<SignUpScreen> {
                                       padding:
                                           const EdgeInsets.only(bottom: 20),
                                       requiredMessage:
-                                          'Please enter your invitation code',
+                                          S.of(context).enterInvitationCode,
                                       requiredField: true,
-                                      hintText: 'Invitation code',
+                                      hintText: S.of(context).invitationCode,
                                       icon: Icons.discount,
                                     ),
                                     Padding(
@@ -138,8 +138,9 @@ class _SignUpScreen extends State<SignUpScreen> {
                                           softWrap: true,
                                           textAlign: TextAlign.center,
                                           text: TextSpan(
-                                            text:
-                                                'By creating the account, you agree with our ',
+                                            text: S
+                                                .of(context)
+                                                .agreedCreatingAccount,
                                             style: const TextStyle(
                                                 color: Color.fromRGBO(
                                                     0, 0, 0, 0.5),
@@ -147,7 +148,9 @@ class _SignUpScreen extends State<SignUpScreen> {
                                                 fontWeight: FontWeight.w400),
                                             children: [
                                               TextSpan(
-                                                  text: 'Terms and Conditions',
+                                                  text: S
+                                                      .of(context)
+                                                      .termConditions,
                                                   style: const TextStyle(
                                                       color: Color.fromRGBO(
                                                           255, 128, 8, 1),
@@ -196,10 +199,10 @@ class _SignUpScreen extends State<SignUpScreen> {
                               color: Color.fromRGBO(0, 0, 0, 0.5),
                               fontSize: 14,
                               fontWeight: FontWeight.w400),
-                          text: 'Already had account? ',
+                          text: '${S.of(context).alreadyHadAccount} ',
                           children: [
                             TextSpan(
-                                text: 'Login',
+                                text: S.of(context).login,
                                 style: const TextStyle(
                                     color: Color.fromRGBO(255, 128, 8, 1),
                                     fontWeight: FontWeight.w700,
@@ -239,23 +242,22 @@ class _SignUpScreen extends State<SignUpScreen> {
     } else if (formStatus is SubmissionFailed) {
       return OverlayContainer(
         child: AlertDialog(
-          title: const Text('Signup Failed'),
+          title: Text(S.of(context).signupFailed),
           content: Text(state.errorMessage),
           actions: [
             TextButton(
                 onPressed: () {
                   context.read<SignUpBloc>().add(SignUpAgain());
                 },
-                child: const Text('Ok'))
+                child: Text(S.of(context).ok))
           ],
         ),
       );
     } else if (formStatus is SubmissionSuccess) {
       return OverlayContainer(
         child: AlertDialog(
-          title: const Text('Account has been created!'),
-          content: const Text(
-              'Your account has been created successfully! An email has been sent to your email address containing an activation code. Please use code to activate your account!'),
+          title: Text(S.of(context).createdAccount),
+          content: Text(S.of(context).sentActivatedCode),
           actions: [
             TextButton(
                 onPressed: () => {
@@ -263,7 +265,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                           .read<AuthCubit>()
                           .showActivation(email: state.email)
                     },
-                child: const Text('Confirm'))
+                child: Text(S.of(context).confirm))
           ],
         ),
       );
@@ -272,23 +274,23 @@ class _SignUpScreen extends State<SignUpScreen> {
   }
 
   Padding _secondHeaderText() {
-    return const Padding(
-      padding: EdgeInsets.only(bottom: 30),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 30),
       child: Text(
-        'Create an account to get earning while traveling',
+        S.of(context).creatingAccountToTravel,
         textAlign: TextAlign.left,
-        style: TextStyle(fontSize: 15),
+        style: const TextStyle(fontSize: 15),
       ),
     );
   }
 
   Padding _headerText() {
-    return const Padding(
-      padding: EdgeInsets.only(bottom: 10),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
       child: Text(
-        'SIGNUP',
+        S.of(context).signUp.toUpperCase(),
         textAlign: TextAlign.left,
-        style: TextStyle(fontWeight: FontWeight.w800, fontSize: 24),
+        style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 24),
       ),
     );
   }

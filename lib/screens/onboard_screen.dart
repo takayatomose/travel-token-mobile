@@ -28,11 +28,11 @@ class OnBoardScreen extends StatelessWidget {
                 Column(
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 16, top: 73),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16, top: 73),
                       child: Text(
-                        'Travel To Earn',
-                        style: TextStyle(
+                        S.of(context).travelToEarn,
+                        style: const TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.w700,
                           color: Color.fromRGBO(0, 0, 0, 1),
@@ -40,11 +40,11 @@ class OnBoardScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 11),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 11),
                       child: Text(
-                        'Already had account?',
-                        style: TextStyle(
+                        S.of(context).alreadyHadAccount,
+                        style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
                             color: Color.fromRGBO(0, 0, 0, 0.5)),
@@ -56,9 +56,9 @@ class OnBoardScreen extends StatelessWidget {
                         onTap: () {
                           context.read<AuthCubit>().showSignIn();
                         },
-                        child: const Text(
-                          'Login with us',
-                          style: TextStyle(
+                        child: Text(
+                          S.of(context).loginWithUs,
+                          style: const TextStyle(
                               decoration: TextDecoration.underline,
                               fontSize: 20,
                               fontWeight: FontWeight.w700,
@@ -76,9 +76,9 @@ class OnBoardScreen extends StatelessWidget {
                           primary: const Color.fromRGBO(255, 128, 8, 1),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8))),
-                      child: const Text(
-                        'Start',
-                        style: TextStyle(
+                      child: Text(
+                        S.of(context).shop,
+                        style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),
                     )
