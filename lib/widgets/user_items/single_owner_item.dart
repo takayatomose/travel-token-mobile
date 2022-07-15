@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
+import 'package:xtrip_mobile/screens/items/bloc/my_item_bloc.dart';
 import 'package:xtrip_mobile/widgets/paints/trapezoid_paint.dart';
 
 import '../../models/user_item.dart';
@@ -10,6 +12,8 @@ class SingleOwnerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MyItemBloc myItemBloc = Provider.of<MyItemBloc>(context);
+
     return InkWell(
       onTap: () => {
         showDialog(
@@ -17,7 +21,6 @@ class SingleOwnerItem extends StatelessWidget {
             builder: (context) => Dialog(
                   child: SizedBox(
                     width: double.infinity,
-                    // height: 500,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -35,10 +38,30 @@ class SingleOwnerItem extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            ElevatedButton(
-                                onPressed: () {}, child: Text('Equipe')),
-                            ElevatedButton(
-                                onPressed: () {}, child: Text('Main Equipe')),
+                            if (userItem.equippedState ==
+                                UserItemStates.unEquipped)
+                              ElevatedButton(
+                                  onPressed: () {
+                                    myItemBloc
+                                        .add(EquippedItem(itemId: userItem.id));
+                                  },
+                                  child: const Text('Equipe')),
+                            if (userItem.equippedState !=
+                                UserItemStates.mainEquipped)
+                              ElevatedButton(
+                                  onPressed: () {
+                                    myItemBloc.add(SetMainEquippedItem(
+                                        itemId: userItem.id));
+                                  },
+                                  child: const Text('Main Equiped')),
+                            if (userItem.equippedState !=
+                                UserItemStates.unEquipped)
+                              ElevatedButton(
+                                  onPressed: () {
+                                    myItemBloc.add(
+                                        UnEquippedItem(itemId: userItem.id));
+                                  },
+                                  child: const Text('Un Equipped'))
                           ],
                         )
                       ],

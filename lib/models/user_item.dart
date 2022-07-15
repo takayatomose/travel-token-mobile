@@ -1,5 +1,11 @@
 import 'package:xtrip_mobile/screens/shop/models/models.dart';
 
+class UserItemStates {
+  static const int equipped = 1;
+  static const int unEquipped = 0;
+  static const int mainEquipped = 2;
+}
+
 class UserItem extends Item {
   final int userId;
   final int equippedState;

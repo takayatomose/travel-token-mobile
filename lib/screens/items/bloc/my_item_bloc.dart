@@ -23,6 +23,22 @@ class MyItemBloc extends Bloc<MyItemEvent, MyItemState> {
         emit(state.copyWith(listSubmissionStatus: FetchedDataListStatus()));
       }
     });
+    on<EquippedItem>((event, emit) async {
+      try {
+        await setItemState(itemId: event.itemId, state: 'equipped');
+      } on Exception catch (e) {}
+    });
+
+    on<UnEquippedItem>((event, emit) async {
+      try {
+        await setItemState(itemId: event.itemId, state: 'un-equipped');
+      } on Exception catch (e) {}
+    });
+    on<SetMainEquippedItem>((event, emit) async {
+      try {
+        await setItemState(itemId: event.itemId, state: 'main-equipped');
+      } on Exception catch (e) {}
+    });
   }
 
   Future<List<UserItem>> fetchUserItems() async {
@@ -33,5 +49,11 @@ class MyItemBloc extends Bloc<MyItemEvent, MyItemState> {
     final PaginateDocument paginateDocument =
         apiService.paginationBody(response.body);
     return paginateDocument.items.map((e) => UserItem.fromJson(e)).toList();
+  }
+
+  Future<void> setItemState(
+      {required int itemId, required String state}) async {
+    final response =
+        await apiService.patchAPI(uri: '/user-items/$itemId/$state');
   }
 }
