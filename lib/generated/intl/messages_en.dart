@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change password"),
+        "changePwd": MessageLookupByLibrary.simpleMessage("Change password"),
+        "changeYourPwd":
+            MessageLookupByLibrary.simpleMessage("Change your password"),
         "condition": MessageLookupByLibrary.simpleMessage("Condition"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmNewPassword":
@@ -61,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Account has been created!"),
         "creatingAccountToTravel": MessageLookupByLibrary.simpleMessage(
             "Create an account to get earning while traveling"),
+        "currentPwd":
+            MessageLookupByLibrary.simpleMessage("Your current password"),
         "disclosure": MessageLookupByLibrary.simpleMessage("Disclosure"),
         "distance": MessageLookupByLibrary.simpleMessage("Distance"),
         "donthaveAccount":
@@ -68,11 +73,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "durability": MessageLookupByLibrary.simpleMessage("Durability"),
         "efficiency": MessageLookupByLibrary.simpleMessage("Efficiency"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("E-mail address"),
+        "emailCopied": MessageLookupByLibrary.simpleMessage("Email copied"),
+        "emailCopiedMsg":
+            MessageLookupByLibrary.simpleMessage("Email address copied!"),
         "emailEmptyError": MessageLookupByLibrary.simpleMessage(
             "Please enter your email address"),
         "emailHint": MessageLookupByLibrary.simpleMessage("Your email address"),
         "enterActivationCode": MessageLookupByLibrary.simpleMessage(
             "Please enter your activation code"),
+        "enterCurrentPwd": MessageLookupByLibrary.simpleMessage(
+            "Please enter your current password"),
         "enterInvitationCode": MessageLookupByLibrary.simpleMessage(
             "Please enter your invitation code"),
         "enterPassword":
@@ -117,12 +127,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please your new password"),
         "pwdNotMatched":
             MessageLookupByLibrary.simpleMessage("Password does not match"),
+        "pwdUpdated": MessageLookupByLibrary.simpleMessage(
+            "Your password has been updated"),
         "repair": MessageLookupByLibrary.simpleMessage("Repair"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
         "resetPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Reset Password Success"),
         "resetPwdSuccessMsg": MessageLookupByLibrary.simpleMessage(
             "Your new password has been save! You can login now!"),
+        "sendUsEmail":
+            MessageLookupByLibrary.simpleMessage("Send email to us:"),
         "sentActivatedCode": MessageLookupByLibrary.simpleMessage(
             "Your account has been created successfully! An email has been sent to your email address containing an activation code. Please use code to activate your account!"),
         "sentEmailPwdInstruction": MessageLookupByLibrary.simpleMessage(

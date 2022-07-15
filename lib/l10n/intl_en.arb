@@ -82,6 +82,14 @@
     "invite": "Invite",
     "yourInviteCode": "Your invitation code",
     "copiedInviteCode": "Invitation code copied!",
-    "copiedInviteCodeMsg": "You have copied invitation code!"
+    "copiedInviteCodeMsg": "You have copied invitation code!",
+    "emailCopied": "Email copied",
+    "emailCopiedMsg": "Email address copied!",
+    "sendUsEmail": "Send email to us:",
+    "pwdUpdated": "Your password has been updated",
+    "changePwd": "Change password",
+    "currentPwd": "Your current password",
+    "enterCurrentPwd": "Please enter your current password",
+    "changeYourPwd": "Change your password"
     
 }

@@ -4,9 +4,6 @@ import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/screens/items/bloc/my_item_bloc.dart';
 import 'package:xtrip_mobile/screens/items/widgets/user_attributes_widget.dart';
 import 'package:xtrip_mobile/sessions/list_submission_status.dart';
-import 'package:xtrip_mobile/sessions/session_cubit.dart';
-import 'package:xtrip_mobile/sessions/session_state.dart';
-import 'package:xtrip_mobile/widgets/map_bottom_sheet/map_bottom_sheet.dart';
 import 'package:xtrip_mobile/widgets/user_items/user_items.dart';
 
 class MyItemsScreen extends StatefulWidget {

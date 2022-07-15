@@ -889,6 +889,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Email copied`
+  String get emailCopied {
+    return Intl.message(
+      'Email copied',
+      name: 'emailCopied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email address copied!`
+  String get emailCopiedMsg {
+    return Intl.message(
+      'Email address copied!',
+      name: 'emailCopiedMsg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send email to us:`
+  String get sendUsEmail {
+    return Intl.message(
+      'Send email to us:',
+      name: 'sendUsEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your password has been updated`
+  String get pwdUpdated {
+    return Intl.message(
+      'Your password has been updated',
+      name: 'pwdUpdated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change password`
+  String get changePwd {
+    return Intl.message(
+      'Change password',
+      name: 'changePwd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your current password`
+  String get currentPwd {
+    return Intl.message(
+      'Your current password',
+      name: 'currentPwd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your current password`
+  String get enterCurrentPwd {
+    return Intl.message(
+      'Please enter your current password',
+      name: 'enterCurrentPwd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change your password`
+  String get changeYourPwd {
+    return Intl.message(
+      'Change your password',
+      name: 'changeYourPwd',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
