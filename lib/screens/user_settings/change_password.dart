@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/change_password/change_password_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/change_password/change_password_event.dart';
 import 'package:xtrip_mobile/bloc/user_setting/change_password/change_password_state.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/repositories/user_repository.dart';
 import 'package:xtrip_mobile/sessions/form_submission_status.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
@@ -37,13 +38,13 @@ class _ChangePasswordState extends State<ChangePassword> {
           if (formStatus is SubmissionSuccess) {
             ToastNotification.showToast(context,
                 type: 'success',
-                message: 'Your password has been updated',
-                title: 'Password Changed!');
+                message: S.of(context).pwdUpdated,
+                title: '${S.of(context).changePassword}!');
           }
         },
         builder: (context, state) {
           return UserSettingWrapper(
-            title: 'Change password',
+            title: S.of(context).changePassword,
             child: Stack(
               children: [
                 SingleChildScrollView(
@@ -65,15 +66,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const FormLabel(
-                                      text: 'Your current password'),
+                                  FormLabel(text: S.of(context).currentPwd),
                                   BorderTextField(
                                     hasIcon: false,
                                     padding: const EdgeInsets.only(bottom: 30),
                                     borderRadius: 8,
                                     requiredField: true,
                                     requiredMessage:
-                                        'Please enter your current password',
+                                        S.of(context).enterCurrentPwd,
                                     onChanged: (value) {
                                       context.read<ChangePasswordBloc>().add(
                                           ChangePasswordCurrentChanged(
@@ -81,14 +81,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                                     },
                                     obscureText: true,
                                   ),
-                                  const FormLabel(text: 'Your new password'),
+                                  FormLabel(text: S.of(context).newPassword),
                                   BorderTextField(
                                     padding: const EdgeInsets.only(bottom: 30),
                                     hasIcon: false,
                                     borderRadius: 8,
                                     requiredField: true,
                                     requiredMessage:
-                                        'Please enter your new password',
+                                        S.of(context).pleseNewPassword,
                                     onChanged: (value) {
                                       context.read<ChangePasswordBloc>().add(
                                           ChangePasswordNewChanged(
@@ -97,21 +97,20 @@ class _ChangePasswordState extends State<ChangePassword> {
                                     controller: passwordCtrl,
                                     obscureText: true,
                                   ),
-                                  const FormLabel(text: 'Confirm password'),
+                                  FormLabel(text: S.of(context).confirmPwd),
                                   BorderTextField(
                                     obscureText: true,
                                     padding: const EdgeInsets.only(bottom: 30),
                                     hasIcon: false,
                                     borderRadius: 8,
                                     requiredField: true,
-                                    requiredMessage:
-                                        'Please enter your new password',
+                                    requiredMessage: S.of(context).newPassword,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please re-enter password';
+                                        return S.of(context).enterPassword;
                                       }
                                       if (passwordCtrl.text != value) {
-                                        return 'Password does not match';
+                                        return S.of(context).pwdNotMatched;
                                       }
                                       return null;
                                     },
@@ -132,9 +131,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                                 .add(ChangePasswordSubmitted());
                           }
                         },
-                        child: const Text(
-                          'Change your password',
-                          style: TextStyle(
+                        child: Text(
+                          S.of(context).changeYourPwd,
+                          style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
                               color: Color.fromRGBO(255, 255, 255, 1)),

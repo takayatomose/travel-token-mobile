@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/us_cubit.dart';
 import 'package:xtrip_mobile/bloc/user_setting/us_state.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/utils/toast_notification.dart';
 import 'package:xtrip_mobile/widgets/user_setting_wrapper.dart';
 
@@ -30,7 +31,7 @@ class _UserInvitationScreenState extends State<UserInvitationScreen> {
       builder: (context, state) {
         state as USInviteState;
         return UserSettingWrapper(
-          title: 'Invite your friend',
+          title: S.of(context).inviteFriend,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 20,
@@ -38,13 +39,13 @@ class _UserInvitationScreenState extends State<UserInvitationScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Center(
+                Center(
                   child: Padding(
-                    padding: EdgeInsets.only(top: 40, bottom: 20),
+                    padding: const EdgeInsets.only(top: 40, bottom: 20),
                     child: Text(
-                      'Your invitation code',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                      S.of(context).yourInviteCode,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),
@@ -60,12 +61,13 @@ class _UserInvitationScreenState extends State<UserInvitationScreen> {
                     child: Text(state.invitationCode),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 40, bottom: 20),
+                Padding(
+                  padding: const EdgeInsets.only(top: 40, bottom: 20),
                   child: Text(
-                    'Guidance',
+                    S.of(context).guidance,
                     textAlign: TextAlign.start,
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w700, fontSize: 18),
                   ),
                 ),
                 Container(
@@ -87,12 +89,12 @@ class _UserInvitationScreenState extends State<UserInvitationScreen> {
                           ClipboardData(text: state.invitationCode));
                       ToastNotification.showToast(context,
                           type: 'success',
-                          title: 'Invitation code copied!',
-                          message: 'You have copied invitation code!');
+                          title: S.of(context).copiedInviteCode,
+                          message: S.of(context).copiedInviteCodeMsg);
                     },
-                    child: const Text(
-                      'Invite',
-                      style: TextStyle(
+                    child: Text(
+                      S.of(context).invite,
+                      style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 16,
                           color: Colors.white),

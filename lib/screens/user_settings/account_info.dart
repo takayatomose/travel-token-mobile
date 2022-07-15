@@ -42,14 +42,14 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
           if (state.formStatus is SubmissionSuccess) {
             ToastNotification.showToast(context,
                 type: 'success',
-                title: 'User Info updated',
-                message: 'You have updated your information');
+                title: S.of(context).userInfoUpdated,
+                message: S.of(context).userInfoUpdatedMsg);
           }
           if (state.formStatus is SubmissionFailed) {
             ToastNotification.showToast(context,
                 type: 'error',
-                title: 'Error',
-                message: 'Something went wrong. Please try again later');
+                title: S.of(context).error,
+                message: S.of(context).somethingWrong);
           }
         },
         builder: (context, state) {
@@ -69,9 +69,9 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        const Text(
-                          'Your name',
-                          style: TextStyle(
+                        Text(
+                          S.of(context).yourName,
+                          style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                               color: Color.fromRGBO(0, 0, 0, 0.5)),
@@ -92,7 +92,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                                       UserInfoFullNameChanged(fullName: value)),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter your name';
+                                  return S.of(context).fullNameEmptyError;
                                 }
                                 return null;
                               },
@@ -133,9 +133,9 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Your email',
-                          style: TextStyle(
+                        Text(
+                          S.of(context).yourEmail,
+                          style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                               color: Color.fromRGBO(0, 0, 0, 0.5)),

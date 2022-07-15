@@ -67,10 +67,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                             fontWeight: FontWeight.w700),
                                       ),
                                     ),
-                                    const Padding(
-                                      padding: EdgeInsets.only(bottom: 40),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 40),
                                       child: Text(
-                                        'Login to your account to keep traveling',
+                                        S.of(context).loginHeadline,
                                         textAlign: TextAlign.left,
                                       ),
                                     ),
@@ -79,8 +80,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                           const EdgeInsets.only(bottom: 30),
                                       requiredField: true,
                                       requiredMessage:
-                                          'Please enter your email',
-                                      hintText: 'Your email',
+                                          S.of(context).emailEmptyError,
+                                      hintText: S.of(context).emailHint,
                                       icon: Icons.email,
                                       onChanged: (value) => context
                                           .read<SignInBloc>()
@@ -90,10 +91,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                     BorderTextField(
                                       padding:
                                           const EdgeInsets.only(bottom: 15),
-                                      hintText: 'Your password',
+                                      hintText: S.of(context).passwordHint,
                                       requiredField: true,
                                       requiredMessage:
-                                          'Please enter your password',
+                                          S.of(context).enterPassword,
                                       icon: Icons.lock,
                                       obscureText: true,
                                       onChanged: (value) => context
@@ -106,10 +107,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                           const EdgeInsets.only(bottom: 60),
                                       alignment: Alignment.topRight,
                                       child: InkWell(
-                                        child: const Text(
-                                          'Forgot password',
+                                        child: Text(
+                                          S.of(context).forgotPassword,
                                           textAlign: TextAlign.right,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               decoration:
                                                   TextDecoration.underline,
                                               fontSize: 14,
@@ -149,14 +150,14 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
-                            text: 'Don\'t have account? ',
+                            text: S.of(context).donthaveAccount,
                             style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: Color.fromRGBO(0, 0, 0, 0.5)),
                             children: [
                               TextSpan(
-                                text: 'Sign up',
+                                text: S.of(context).signUp,
                                 style: const TextStyle(
                                     color: Color.fromRGBO(255, 128, 8, 1),
                                     fontWeight: FontWeight.w700,
@@ -186,14 +187,14 @@ class _SignInScreenState extends State<SignInScreen> {
     } else if (formStatus is SubmissionFailed) {
       return OverlayContainer(
         child: AlertDialog(
-          title: const Text('Error'),
-          content: const Text('Error'),
+          title: Text(S.of(context).error),
+          content: Text(S.of(context).error),
           actions: [
             TextButton(
                 onPressed: () {
                   context.read<SignInBloc>().add(SignInAgain());
                 },
-                child: const Text('Ok'))
+                child: Text(S.of(context).ok))
           ],
         ),
       );
