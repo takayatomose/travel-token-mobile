@@ -33,14 +33,22 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
       } catch (e) {}
     });
     on<SelectCategory>((event, emit) async {
-      print("SelectCategory");
       final items = await _fetchItems(
           1, state.categories[event.selectedCategoryIndex].id);
-      print(
-          'items: ' + items.length.toString() + (items.length < 5).toString());
       return emit(state.copyWith(
         fetchItemStatus: FetchStatus.success,
         selectedCategoryIndex: event.selectedCategoryIndex,
+        items: items,
+        hasReachedMax: items.length < 5,
+      ));
+    });
+
+     on<SelectSortText>((event, emit) async {
+      final items = await _fetchItems(
+          1, state.categories[state.selectedCategoryIndex].id, event.selectSortText);
+      return emit(state.copyWith(
+        fetchItemStatus: FetchStatus.success,
+        sortText: event.selectSortText,
         items: items,
         hasReachedMax: items.length < 5,
       ));
@@ -57,16 +65,14 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
               hasReachedMax: items.length < 5,
             ));
           }
-          print("FetchItems " +
-              state.fetchItemStatus.toString() +
-              state.items.length.toString());
 
           final items;
           if (state.selectedCategoryIndex == -1) {
-            items = await _fetchItems((state.items.length / 5).floor() + 1, -1);
+            items = await _fetchItems((state.items.length / 5).floor() + 1, -1, state.sortText);
           } else {
             items = await _fetchItems((state.items.length / 5).floor() + 1,
-                state.categories[state.selectedCategoryIndex].id);
+                state.categories[state.selectedCategoryIndex].id,
+                state.sortText);
           }
 
           items.isEmpty
@@ -103,10 +109,13 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
     throw Exception('error fetching posts');
   }
 
-  Future<List<Item>> _fetchItems([int page = 1, itemCategeryId = -1]) async {
+  Future<List<Item>> _fetchItems([int page = 1, itemCategeryId = -1, sortText = ""]) async {
     var uri = '/item?page=${page}';
     if (itemCategeryId != -1) {
       uri = '/item?page=${page}&item_category_id=${itemCategeryId}';
+    }
+    if(sortText != "") {
+        uri =  uri + sortText;
     }
     print("uri: " + uri);
     final response = await apiService.getAPI(uri: uri);

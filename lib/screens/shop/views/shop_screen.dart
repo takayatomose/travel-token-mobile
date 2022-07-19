@@ -11,13 +11,14 @@ class ShopScreen extends StatefulWidget {
 
 class _ShopScreenState extends State<ShopScreen> {
   final ShopBloc shopBloc = ShopBloc(httpClient: http.Client());
-var items = [   
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
+
+  List<DropdownMenuItem<String>> menuItems = [
+    DropdownMenuItem(
+        child: Text("Lowest Price"), value: "&orderBy=price&sort=ASC"),
+    DropdownMenuItem(
+        child: Text("Highest Price"), value: "&orderBy=price&sort=DESC"),
   ];
+
   @override
   void initState() {
     shopBloc.add(FetchCategories());
@@ -29,60 +30,56 @@ var items = [
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => shopBloc,
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: false,
-          title: const Text('WELCOME TO XTRIP SHOP',
-              style: const TextStyle(color: Colors.black),
-              textAlign: TextAlign.left),
-          backgroundColor: Colors.white,
-        ),
-        body: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                child: Padding(
-                    padding: EdgeInsets.only(top: 8, left: 21),
-                    child: Text('Have a nice shopping',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
-                        ),
-                        textAlign: TextAlign.left)),
-              ),
+      child: BlocBuilder<ShopBloc, ShopState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              centerTitle: false,
+              title: const Text('WELCOME TO XTRIP SHOP',
+                  style: const TextStyle(color: Colors.black),
+                  textAlign: TextAlign.left),
+              backgroundColor: Colors.white,
             ),
-            CategoryList(),
-             DropdownButton(
-               
-              // Initial Value
-              // value: dropdownvalue,
-               
-              // Down Arrow Icon
-              icon: const Icon(Icons.keyboard_arrow_down),   
-               
-              // Array list of items
-              items: items.map((String items) {
-                return DropdownMenuItem(
-                  value: items,
-                  child: Text(items),
-                );
-              }).toList(),
-              // After selecting the desired option,it will
-              // change button value to selected value
-              onChanged: (String? newValue) {
-                setState(() {
-                  // dropdownvalue = newValue!;
-                });
-              },
+            body: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    child: Padding(
+                        padding: EdgeInsets.only(top: 8, left: 21),
+                        child: Text('Have a nice shopping',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black,
+                            ),
+                            textAlign: TextAlign.left)),
+                  ),
+                ),
+                CategoryList(),
+                DropdownButton(
+                  // Initial Value
+                  // value: state.sortText,
+                  icon: const Icon(Icons.keyboard_arrow_down),
+
+                  // Array list of items
+                  items: menuItems,
+                  // After selecting the desired option,it will
+                  // change button value to selected value
+                  onChanged: (String? newValue) {
+                    final value = newValue ?? '';
+                    context.read<ShopBloc>().add(SelectSortText(value));
+                  },
+                  hint: const Text("Sort"),
+                ),
+                Expanded(
+                  // wrap in Expanded
+                  child: ItemList(),
+                ),
+              ],
             ),
-            Expanded(
-              // wrap in Expanded
-              child: ItemList(),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

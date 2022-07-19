@@ -9,6 +9,7 @@ class ShopState {
   final List<Category> categories;
   final int selectedCategoryIndex;
   final bool hasReachedMax;
+  final String sortText;
 
   ShopState({
     this.fetchItemStatus = FetchStatus.initial,
@@ -17,6 +18,7 @@ class ShopState {
     this.selectedCategoryIndex = -1,
     this.categories = const <Category>[],
     this.hasReachedMax = false,
+    this.sortText = '',
   });
   ShopState copyWith({
     FetchStatus? fetchCategoryStatus,
@@ -25,6 +27,7 @@ class ShopState {
     List<Category>? categories,
     int? selectedCategoryIndex,
     bool? hasReachedMax,
+    String? sortText,
   }) {
     return ShopState(
       fetchItemStatus: fetchItemStatus ?? this.fetchItemStatus,
@@ -34,6 +37,7 @@ class ShopState {
       selectedCategoryIndex:
           selectedCategoryIndex ?? this.selectedCategoryIndex,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      sortText: sortText ?? this.sortText,
     );
   }
 

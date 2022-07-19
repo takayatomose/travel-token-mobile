@@ -12,3 +12,10 @@ class SelectCategory extends ShopEvent {
 
   SelectCategory(this.selectedCategoryIndex);
 }
+
+class SelectSortText extends ShopEvent {
+  final String selectSortText;
+
+  SelectSortText(this.selectSortText);
+}
+
