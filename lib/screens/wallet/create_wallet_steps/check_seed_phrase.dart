@@ -23,7 +23,17 @@ class CheckSeedPhrase extends StatelessWidget {
               child: Column(children: [
                 SeedPhraseNotice(
                   text: S.of(context).chooseSeedPhraseMessage,
-                )
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 20, bottom: 20),
+                  padding: const EdgeInsets.all(10),
+                  width: double.infinity,
+                  height: 200,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(16)),
+                  child: Text(state.inputtedSeedPhrase),
+                ),
               ]),
             ),
           ),
