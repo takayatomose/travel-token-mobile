@@ -97,6 +97,7 @@
     "newWallet": "New Wallet",
     "backedupSeedPhrase": "I have written down",
     "seedPhraseNotice1": "Don't risk losing your fund. Protect your wallet by saving you Seed Phrase in a place you trust",
-    "seedPhraseNotice2": "It's the only way to recover your wallet if you get locked out of the app or get a new device"
+    "seedPhraseNotice2": "It's the only way to recover your wallet if you get locked out of the app or get a new device",
+    "chooseSeedPhraseMessage": "Please choose Seed Phrase in order and make sure your Seed Phrase was correct written, once forgotten, it cannot be recovered."
 
 }

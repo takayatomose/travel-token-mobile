@@ -47,6 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePwd": MessageLookupByLibrary.simpleMessage("Change password"),
         "changeYourPwd":
             MessageLookupByLibrary.simpleMessage("Change your password"),
+        "chooseSeedPhraseMessage": MessageLookupByLibrary.simpleMessage(
+            "Please choose Seed Phrase in order and make sure your Seed Phrase was correct written, once forgotten, it cannot be recovered."),
         "condition": MessageLookupByLibrary.simpleMessage("Condition"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmNewPassword":

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/screens/wallet/bloc/initialize_e_wallet/initialize_e_wallet_bloc.dart';
-import 'package:xtrip_mobile/screens/wallet/seed_phrase_notice.dart';
+import 'package:xtrip_mobile/screens/wallet/create_wallet_steps/backup_seed_phrase.dart';
+import 'package:xtrip_mobile/screens/wallet/create_wallet_steps/check_seed_phrase.dart';
 
 class CreateEWallet extends StatefulWidget {
   const CreateEWallet({Key? key}) : super(key: key);
@@ -19,58 +19,18 @@ class _CreateEWalletState extends State<CreateEWallet> {
       create: (context) =>
           InitializeEWalletBloc(formState: InitializeWalletFormState.create)
             ..add(GenerateSeedPhrase()),
-      child: BlocConsumer<InitializeEWalletBloc, InitializeEWalletState>(
-        listener: ((context, state) {}),
-        builder: (context, state) => SafeArea(
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text(S.of(context).newWallet),
-              centerTitle: true,
-            ),
-            body: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                      margin: const EdgeInsets.only(bottom: 30),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 20),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: Colors.grey)),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SeedPhraseNotice(
-                              text: S.of(context).seedPhraseNotice1),
-                          SeedPhraseNotice(
-                              text: S.of(context).seedPhraseNotice2),
-                          if (state.seedPhrase.isNotEmpty)
-                            Expanded(
-                              child: ListView.builder(
-                                  itemCount: state.mnemonicArray.length,
-                                  itemBuilder: (BuildContext listContext,
-                                          int i) =>
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 10),
-                                        child: Text(
-                                            "${i + 1}   ${state.mnemonicArray[i]}"),
-                                      )),
-                            ),
-                        ],
-                      )),
-                ),
-                ElevatedButton(
-                    onPressed: () {},
-                    child: Text(S.of(context).backedupSeedPhrase.toLowerCase()))
-              ]),
-            ),
-          ),
-        ),
-      ),
+      child: BlocBuilder<InitializeEWalletBloc, InitializeEWalletState>(
+          builder: ((context, state) => Navigator(
+                pages: [
+                  if (state.createWalletStep ==
+                      CreateWalletStep.backupSeedPhrase)
+                    const MaterialPage(child: BackupSeedPhrase()),
+                  if (state.createWalletStep ==
+                      CreateWalletStep.checkSeedPhrase)
+                    const MaterialPage(child: CheckSeedPhrase()),
+                ],
+                onPopPage: (route, result) => route.didPop(result),
+              ))),
     );
   }
 }

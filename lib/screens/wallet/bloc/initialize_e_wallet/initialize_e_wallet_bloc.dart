@@ -21,5 +21,10 @@ class InitializeEWalletBloc
       emit(state.copyWith(
           seedPhrase: mnemonic, mnemonicArray: mnemonic.split(' ')));
     });
+
+    on<CheckSeedPhraseEvent>(
+      (event, emit) => emit(
+          state.copyWith(createWalletStep: CreateWalletStep.checkSeedPhrase)),
+    );
   }
 }

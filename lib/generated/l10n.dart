@@ -1039,6 +1039,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Please choose Seed Phrase in order and make sure your Seed Phrase was correct written, once forgotten, it cannot be recovered.`
+  String get chooseSeedPhraseMessage {
+    return Intl.message(
+      'Please choose Seed Phrase in order and make sure your Seed Phrase was correct written, once forgotten, it cannot be recovered.',
+      name: 'chooseSeedPhraseMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

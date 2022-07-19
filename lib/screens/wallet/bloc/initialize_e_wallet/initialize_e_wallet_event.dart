@@ -17,3 +17,5 @@ class ExecImportWallet extends InitializeEWalletEvent {}
 class ExecCreateWallet extends InitializeEWalletEvent {}
 
 class GenerateSeedPhrase extends InitializeEWalletEvent {}
+
+class CheckSeedPhraseEvent extends InitializeEWalletEvent {}
