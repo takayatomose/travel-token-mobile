@@ -4,7 +4,8 @@ import 'package:xtrip_mobile/screens/custom_map_screen.dart';
 import 'package:xtrip_mobile/screens/items/my_item_navigator.dart';
 import 'package:xtrip_mobile/screens/shop/views/shop_screen.dart';
 import 'package:xtrip_mobile/screens/user_settings/user_navigation.dart';
-import 'package:xtrip_mobile/screens/wallet/e_wallet_screen.dart';
+import 'package:xtrip_mobile/screens/wallet/main_wallet_screen.dart';
+import 'package:xtrip_mobile/screens/wallet/wallet_navigator.dart';
 
 class AuthenticatedNavigator extends StatefulWidget {
   const AuthenticatedNavigator({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _AuthenticatedNavigatorState extends State<AuthenticatedNavigator> {
     CustomMap(),
     ShopScreen(),
     UserNavigator(),
-    EWalletScreen(),
+    WalletNavigator(),
   ];
   void _onItemTapped(int index) {
     setState(() {

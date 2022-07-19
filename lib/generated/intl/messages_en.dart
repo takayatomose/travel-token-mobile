@@ -39,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "By creating the account, you agree with our "),
         "alreadyHadAccount":
             MessageLookupByLibrary.simpleMessage("Already had account?"),
+        "backedupSeedPhrase":
+            MessageLookupByLibrary.simpleMessage("I have written down"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change password"),
@@ -101,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fullNameHint": MessageLookupByLibrary.simpleMessage("Your full name"),
         "goToShop": MessageLookupByLibrary.simpleMessage("Go go shop"),
         "guidance": MessageLookupByLibrary.simpleMessage("Guidance"),
+        "importWallet": MessageLookupByLibrary.simpleMessage("Import Wallet"),
         "invitationCode":
             MessageLookupByLibrary.simpleMessage("Invitation code"),
         "invite": MessageLookupByLibrary.simpleMessage("Invite"),
@@ -117,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
         "newPassword":
             MessageLookupByLibrary.simpleMessage("Your new password"),
+        "newWallet": MessageLookupByLibrary.simpleMessage("New Wallet"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "passwordHint": MessageLookupByLibrary.simpleMessage("Your password"),
         "pleaseEnterPwd":
@@ -135,6 +139,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Reset Password Success"),
         "resetPwdSuccessMsg": MessageLookupByLibrary.simpleMessage(
             "Your new password has been save! You can login now!"),
+        "seedPhrase": MessageLookupByLibrary.simpleMessage("Seed Phrase"),
+        "seedPhraseEmpty": MessageLookupByLibrary.simpleMessage(
+            "Please enter your seed phrase"),
+        "seedPhraseNotice1": MessageLookupByLibrary.simpleMessage(
+            "Don\'t risk losing your fund. Protect your wallet by saving you Seed Phrase in a place you trust"),
+        "seedPhraseNotice2": MessageLookupByLibrary.simpleMessage(
+            "It\'s the only way to recover your wallet if you get locked out of the app or get a new device"),
         "sendUsEmail":
             MessageLookupByLibrary.simpleMessage("Send email to us:"),
         "sentActivatedCode": MessageLookupByLibrary.simpleMessage(

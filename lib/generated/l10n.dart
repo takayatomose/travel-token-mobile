@@ -969,6 +969,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Import Wallet`
+  String get importWallet {
+    return Intl.message(
+      'Import Wallet',
+      name: 'importWallet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seed Phrase`
+  String get seedPhrase {
+    return Intl.message(
+      'Seed Phrase',
+      name: 'seedPhrase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your seed phrase`
+  String get seedPhraseEmpty {
+    return Intl.message(
+      'Please enter your seed phrase',
+      name: 'seedPhraseEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Wallet`
+  String get newWallet {
+    return Intl.message(
+      'New Wallet',
+      name: 'newWallet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I have written down`
+  String get backedupSeedPhrase {
+    return Intl.message(
+      'I have written down',
+      name: 'backedupSeedPhrase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't risk losing your fund. Protect your wallet by saving you Seed Phrase in a place you trust`
+  String get seedPhraseNotice1 {
+    return Intl.message(
+      'Don\'t risk losing your fund. Protect your wallet by saving you Seed Phrase in a place you trust',
+      name: 'seedPhraseNotice1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It's the only way to recover your wallet if you get locked out of the app or get a new device`
+  String get seedPhraseNotice2 {
+    return Intl.message(
+      'It\'s the only way to recover your wallet if you get locked out of the app or get a new device',
+      name: 'seedPhraseNotice2',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
