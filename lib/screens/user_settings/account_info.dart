@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/user_info/user_info_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/user_info/user_info_event.dart';
 import 'package:xtrip_mobile/bloc/user_setting/user_info/user_info_state.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/repositories/user_repository.dart';
 import 'package:xtrip_mobile/sessions/form_submission_status.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
@@ -27,9 +28,9 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext bContext) {
     final SessionState sessionState =
-        BlocProvider.of<SessionCubit>(context).state;
+        BlocProvider.of<SessionCubit>(bContext).state;
     GlobalKey<FormState> infoFormKey = GlobalKey<FormState>();
     return BlocProvider(
       create: (context) => UserInfoBloc(
@@ -41,19 +42,19 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
           if (state.formStatus is SubmissionSuccess) {
             ToastNotification.showToast(context,
                 type: 'success',
-                title: 'User Info updated',
-                message: 'You have updated your information');
+                title: S.of(context).userInfoUpdated,
+                message: S.of(context).userInfoUpdatedMsg);
           }
           if (state.formStatus is SubmissionFailed) {
             ToastNotification.showToast(context,
                 type: 'error',
-                title: 'Error',
-                message: 'Something went wrong. Please try again later');
+                title: S.of(context).error,
+                message: S.of(context).somethingWrong);
           }
         },
         builder: (context, state) {
           return UserSettingWrapper(
-            title: 'Your account',
+            title: S.of(context).yourAccount,
             child: Stack(children: [
               Card(
                 elevation: 3,
@@ -68,9 +69,9 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        const Text(
-                          'Your name',
-                          style: TextStyle(
+                        Text(
+                          S.of(context).yourName,
+                          style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                               color: Color.fromRGBO(0, 0, 0, 0.5)),
@@ -91,7 +92,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                                       UserInfoFullNameChanged(fullName: value)),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter your name';
+                                  return S.of(context).fullNameEmptyError;
                                 }
                                 return null;
                               },
@@ -132,9 +133,9 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Your email',
-                          style: TextStyle(
+                        Text(
+                          S.of(context).yourEmail,
+                          style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                               color: Color.fromRGBO(0, 0, 0, 0.5)),

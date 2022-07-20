@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/utils/toast_notification.dart';
 import 'package:xtrip_mobile/widgets/form_label.dart';
-import 'package:xtrip_mobile/widgets/toast_container.dart';
 import 'package:xtrip_mobile/widgets/user_setting_wrapper.dart';
 import 'package:flutter/services.dart';
 
@@ -11,11 +11,11 @@ class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UserSettingWrapper(
-      title: 'Contact us',
+      title: S.of(context).contactUs,
       child: Padding(
         padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const FormLabel(text: 'Send email to us:'),
+          FormLabel(text: S.of(context).sendUsEmail),
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
@@ -40,8 +40,8 @@ class ContactUsScreen extends StatelessWidget {
                               text: 'contact@xtrip.travel'));
                           ToastNotification.showToast(context,
                               type: 'success',
-                              title: 'Copied',
-                              message: 'Email address copied!');
+                              title: S.of(context).emailCopied,
+                              message: S.of(context).emailCopiedMsg);
                         },
                         icon: const Icon(
                           Icons.copy_rounded,

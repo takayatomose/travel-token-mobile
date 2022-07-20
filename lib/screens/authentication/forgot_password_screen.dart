@@ -4,6 +4,7 @@ import 'package:xtrip_mobile/bloc/auth/forgot_passwd/forgot_passwd_bloc.dart';
 import 'package:xtrip_mobile/bloc/auth/forgot_passwd/forgot_passwd_event.dart';
 import 'package:xtrip_mobile/bloc/auth/forgot_passwd/forgot_passwd_state.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
 import 'package:xtrip_mobile/sessions/form_submission_status.dart';
 import 'package:xtrip_mobile/widgets/border_text_field.dart';
@@ -59,8 +60,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                           const EdgeInsets.only(bottom: 10),
                                       child: Text(
                                         state.formState == PwdFormState.forgot
-                                            ? 'FORGOT PASSWORD'
-                                            : 'RESET PASSWORD',
+                                            ? S.of(context).forgotPassword
+                                            : S.of(context).resetPassword,
                                         style: const TextStyle(
                                             fontSize: 24,
                                             fontWeight: FontWeight.w700),
@@ -69,18 +70,22 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 10),
-                                      child: Text(state.formState ==
-                                              PwdFormState.forgot
-                                          ? 'Input your registered email address, we will send you the link to reset your password. Please check your email and follow instructions.'
-                                          : 'Enter code that you received via email and your new password'),
+                                      child: Text(
+                                          state.formState == PwdFormState.forgot
+                                              ? S
+                                                  .of(context)
+                                                  .forgotPasswordInstruction
+                                              : S
+                                                  .of(context)
+                                                  .enterResetPasswordCode),
                                     ),
                                     Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 30),
                                       child: InkWell(
-                                        child: const Text(
-                                          'Need help?',
-                                          style: TextStyle(
+                                        child: Text(
+                                          S.of(context).needHelp,
+                                          style: const TextStyle(
                                               color: Color.fromRGBO(
                                                   255, 128, 8, 1),
                                               decoration:
@@ -93,10 +98,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       BorderTextField(
                                         padding:
                                             const EdgeInsets.only(bottom: 10),
-                                        hintText: 'E-mail address',
+                                        hintText: S.of(context).emailAddress,
                                         requiredField: true,
                                         requiredMessage:
-                                            'Please enter your e-mail address',
+                                            S.of(context).emailEmptyError,
                                         icon: Icons.email,
                                         onChanged: (value) => context
                                             .read<ForgotPwdBloc>()
@@ -150,30 +155,24 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     } else if (formStatus is SubmissionFailed) {
       return OverlayContainer(
         child: AlertDialog(
-          title: const Text('Error'),
-          content: const Text('Error'),
+          title: Text(S.of(context).error),
+          content: Text(S.of(context).error),
           actions: [
             TextButton(
                 onPressed: () {
                   context.read<ForgotPwdBloc>().add(ForgotPwdAgain());
-                  // if (state.formState == PwdFormState.forgot) {
-                  //   context.read<ForgotPwdBloc>().add(ForgotPwdFormStateChanged(
-                  //       formState: PwdFormState.reset));
-                  // } else {
-                  //   context.read<AuthCubit>().showSignIn();
-                  // }
                 },
-                child: const Text('Ok'))
+                child: Text(S.of(context).ok))
           ],
         ),
       );
     } else if (formStatus is SubmissionSuccess) {
       String title = state.formState == PwdFormState.forgot
-          ? 'Forgot Password Success'
-          : 'Reset Password Success';
+          ? S.of(context).forgotPwdSuccess
+          : S.of(context).resetPasswordSuccess;
       String content = state.formState == PwdFormState.forgot
-          ? 'We sent you and an e-mail to instruction to reset password'
-          : 'Your new password has been save! You can login now!';
+          ? S.of(context).sentEmailPwdInstruction
+          : S.of(context).resetPwdSuccessMsg;
       return OverlayContainer(
         child: AlertDialog(
           title: Text(title),
@@ -188,7 +187,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     context.read<AuthCubit>().showSignIn();
                   }
                 },
-                child: const Text('Confirm')),
+                child: Text(S.of(context).confirm)),
           ],
         ),
       );
@@ -202,9 +201,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     }
     return BorderTextField(
       padding: const EdgeInsets.only(bottom: 10),
-      hintText: 'Your recover code',
+      hintText: S.of(context).yourRecoverCode,
       requiredField: true,
-      requiredMessage: 'Please your recover code',
+      requiredMessage: S.of(context).pleaseEnterRecovercode,
       onChanged: (value) =>
           context.read<ForgotPwdBloc>().add(ForgotPwdCodeChanged(code: value)),
       icon: Icons.code,
@@ -218,9 +217,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return BorderTextField(
       padding: const EdgeInsets.only(bottom: 10),
       controller: passwordCtrl,
-      hintText: 'Your new password',
+      hintText: S.of(context).newPassword,
       requiredField: true,
-      requiredMessage: 'Please your new password',
+      requiredMessage: S.of(context).pleseNewPassword,
       obscureText: true,
       onChanged: (value) => context
           .read<ForgotPwdBloc>()
@@ -235,7 +234,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     }
     return BorderTextField(
       padding: const EdgeInsets.only(bottom: 10),
-      hintText: 'Confirm your new password',
+      hintText: S.of(context).confirmNewPassword,
       obscureText: true,
       onChanged: (value) => context
           .read<ForgotPwdBloc>()
@@ -243,10 +242,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       icon: Icons.lock,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please re-enter password';
+          return S.of(context).pleaseEnterPwd;
         }
         if (passwordCtrl.text != value) {
-          return 'Password does not match';
+          return S.of(context).pwdNotMatched;
         }
         return null;
       },

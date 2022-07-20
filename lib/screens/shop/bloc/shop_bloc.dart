@@ -1,8 +1,7 @@
+// ignore_for_file: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:xtrip_mobile/screens/shop/shop.dart';
-import 'package:xtrip_mobile/models/paginateDocument.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:stream_transform/stream_transform.dart';
 import 'package:xtrip_mobile/utils/api.dart';
@@ -33,6 +32,14 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
       } catch (e) {}
     });
     on<SelectCategory>((event, emit) async {
+      if (event.selectedCategoryIndex == state.selectedCategoryIndex) {
+        final items = await _fetchItems(1);
+        return emit(state.copyWith(
+          fetchItemStatus: FetchStatus.success,
+          selectedCategoryIndex: -1,
+          items: items,
+        ));
+      }
       final items = await _fetchItems(
           1, state.categories[event.selectedCategoryIndex].id);
       return emit(state.copyWith(
@@ -43,9 +50,13 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
       ));
     });
 
-     on<SelectSortText>((event, emit) async {
+    on<SelectSortText>((event, emit) async {
       final items = await _fetchItems(
-          1, state.categories[state.selectedCategoryIndex].id, event.selectSortText);
+          1,
+          state.selectedCategoryIndex != -1
+              ? state.categories[state.selectedCategoryIndex].id
+              : state.selectedCategoryIndex,
+          event.selectSortText);
       return emit(state.copyWith(
         fetchItemStatus: FetchStatus.success,
         sortText: event.selectSortText,
@@ -68,9 +79,11 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
 
           final items;
           if (state.selectedCategoryIndex == -1) {
-            items = await _fetchItems((state.items.length / 5).floor() + 1, -1, state.sortText);
+            items = await _fetchItems(
+                (state.items.length / 5).floor() + 1, -1, state.sortText);
           } else {
-            items = await _fetchItems((state.items.length / 5).floor() + 1,
+            items = await _fetchItems(
+                (state.items.length / 5).floor() + 1,
                 state.categories[state.selectedCategoryIndex].id,
                 state.sortText);
           }
@@ -85,20 +98,25 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
                   ),
                 );
         } catch (_) {
-          print("Error: " + _.toString());
           emit(state.copyWith(fetchItemStatus: FetchStatus.failure));
         }
       },
       transformer: throttleDroppable(throttleDuration),
     );
+    on<BuyItem>((event, emit) async {
+      var uri = '/user-items/buy/${event.itemId}';
+      try {
+        await apiService.postAPI(uri: uri);
+      } catch (e) {
+        
+      }
+    });
   }
   Future<List<Category>> _fetchCategories() async {
     final response = await apiService.getAPI(uri: '/item-category');
     if (response.statusCode == 200) {
       final body = json.decode(response.body) as List;
-      print(
-        "body",
-      );
+
       return body.map((dynamic json) {
         return Category(
           name: json['name'] as String,
@@ -109,13 +127,16 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
     throw Exception('error fetching posts');
   }
 
-  Future<List<Item>> _fetchItems([int page = 1, itemCategeryId = -1, sortText = ""]) async {
+  Future<List<Item>> _fetchItems(
+      [int page = 1,
+      itemCategeryId = -1,
+      sortText = "&orderBy=price&sort=ASC"]) async {
     var uri = '/item?page=${page}';
     if (itemCategeryId != -1) {
       uri = '/item?page=${page}&item_category_id=${itemCategeryId}';
     }
-    if(sortText != "") {
-        uri =  uri + sortText;
+    if (sortText != "") {
+      uri = uri + sortText;
     }
     print("uri: " + uri);
     final response = await apiService.getAPI(uri: uri);
@@ -123,6 +144,6 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
       Map<String, dynamic> map = json.decode(response.body);
       return map["items"].map<Item>((model) => Item.fromJson(model)).toList();
     }
-    throw Exception('error fetching posts');
+    throw Exception('error fetching items');
   }
 }

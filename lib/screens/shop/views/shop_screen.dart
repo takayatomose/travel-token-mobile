@@ -13,10 +13,10 @@ class _ShopScreenState extends State<ShopScreen> {
   final ShopBloc shopBloc = ShopBloc(httpClient: http.Client());
 
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(
-        child: Text("Lowest Price"), value: "&orderBy=price&sort=ASC"),
-    DropdownMenuItem(
-        child: Text("Highest Price"), value: "&orderBy=price&sort=DESC"),
+    const DropdownMenuItem(
+        value: "&orderBy=price&sort=ASC", child: Text("Lowest Price")),
+    const DropdownMenuItem(
+        value: "&orderBy=price&sort=DESC", child: Text("Highest Price")),
   ];
 
   @override
@@ -32,52 +32,73 @@ class _ShopScreenState extends State<ShopScreen> {
       create: (context) => shopBloc,
       child: BlocBuilder<ShopBloc, ShopState>(
         builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              centerTitle: false,
-              title: const Text('WELCOME TO XTRIP SHOP',
-                  style: const TextStyle(color: Colors.black),
-                  textAlign: TextAlign.left),
-              backgroundColor: Colors.white,
-            ),
-            body: Column(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    child: Padding(
-                        padding: EdgeInsets.only(top: 8, left: 21),
-                        child: Text('Have a nice shopping',
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black,
-                            ),
-                            textAlign: TextAlign.left)),
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 42, left: 21),
+                child: Column(children: const [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'XTRIP SHOP',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                      ),
+                    ),
                   ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Have a nice shopping',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
+                        ),
+                        textAlign: TextAlign.left),
+                  )
+                ]),
+              ),
+              const CategoryList(),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding: const EdgeInsets.only(top: 12, bottom: 20, left: 21),
+                  child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color:
+                            Colors.white, //background color of dropdown button
+                        border: Border.all(
+                            color: Colors.black38,
+                            width: 1), //border of dropdown button
+                        borderRadius: BorderRadius.circular(
+                            50), //border raiuds of dropdown button
+                      ),
+                      child: Padding(
+                          padding: const EdgeInsets.only(left: 12, right: 12),
+                          child: DropdownButton(
+                            value: state.sortText,
+                            items: menuItems,
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            style: const TextStyle(
+                              color: Colors.black, //Font color
+                            ),
+                            underline: Container(), //remove underline
+                            onChanged: (String? newValue) {
+                              final value = newValue ?? '';
+                              context
+                                  .read<ShopBloc>()
+                                  .add(SelectSortText(value));
+                            },
+                            hint: const Text("Sort"),
+                          ))),
                 ),
-                CategoryList(),
-                DropdownButton(
-                  // Initial Value
-                  // value: state.sortText,
-                  icon: const Icon(Icons.keyboard_arrow_down),
-
-                  // Array list of items
-                  items: menuItems,
-                  // After selecting the desired option,it will
-                  // change button value to selected value
-                  onChanged: (String? newValue) {
-                    final value = newValue ?? '';
-                    context.read<ShopBloc>().add(SelectSortText(value));
-                  },
-                  hint: const Text("Sort"),
-                ),
-                Expanded(
-                  // wrap in Expanded
-                  child: ItemList(),
-                ),
-              ],
-            ),
+              ),
+              Expanded(
+                child: ItemList(),
+              ),
+            ],
           );
         },
       ),

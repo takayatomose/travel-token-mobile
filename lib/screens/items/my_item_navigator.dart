@@ -7,7 +7,8 @@ class MyItemNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Navigator(
-      pages: [MaterialPage(child: MyItemsScreen())],
+      pages: const [MaterialPage(child: MyItemsScreen())],
+      onPopPage: (router, result) => router.didPop(result),
     );
   }
 }

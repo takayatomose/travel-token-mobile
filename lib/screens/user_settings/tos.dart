@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/widgets/user_setting_wrapper.dart';
 
 class TOSScreen extends StatelessWidget {
@@ -6,9 +7,9 @@ class TOSScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const UserSettingWrapper(
-      title: 'Disclosure',
-      child: Text('Terms and conditions'),
+    return UserSettingWrapper(
+      title: S.of(context).disclosure,
+      child: Text(S.of(context).termConditions),
     );
   }
 }

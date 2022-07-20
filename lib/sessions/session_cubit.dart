@@ -3,6 +3,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:xtrip_mobile/bloc/auth/auth_credentials.dart';
 import 'package:xtrip_mobile/constants/user_constants.dart';
+import 'package:xtrip_mobile/models/user_play_attributes.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
 import 'package:xtrip_mobile/repositories/user_repository.dart';
 import 'package:xtrip_mobile/sessions/session_state.dart';
@@ -66,6 +67,15 @@ class SessionCubit extends Cubit<SessionState> {
       emit(state.copyWith(authSessionState: Authenticated(), user: user));
     } on Exception catch (e) {
       emit(state.copyWith(authSessionState: Unauthenticated()));
+    }
+  }
+
+  Future<void> fetchUserAttributes() async {
+    try {
+      final userAttributes = await userRepo.fetchUserPlayAttribute();
+      emit(state.copyWith(userPlayAttributes: userAttributes));
+    } on Exception catch (e) {
+      emit(state.copyWith(userPlayAttributes: const UserPlayAttributes()));
     }
   }
 

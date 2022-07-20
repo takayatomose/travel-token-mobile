@@ -5,6 +5,7 @@ import 'package:xtrip_mobile/bloc/auth/signin/sigin_bloc.dart';
 import 'package:xtrip_mobile/bloc/auth/signin/signin_event.dart';
 import 'package:xtrip_mobile/bloc/auth/signin/signin_state.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
 import 'package:xtrip_mobile/sessions/form_submission_status.dart';
 import 'package:xtrip_mobile/widgets/border_text_field.dart';
@@ -26,6 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final GlobalKey<FormState> _signinFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return ContainerBackground(
       bgAsset: 'assets/images/auth_3.png',
       child: BlocProvider(
@@ -34,128 +36,144 @@ class _SignInScreenState extends State<SignInScreen> {
             authCubit: context.read<AuthCubit>()),
         child: BlocConsumer<SignInBloc, SignInState>(
           listener: (context, state) {},
-          builder: (context, state) => Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Stack(
+          builder: (context, state) => SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints.tightFor(height: height),
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CardShadow(
-                          child: Form(
-                            key: _signinFormKey,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(bottom: 10),
-                                  child: Text(
-                                    'Login',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(bottom: 40),
-                                  child: Text(
-                                    'Login to your account to keep traveling',
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ),
-                                BorderTextField(
-                                  padding: const EdgeInsets.only(bottom: 30),
-                                  requiredField: true,
-                                  requiredMessage: 'Please enter your email',
-                                  hintText: 'Your email',
-                                  icon: Icons.email,
-                                  onChanged: (value) => context
-                                      .read<SignInBloc>()
-                                      .add(SignInEmailChanged(email: value)),
-                                ),
-                                BorderTextField(
-                                  padding: const EdgeInsets.only(bottom: 15),
-                                  hintText: 'Your password',
-                                  requiredField: true,
-                                  requiredMessage: 'Please enter your password',
-                                  icon: Icons.lock,
-                                  obscureText: true,
-                                  onChanged: (value) => context
-                                      .read<SignInBloc>()
-                                      .add(SignInPasswordChanged(
-                                          password: value)),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.only(bottom: 60),
-                                  alignment: Alignment.topRight,
-                                  child: InkWell(
-                                    child: const Text(
-                                      'Forgot password',
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          fontSize: 14,
-                                          color:
-                                              Color.fromRGBO(255, 128, 8, 1)),
+                        Stack(
+                          children: [
+                            CardShadow(
+                              child: Form(
+                                key: _signinFormKey,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10),
+                                      child: Text(
+                                        S.of(context).login,
+                                        textAlign: TextAlign.left,
+                                        style: const TextStyle(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w700),
+                                      ),
                                     ),
-                                    onTap: () {
-                                      context
-                                          .read<AuthCubit>()
-                                          .showForgotPassword();
-                                    },
-                                  ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 40),
+                                      child: Text(
+                                        S.of(context).loginHeadline,
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                    BorderTextField(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 30),
+                                      requiredField: true,
+                                      requiredMessage:
+                                          S.of(context).emailEmptyError,
+                                      hintText: S.of(context).emailHint,
+                                      icon: Icons.email,
+                                      onChanged: (value) => context
+                                          .read<SignInBloc>()
+                                          .add(
+                                              SignInEmailChanged(email: value)),
+                                    ),
+                                    BorderTextField(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 15),
+                                      hintText: S.of(context).passwordHint,
+                                      requiredField: true,
+                                      requiredMessage:
+                                          S.of(context).enterPassword,
+                                      icon: Icons.lock,
+                                      obscureText: true,
+                                      onChanged: (value) => context
+                                          .read<SignInBloc>()
+                                          .add(SignInPasswordChanged(
+                                              password: value)),
+                                    ),
+                                    Container(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 60),
+                                      alignment: Alignment.topRight,
+                                      child: InkWell(
+                                        child: Text(
+                                          S.of(context).forgotPassword,
+                                          textAlign: TextAlign.right,
+                                          style: const TextStyle(
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              fontSize: 14,
+                                              color: Color.fromRGBO(
+                                                  255, 128, 8, 1)),
+                                        ),
+                                        onTap: () {
+                                          context
+                                              .read<AuthCubit>()
+                                              .showForgotPassword();
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: CircleNextButton(onPressed: () {
+                                context
+                                    .read<SignInBloc>()
+                                    .add(SignInSubmitted());
+                              }),
+                            )
+                          ],
                         ),
-                        Positioned(
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: CircleNextButton(onPressed: () {
-                            context.read<SignInBloc>().add(SignInSubmitted());
-                          }),
-                        )
                       ],
                     ),
-                  ],
-                ),
-              ),
-              Positioned(
-                bottom: 50,
-                left: 0,
-                right: 0,
-                child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                        text: 'Don\'t have account? ',
-                        style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: Color.fromRGBO(0, 0, 0, 0.5)),
-                        children: [
-                          TextSpan(
-                            text: 'Sign up',
+                  ),
+                  Positioned(
+                    bottom: 50,
+                    left: 0,
+                    right: 0,
+                    child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                            text: S.of(context).donthaveAccount,
                             style: const TextStyle(
-                                color: Color.fromRGBO(255, 128, 8, 1),
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16,
-                                decoration: TextDecoration.underline),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                context.read<AuthCubit>().showSignUp();
-                              },
-                          )
-                        ])),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Color.fromRGBO(0, 0, 0, 0.5)),
+                            children: [
+                              TextSpan(
+                                text: S.of(context).signUp,
+                                style: const TextStyle(
+                                    color: Color.fromRGBO(255, 128, 8, 1),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
+                                    decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    context.read<AuthCubit>().showSignUp();
+                                  },
+                              )
+                            ])),
+                  ),
+                  _showDialog(context, state),
+                ],
               ),
-              _showDialog(context, state),
-            ],
+            ),
           ),
         ),
       ),
@@ -169,32 +187,19 @@ class _SignInScreenState extends State<SignInScreen> {
     } else if (formStatus is SubmissionFailed) {
       return OverlayContainer(
         child: AlertDialog(
-          title: const Text('Error'),
-          content: const Text('Error'),
+          title: Text(S.of(context).error),
+          content: Text(S.of(context).error),
           actions: [
             TextButton(
                 onPressed: () {
                   context.read<SignInBloc>().add(SignInAgain());
                 },
-                child: const Text('Ok'))
+                child: Text(S.of(context).ok))
           ],
         ),
       );
     } else if (formStatus is SubmissionSuccess) {
       context.read<AuthCubit>().showHome();
-      // return OverlayContainer(
-      //   child: AlertDialog(
-      //     title: const Text('Login Succesfully'),
-      //     content: const Text('You have login to your account successful'),
-      //     actions: [
-      //       TextButton(
-      //           onPressed: () {
-      //             context.read<AuthCubit>().showMap();
-      //           },
-      //           child: const Text('Continue to app'))
-      //     ],
-      //   ),
-      // );
     }
     return Container();
   }

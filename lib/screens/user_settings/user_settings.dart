@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/user_setting/us_cubit.dart';
 import 'package:xtrip_mobile/bloc/user_setting/us_state.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
 import 'package:xtrip_mobile/sessions/session_state.dart';
 import 'package:xtrip_mobile/widgets/user_balance_column.dart';
@@ -78,23 +79,23 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
                                               .read<SessionCubit>()
                                               .signOut();
                                         },
-                                        child: const Text('Ok')),
+                                        child: Text(S.of(context).ok)),
                                     TextButton(
                                         onPressed: () {
                                           Navigator.of(dialogContext).pop();
                                         },
-                                        child: const Text('Cancel'))
+                                        child: Text(S.of(context).cancel))
                                   ],
                                 )),
                         child: Column(
-                          children: const [
-                            Icon(
+                          children: [
+                            const Icon(
                               Icons.power_settings_new,
                               color: Color.fromRGBO(255, 128, 8, 1),
                             ),
                             Text(
-                              'Sign out',
-                              style: TextStyle(
+                              S.of(context).signOut,
+                              style: const TextStyle(
                                   color: Color.fromRGBO(255, 128, 8, 1)),
                             )
                           ],
@@ -122,7 +123,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
                                 child: UserBalanceColumn(
                                   balanceValue: getWalletBalance(
                                       wallets: state.wallets, token: 'GST'),
-                                  label: 'Game Coin balance',
+                                  label: S.of(context).xTokenBalance('GXT'),
                                   iconAsset: 'assets/images/gold_two.png',
                                 ),
                               ),
@@ -130,7 +131,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
                                 child: UserBalanceColumn(
                                   balanceValue: getWalletBalance(
                                       wallets: state.wallets, token: 'XTR'),
-                                  label: 'Token balance',
+                                  label: S.of(context).xTokenBalance('XTR'),
                                   iconAsset: 'assets/images/token_btc.png',
                                 ),
                               ),
@@ -196,43 +197,43 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
                     shrinkWrap: true,
                     children: [
                       UserSettingRow(
-                        label: 'Your account',
+                        label: S.of(context).yourAccount,
                         onTap: () {
                           usCubit.accountInfo();
                         },
                       ),
                       UserSettingRow(
-                        label: 'Change password',
+                        label: S.of(context).changePassword,
                         onTap: () {
                           usCubit.changePassword();
                         },
                       ),
                       UserSettingRow(
-                        label: 'Invite your friend',
+                        label: S.of(context).inviteFriend,
                         onTap: () {
                           usCubit.inviteFriend();
                         },
                       ),
                       UserSettingRow(
-                        label: 'Disclosure',
+                        label: S.of(context).disclosure,
                         onTap: () {
                           usCubit.tos();
                         },
                       ),
                       UserSettingRow(
-                        label: 'Guidance',
+                        label: S.of(context).guidance,
                         onTap: () {
                           usCubit.guide();
                         },
                       ),
                       UserSettingRow(
-                        label: 'Contact us',
+                        label: S.of(context).contactUs,
                         onTap: () {
                           usCubit.contactUs();
                         },
                       ),
                       UserSettingRow(
-                        label: 'Version',
+                        label: S.of(context).version,
                         secondLabel: '1.0.0',
                         onTap: () {},
                       ),

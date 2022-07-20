@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:xtrip_mobile/models/user.dart';
+import 'package:xtrip_mobile/models/user_play_attributes.dart';
 import 'package:xtrip_mobile/utils/api.dart';
 
 class UserRepository {
@@ -47,5 +48,15 @@ class UserRepository {
   Future<Response> fetchUserWallets() async {
     final response = await apiService.getAPI(uri: '/wallets');
     return response;
+  }
+
+  Future<UserPlayAttributes> fetchUserPlayAttribute() async {
+    final response =
+        await apiService.getAPI(uri: '/user-items/play-attributes');
+    if (response.statusCode != 200) {
+      throw Exception('Error');
+    }
+    return UserPlayAttributes.fromJson(json.decode(response.body));
+    // return response;
   }
 }

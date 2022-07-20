@@ -4,6 +4,8 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/navigators/app_navigator.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
 import 'package:xtrip_mobile/repositories/user_repository.dart';
@@ -21,7 +23,7 @@ Future main() async {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     // runApp(const MyApp());
     BlocOverrides.runZoned(
-      () => runApp(MyApp()),
+      () => runApp(const MyApp()),
       blocObserver: SimpleBlocObserver(),
     );
   }, (error, stackTrace) {
@@ -50,6 +52,15 @@ class MyApp extends StatelessWidget {
           child: const AppNavigator(),
         ),
       ),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''),
+      ],
     );
   }
 }

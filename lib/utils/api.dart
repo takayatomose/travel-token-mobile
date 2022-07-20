@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:http_interceptor/http_interceptor.dart';
+import 'package:xtrip_mobile/models/paginate_document.dart';
 import 'package:xtrip_mobile/utils/apiinterceptor.dart';
 
 class ApiService {
@@ -22,5 +25,11 @@ class ApiService {
 
   Future<http.Response> getAPI({required String uri}) {
     return httpClient.get(Uri.parse('${getHttpClient()}$uri'));
+  }
+
+  PaginateDocument paginationBody(String body) {
+    Map<String, dynamic> bodyJson = json.decode(body);
+
+    return PaginateDocument.fromJson(bodyJson);
   }
 }

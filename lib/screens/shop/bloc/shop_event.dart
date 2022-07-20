@@ -18,4 +18,8 @@ class SelectSortText extends ShopEvent {
 
   SelectSortText(this.selectSortText);
 }
+class BuyItem extends ShopEvent {
+  final int itemId;
+  BuyItem({required this.itemId});
+}
 

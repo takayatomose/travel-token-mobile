@@ -18,7 +18,7 @@ class ShopState {
     this.selectedCategoryIndex = -1,
     this.categories = const <Category>[],
     this.hasReachedMax = false,
-    this.sortText = '',
+    this.sortText = '&orderBy=price&sort=ASC',
   });
   ShopState copyWith({
     FetchStatus? fetchCategoryStatus,

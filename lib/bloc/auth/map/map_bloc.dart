@@ -15,8 +15,5 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   void onChange(Change<MapState> change) {
     // TODO: implement onChange
     super.onChange(change);
-    print("currentState " + change.currentState.selectedIndex.toString());
-    print("nextState " + change.nextState.selectedIndex.toString());
   }
-  
 }

@@ -2,7 +2,7 @@ class Item {
   final String name;
   final int id;
   final int price;
-  final int eficiency;
+  final int efficiency;
   final int durability;
   final int luck;
   final int distance;
@@ -10,7 +10,7 @@ class Item {
       {required this.id,
       required this.name,
       required this.price,
-      required this.eficiency,
+      required this.efficiency,
       required this.durability,
       required this.luck,
       required this.distance}) {}
@@ -19,7 +19,7 @@ class Item {
         id: json['id'] as int,
         name: json['name'] as String,
         price: json['price'] as int,
-        eficiency: json['eficiency'] as int,
+        efficiency: json['efficiency'] as int,
         durability: json['durability'] as int,
         luck: json['luck'] as int,
         distance: json['distance'] as int,

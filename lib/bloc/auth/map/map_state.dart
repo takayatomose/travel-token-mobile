@@ -9,10 +9,8 @@ class MapState {
   MapState copyWith({
     int? selectedIndex,
   }) {
-    print('selectedIndex: ${selectedIndex}');
-    print('this.selectedIndex: ${this.selectedIndex}');
-    final a =  MapState(selectedIndex ?? this.selectedIndex);
-    print('a: ${a}');
-    return a; 
+    final a = MapState(selectedIndex ?? this.selectedIndex);
+
+    return a;
   }
 }
