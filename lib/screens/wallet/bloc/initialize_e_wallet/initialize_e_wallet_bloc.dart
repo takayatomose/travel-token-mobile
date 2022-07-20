@@ -26,5 +26,28 @@ class InitializeEWalletBloc
       (event, emit) => emit(
           state.copyWith(createWalletStep: CreateWalletStep.checkSeedPhrase)),
     );
+
+    on<MnemoicItemAdded>(
+      (event, emit) {
+        List<String> inputtedMnemonicArray =
+            List.from(state.inputtedMnemonicArray);
+        inputtedMnemonicArray.add(event.mItem);
+        emit(state.copyWith(
+            inputtedMnemonicArray: inputtedMnemonicArray,
+            inputtedSeedPhrase: List.from(
+                    inputtedMnemonicArray.where((element) => element != ""))
+                .join(" ")));
+      },
+    );
+    on<MnemoicItemRemoved>((event, emit) {
+      List<String> inputtedMnemonicArray =
+          List.from(state.inputtedMnemonicArray);
+      inputtedMnemonicArray[event.position] = "";
+      emit(state.copyWith(
+          inputtedMnemonicArray: inputtedMnemonicArray,
+          inputtedSeedPhrase:
+              List.from(inputtedMnemonicArray.where((element) => element != ""))
+                  .join(" ")));
+    });
   }
 }

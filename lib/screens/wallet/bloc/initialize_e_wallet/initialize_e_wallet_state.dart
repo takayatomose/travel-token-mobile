@@ -14,6 +14,7 @@ class InitializeEWalletState {
   final String seedPhrase;
   final List<String> mnemonicArray;
   final CreateWalletStep createWalletStep;
+  final List<String> inputtedMnemonicArray;
 
   InitializeEWalletState(
       {this.walletFormState = InitializeWalletFormState.create,
@@ -21,14 +22,16 @@ class InitializeEWalletState {
       this.emailVerificationCode = '',
       this.seedPhrase = '',
       this.mnemonicArray = const [],
-      this.createWalletStep = CreateWalletStep.backupSeedPhrase});
+      this.createWalletStep = CreateWalletStep.backupSeedPhrase,
+      this.inputtedMnemonicArray = const []});
   InitializeEWalletState copyWith(
       {String? inputtedSeedPhrase,
       String? emailVerificationCode,
       InitializeWalletFormState? walletFormState,
       String? seedPhrase,
       List<String>? mnemonicArray,
-      CreateWalletStep? createWalletStep}) {
+      CreateWalletStep? createWalletStep,
+      List<String>? inputtedMnemonicArray}) {
     return InitializeEWalletState(
         walletFormState: walletFormState ?? this.walletFormState,
         emailVerificationCode:
@@ -36,6 +39,8 @@ class InitializeEWalletState {
         inputtedSeedPhrase: inputtedSeedPhrase ?? this.inputtedSeedPhrase,
         seedPhrase: seedPhrase ?? this.seedPhrase,
         mnemonicArray: mnemonicArray ?? this.mnemonicArray,
-        createWalletStep: createWalletStep ?? this.createWalletStep);
+        createWalletStep: createWalletStep ?? this.createWalletStep,
+        inputtedMnemonicArray:
+            inputtedMnemonicArray ?? this.inputtedMnemonicArray);
   }
 }

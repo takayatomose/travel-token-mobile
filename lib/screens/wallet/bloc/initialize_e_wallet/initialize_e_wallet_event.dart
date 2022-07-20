@@ -19,3 +19,13 @@ class ExecCreateWallet extends InitializeEWalletEvent {}
 class GenerateSeedPhrase extends InitializeEWalletEvent {}
 
 class CheckSeedPhraseEvent extends InitializeEWalletEvent {}
+
+class MnemoicItemAdded extends InitializeEWalletEvent {
+  final String mItem;
+  MnemoicItemAdded({required this.mItem});
+}
+
+class MnemoicItemRemoved extends InitializeEWalletEvent {
+  final int position;
+  MnemoicItemRemoved({required this.position});
+}
