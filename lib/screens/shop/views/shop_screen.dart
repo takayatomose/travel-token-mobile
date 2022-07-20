@@ -12,7 +12,7 @@ class ShopScreen extends StatefulWidget {
 class _ShopScreenState extends State<ShopScreen> {
   final ShopBloc shopBloc = ShopBloc(httpClient: http.Client());
 
-  List<DropdownMenuItem<String>> menuItems = [
+  List<DropdownMenuItem<String>> sortItems = [
     const DropdownMenuItem(
         value: "&orderBy=price&sort=ASC", child: Text("Lowest Price")),
     const DropdownMenuItem(
@@ -76,10 +76,11 @@ class _ShopScreenState extends State<ShopScreen> {
                             50), //border raiuds of dropdown button
                       ),
                       child: Padding(
-                          padding: const EdgeInsets.only(left: 12, right: 12),
+                          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
                           child: DropdownButton(
+                            isDense: true,
                             value: state.sortText,
-                            items: menuItems,
+                            items: sortItems,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             style: const TextStyle(
                               color: Colors.black, //Font color

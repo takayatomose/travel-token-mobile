@@ -26,13 +26,14 @@ class ShopItem extends StatelessWidget {
               Flexible(
                 flex: 20,
                 child: Container(
+                    margin: const EdgeInsets.all(2),
                     padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border:
-                          Border.all(color: const Color(0x0000ffff), width: 1),
-                      borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(16.0)),
-                      color: const Color(0xfff3f3f3),
+                    decoration: const BoxDecoration(
+                      // border:
+                      // Border.all(color:  Color.white, width: 1),
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(14)),
+                      color: Color(0xfff3f3f3),
                     ),
                     child: Row(
                       children: <Widget>[
@@ -65,28 +66,53 @@ class ShopItem extends StatelessWidget {
                       ],
                     )),
               ),
-              GestureDetector(
-                onTap: () {
-                  showItemDetail(context, item);
-                },
-                child: Flexible(
-                  flex: 75,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      children: <Widget>[
-                        Image.network('https://picsum.photos/100'),
-                        Padding(
+              Flexible(
+                flex: 75,
+                child: GestureDetector(
+                  onTap: () {
+                    showItemDetail(context, item);
+                  },
+                  child: Flexible(
+                    flex: 75,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      child: Column(
+                        children: <Widget>[
+                          Image.network('https://picsum.photos/100'),
+                          Padding(
                             padding: const EdgeInsets.only(top: 8),
-                            child: Text(item.name.toUpperCase(),
-                                style: const TextStyle(fontSize: 12))),
-                        Padding(
-                            padding: const EdgeInsets.only(top: 4),
-                            child: Text(
-                                'E${item.efficiency.toString()} D${item.durability.toString()} L${item.luck.toString()} D${item.distance.toString()} ',
-                                style: const TextStyle(
-                                    fontSize: 12, color: Color(0xffABABAB)))),
-                      ],
+                            child: Center(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const CircleAvatar(
+                                    backgroundColor: Color(0xff022134),
+                                    radius: 7.5,
+                                    child: Center(
+                                      child: Text(
+                                        "#",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 4.0),
+                                    child: Text(item.name.toUpperCase(),
+                                        style: const TextStyle(fontSize: 12)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: Text(
+                                  'E${item.efficiency.toString()}  D${item.durability.toString()}  L${item.luck.toString()}  D${item.distance.toString()} ',
+                                  style: const TextStyle(
+                                      fontSize: 12, color: Color(0xffABABAB)))),
+                        ],
+                      ),
                     ),
                   ),
                 ),
