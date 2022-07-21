@@ -77,7 +77,7 @@ class OnBoardScreen extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8))),
                       child: Text(
-                        S.of(context).shop,
+                        S.of(context).getStarted,
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w700),
                       ),

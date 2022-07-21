@@ -103,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fullNameEmptyError":
             MessageLookupByLibrary.simpleMessage("Please enter your name"),
         "fullNameHint": MessageLookupByLibrary.simpleMessage("Your full name"),
+        "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "goToShop": MessageLookupByLibrary.simpleMessage("Go go shop"),
         "guidance": MessageLookupByLibrary.simpleMessage("Guidance"),
         "importWallet": MessageLookupByLibrary.simpleMessage("Import Wallet"),
