@@ -49,8 +49,8 @@ class USCubit extends Cubit<USState> {
     try {
       final response = await userRepository.fetchUserWallets();
       Iterable l = json.decode(response.body);
-      List<Wallet> wallets =
-          List<Wallet>.from(l.map((e) => Wallet.fromJson(e)));
+      List<XtripWallet> wallets =
+          List<XtripWallet>.from(l.map((e) => XtripWallet.fromJson(e)));
       emit(USSettingState(wallets: wallets));
     } on Exception catch (e) {}
   }

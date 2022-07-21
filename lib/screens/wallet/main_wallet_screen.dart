@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/screens/wallet/bloc/wallet_cubit.dart';
-import 'package:xtrip_mobile/screens/wallet/services/wallet_address_service.dart';
 import 'package:xtrip_mobile/screens/wallet/widgets/wallet_address_text.dart';
 import 'package:xtrip_mobile/utils/toast_notification.dart';
 import 'package:xtrip_mobile/widgets/circle_button.dart';
@@ -118,7 +117,9 @@ class MainWalletScreen extends StatelessWidget {
                                 Clipboard.setData(ClipboardData(
                                     text: state.eWallet!.address));
                                 ToastNotification.showToast(context,
-                                    type: 'success', title: S.of(context).successfullyCopied, message: S.of(context).addressCopied );
+                                    type: 'success',
+                                    title: S.of(context).successfullyCopied,
+                                    message: S.of(context).addressCopied);
                               },
                               child: Text(
                                 S.of(context).copyAddress.toUpperCase(),

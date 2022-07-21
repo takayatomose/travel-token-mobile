@@ -249,13 +249,13 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
   }
 
   String getWalletBalance(
-      {required List<Wallet> wallets, required String token}) {
+      {required List<XtripWallet> wallets, required String token}) {
     if (wallets.isEmpty) {
       return '0';
     }
-    final Wallet tokenWallet = wallets.firstWhere(
+    final XtripWallet tokenWallet = wallets.firstWhere(
         (element) => element.token == token,
-        orElse: () => Wallet(token: token, balance: 0));
+        orElse: () => XtripWallet(token: token, balance: 0));
     return tokenWallet.balance.toString();
   }
 }
