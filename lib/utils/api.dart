@@ -11,8 +11,13 @@ class ApiService {
   final Client httpClient =
       InterceptedClient.build(interceptors: [ApiInterceptor()]);
   static getHttpClient() {
-    return Uri.http(
-        dotenv.get('API_URL', fallback: 'https://api-prod.xtrip.travel'), '');
+    if (dotenv.get('APP_SSL') == 'false') {
+      return Uri.https(
+          dotenv.get('API_URL', fallback: 'api-prod.xtrip.travel'), '');
+    } else {
+      return Uri.http(
+          dotenv.get('API_URL', fallback: 'api-prod.xtrip.travel'), '');
+    }
   }
 
   Future<http.Response> postAPI({required String uri, Object? body}) {

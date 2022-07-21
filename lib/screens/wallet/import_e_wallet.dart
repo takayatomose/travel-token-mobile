@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/screens/wallet/bloc/initialize_e_wallet/initialize_e_wallet_bloc.dart';
+import 'package:xtrip_mobile/screens/wallet/bloc/wallet_cubit.dart';
 
 class ImportEWallet extends StatefulWidget {
   const ImportEWallet({Key? key}) : super(key: key);
@@ -16,8 +17,9 @@ class _ImportEWalletState extends State<ImportEWallet> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          InitializeEWalletBloc(formState: InitializeWalletFormState.import),
+      create: (context) => InitializeEWalletBloc(
+          formState: InitializeWalletFormState.import,
+          walletCubit: context.read<WalletCubit>()),
       child: BlocConsumer<InitializeEWalletBloc, InitializeEWalletState>(
         listener: (context, state) {},
         builder: (context, state) => Scaffold(
