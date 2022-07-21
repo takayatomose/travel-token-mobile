@@ -13,53 +13,56 @@ class BackupSeedPhrase extends StatelessWidget {
     return BlocBuilder<InitializeEWalletBloc, InitializeEWalletState>(
       bloc: BlocProvider.of<InitializeEWalletBloc>(context),
       builder: (context, state) => SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(S.of(context).newWallet),
-            centerTitle: true,
-          ),
-          body: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Column(children: [
-              Text(state.seedPhrase),
-              Expanded(
-                flex: 1,
-                child: Container(
-                    margin: const EdgeInsets.only(bottom: 30),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 20),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: Colors.grey)),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SeedPhraseNotice(text: S.of(context).seedPhraseNotice1),
-                        SeedPhraseNotice(text: S.of(context).seedPhraseNotice2),
-                        if (state.seedPhrase.isNotEmpty)
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: state.mnemonicArray.length,
-                              itemBuilder: (BuildContext listContext, int i) =>
-                                  Padding(
-                                padding: const EdgeInsets.only(bottom: 10),
-                                child: Text(
-                                    "${i + 1}   ${state.mnemonicArray[i]}"),
+        child: AspectRatio (
+          aspectRatio: 100/100,
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(S.of(context).newWallet),
+              centerTitle: true,
+            ),
+            body: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(children: [
+                Text(state.seedPhrase),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                      margin: const EdgeInsets.only(bottom: 30),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 20),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: Colors.grey)),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SeedPhraseNotice(text: S.of(context).seedPhraseNotice1),
+                          SeedPhraseNotice(text: S.of(context).seedPhraseNotice2),
+                          if (state.seedPhrase.isNotEmpty)
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: state.mnemonicArray.length,
+                                itemBuilder: (BuildContext listContext, int i) =>
+                                    Padding(
+                                  padding: const EdgeInsets.only(bottom: 10),
+                                  child: Text(
+                                      "${i + 1}   ${state.mnemonicArray[i]}"),
+                                ),
                               ),
                             ),
-                          ),
-                      ],
-                    )),
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    context
-                        .read<InitializeEWalletBloc>()
-                        .add(CheckSeedPhraseEvent());
-                  },
-                  child: Text(S.of(context).backedupSeedPhrase.toUpperCase()))
-            ]),
+                        ],
+                      )),
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      context
+                          .read<InitializeEWalletBloc>()
+                          .add(CheckSeedPhraseEvent());
+                    },
+                    child: Text(S.of(context).backedupSeedPhrase.toUpperCase()))
+              ]),
+            ),
           ),
         ),
       ),
