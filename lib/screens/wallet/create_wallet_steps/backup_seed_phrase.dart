@@ -21,6 +21,7 @@ class BackupSeedPhrase extends StatelessWidget {
           body: Container(
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(children: [
+              Text(state.seedPhrase),
               Expanded(
                 flex: 1,
                 child: Container(

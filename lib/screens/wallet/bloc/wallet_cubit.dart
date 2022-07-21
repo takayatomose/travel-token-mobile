@@ -41,7 +41,6 @@ class WalletCubit extends Cubit<WalletState> {
       var web3Client = Web3Client(apiUrl, httpClient);
       EtherAmount balance = await web3Client
           .getBalance(await walletAddress.getPublicKey(privateKey));
-      print(balance.toString());
       emit(state.copyWith(
           eWallet: XtripWallet(address: publicKey), importtedEWallet: true));
     }

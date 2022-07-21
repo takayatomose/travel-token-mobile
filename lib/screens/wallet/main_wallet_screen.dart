@@ -14,7 +14,6 @@ class MainWalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     late WalletCubit walletCubit = BlocProvider.of<WalletCubit>(context);
-
     return BlocConsumer<WalletCubit, WalletState>(
       bloc: walletCubit,
       listener: (context, state) {},
@@ -27,7 +26,7 @@ class MainWalletScreen extends StatelessWidget {
                   children: [
                     Text('0 GXT'),
                     if (state.importtedEWallet) ...walletWidget(state, context),
-                    if (!state.importtedEWallet)
+                    // if (!state.importtedEWallet)
                       ElevatedButton(
                           onPressed: () {
                             showDialog(
@@ -102,7 +101,7 @@ class MainWalletScreen extends StatelessWidget {
                           ),
                           QrImage(
                             data: state.eWallet!.address!,
-                            size: 200,
+                            size: 150,
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),

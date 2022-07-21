@@ -20,7 +20,7 @@ class _CheckSeedPhraseState extends State<CheckSeedPhrase> {
   void initState() {
     super.initState();
     eWalletBloc = BlocProvider.of<InitializeEWalletBloc>(context);
-    mnemonicArray = eWalletBloc.state.mnemonicArray;
+    mnemonicArray = List.from(eWalletBloc.state.mnemonicArray);
     mnemonicArray.shuffle();
     for (int i = 0; i < mnemonicArray.length; i++) {
       mnemoicPlace.add(-1);
@@ -37,6 +37,12 @@ class _CheckSeedPhraseState extends State<CheckSeedPhrase> {
           appBar: AppBar(
             title: Text(S.of(context).newWallet),
             centerTitle: true,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                eWalletBloc.add(EnterBackupSeedPhrase());
+              },
+            ),
           ),
           body: Container(
             margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),

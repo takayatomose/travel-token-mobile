@@ -29,3 +29,5 @@ class MnemoicItemRemoved extends InitializeEWalletEvent {
   final int position;
   MnemoicItemRemoved({required this.position});
 }
+
+class EnterBackupSeedPhrase extends InitializeEWalletEvent {}
