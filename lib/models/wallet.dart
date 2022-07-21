@@ -8,4 +8,9 @@ class Wallet {
         token: json['token'] as String,
         balance: double.parse(json['balance'].toString()),
       );
+
+  String hideAddress() {
+    print(address!.substring(0, 5));
+    return "${address!.substring(0, 5)}...${address!.substring(address!.length - 10)}";
+  }
 }

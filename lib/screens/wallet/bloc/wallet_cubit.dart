@@ -18,7 +18,7 @@ class WalletCubit extends Cubit<WalletState> {
     emit(state.copyWith(screenState: WalletScreenState.createWallet));
   }
 
-  void mainEWallet() async {
+  void enterMainWallet() async {
     await getEWallet();
     emit(state.copyWith(screenState: WalletScreenState.main));
   }
@@ -28,7 +28,10 @@ class WalletCubit extends Cubit<WalletState> {
         await secureStorage.read(key: E_WALLET_PUBLIC_KEY);
     final String? privateKey =
         await secureStorage.read(key: E_WALLET_PRIVATE_KEY);
-    if (privateKey != '' && publicKey != '') {
+    if (privateKey != null &&
+        publicKey != null &&
+        privateKey != '' &&
+        publicKey != '') {
       emit(state.copyWith(
           eWallet: Wallet(address: publicKey), importtedEWallet: true));
     }

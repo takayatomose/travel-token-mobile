@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/screens/wallet/bloc/wallet_cubit.dart';
+import 'package:xtrip_mobile/widgets/circle_button.dart';
 
 class MainWalletScreen extends StatelessWidget {
   const MainWalletScreen({Key? key}) : super(key: key);
@@ -67,22 +68,39 @@ class MainWalletScreen extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(width: 1)),
-      child: Text(state.eWallet!.address!),
+      child: Text(state.eWallet!.hideAddress()),
     ));
-    widgets.add(Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              shape: CircleBorder(side: BorderSide(width: 2))),
-          onPressed: () {},
-          child: Icon(
-            Icons.call_received,
-            color: Colors.grey,
+    widgets.add(Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CircleButton(
+            primaryColor: Colors.white,
+            child: const Icon(
+              Icons.download,
+              color: Colors.grey,
+            ),
+            onPressed: () {},
           ),
-        )
-      ],
+          CircleButton(
+            primaryColor: Colors.white,
+            child: const Icon(
+              Icons.upload,
+              color: Colors.grey,
+            ),
+            onPressed: () {},
+          ),
+          CircleButton(
+            onPressed: () {},
+            primaryColor: Colors.white,
+            child: const Icon(
+              Icons.swap_vert_outlined,
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ),
     ));
     return widgets;
   }
