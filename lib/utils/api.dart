@@ -12,10 +12,10 @@ class ApiService {
       InterceptedClient.build(interceptors: [ApiInterceptor()]);
   static getHttpClient() {
     if (dotenv.get('APP_SSL') == 'false') {
-      return Uri.https(
+      return Uri.http(
           dotenv.get('API_URL', fallback: 'api-prod.xtrip.travel'), '');
     } else {
-      return Uri.http(
+      return Uri.https(
           dotenv.get('API_URL', fallback: 'api-prod.xtrip.travel'), '');
     }
   }
