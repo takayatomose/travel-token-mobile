@@ -4,21 +4,24 @@ enum WalletScreenState { main, eWallet, createWallet, importWallet }
 
 class WalletState {
   final WalletScreenState screenState;
-  final dynamic eWallet;
+  final Wallet? eWallet;
   final dynamic spendingWallet;
+  final bool importtedEWallet;
 
   WalletState(
       {this.screenState = WalletScreenState.main,
       this.eWallet,
-      this.spendingWallet});
+      this.spendingWallet,
+      this.importtedEWallet = false});
   WalletState copyWith(
       {WalletScreenState? screenState,
-      dynamic eWallet,
-      dynamic spendingWallet}) {
+      Wallet? eWallet,
+      dynamic spendingWallet,
+      bool? importtedEWallet}) {
     return WalletState(
-      screenState: screenState ?? this.screenState,
-      eWallet: eWallet ?? this.eWallet,
-      spendingWallet: spendingWallet ?? this.spendingWallet,
-    );
+        screenState: screenState ?? this.screenState,
+        eWallet: eWallet ?? this.eWallet,
+        spendingWallet: spendingWallet ?? this.spendingWallet,
+        importtedEWallet: importtedEWallet ?? this.importtedEWallet);
   }
 }

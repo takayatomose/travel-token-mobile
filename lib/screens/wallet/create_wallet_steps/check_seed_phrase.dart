@@ -87,11 +87,33 @@ class _CheckSeedPhraseState extends State<CheckSeedPhrase> {
                     );
                   }),
                 ),
-              )
+              ),
+              cfSeedPhraseBtn(state, context),
             ]),
           ),
         ),
       ),
     );
+  }
+
+  Widget cfSeedPhraseBtn(InitializeEWalletState state, BuildContext context) {
+    final seedPhraseOk = state.inputtedSeedPhrase == state.seedPhrase;
+    return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            primary: seedPhraseOk
+                ? const Color.fromARGB(255, 128, 8, 1)
+                : Colors.grey),
+        onPressed: () {
+          if (seedPhraseOk) {
+            context.read<InitializeEWalletBloc>().add(ExecImportWallet());
+          }
+        },
+        child: Text(
+          S.of(context).confirm.toUpperCase(),
+          style: TextStyle(
+              color: seedPhraseOk
+                  ? Colors.white
+                  : const Color.fromARGB(255, 241, 241, 241)),
+        ));
   }
 }

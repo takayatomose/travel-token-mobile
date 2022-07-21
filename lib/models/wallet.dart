@@ -2,7 +2,7 @@ class Wallet {
   final String token;
   final double balance;
   final String? address;
-  Wallet({required this.token, this.address, required this.balance});
+  Wallet({this.token = '', this.address, this.balance = 0.0});
 
   factory Wallet.fromJson(Map<String, dynamic> json) => Wallet(
         token: json['token'] as String,
