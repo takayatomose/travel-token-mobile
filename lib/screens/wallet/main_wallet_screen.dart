@@ -24,9 +24,11 @@ class MainWalletScreen extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('0 GXT'),
+                    Text(state.importtedEWallet
+                        ? '${state.eWallet!.balance} GXT'
+                        : '0 GXT'),
                     if (state.importtedEWallet) ...walletWidget(state, context),
-                    // if (!state.importtedEWallet)
+                    if (!state.importtedEWallet)
                       ElevatedButton(
                           onPressed: () {
                             showDialog(

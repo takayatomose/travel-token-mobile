@@ -49,9 +49,14 @@ class WalletCubit extends Cubit<WalletState> {
           contract: contract,
           function: contract.function('balanceOf'),
           params: [EthereumAddress.fromHex(publicKey)]);
-
+      final EtherAmount amount =
+          EtherAmount.fromUnitAndValue(EtherUnit.wei, balance.first);
       emit(state.copyWith(
-          eWallet: XtripWallet(address: publicKey), importtedEWallet: true));
+          eWallet: XtripWallet(
+              address: publicKey,
+              token: 'GXT',
+              balance: amount.getInEther.toDouble()),
+          importtedEWallet: true));
     }
   }
 }
