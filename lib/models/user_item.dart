@@ -17,6 +17,7 @@ class UserItem extends Item {
   UserItem({
     required super.id,
     required super.name,
+    required super.icon,
     required super.price,
     required super.efficiency,
     required super.durability,
@@ -34,6 +35,7 @@ class UserItem extends Item {
   factory UserItem.fromJson(Map<String, dynamic> json) => UserItem(
       id: json['id'] ?? 0,
       name: json['name'].toString(),
+      icon: json['icon'].toString(),
       price: json['price'] ?? 0,
       efficiency: json['efficiency'],
       durability: json['durability'],

@@ -4,11 +4,16 @@ import 'package:xtrip_mobile/screens/shop/shop.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem(
-      {Key? key, required this.backgroundColor, required this.index, required this.name})
+      {Key? key,
+      required this.backgroundColor,
+      required this.index,
+      required this.name,
+      required this.icon})
       : super(key: key);
   final Color backgroundColor;
   final int index;
   final String name;
+  final String icon;
 
   @override
   Widget build(BuildContext context) {
@@ -23,25 +28,23 @@ class CategoryItem extends StatelessWidget {
                   onPressed: () {
                     context.read<ShopBloc>().add(SelectCategory(index));
                   },
-                  child: Icon(
-                    Icons.volume_up,
-                    color: Colors.black,
-                  ),
                   style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(20),
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(16),
                     primary: backgroundColor, // <-- Button color
                   ),
+                  child: Image.network(icon,
+                      width: 32, height: 32, fit: BoxFit.fill),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 14),
                   child: Center(
                       child: Text(
-                    '${state.categories[index].name.toUpperCase()}',
+                    name.toUpperCase(),
                     style: TextStyle(
                         fontSize: 14,
                         color: state.selectedCategoryIndex == index
-                            ? Color.fromRGBO(255, 128, 8, 1)
+                            ? const Color.fromRGBO(255, 128, 8, 1)
                             : Colors.black),
                   )),
                 ),
