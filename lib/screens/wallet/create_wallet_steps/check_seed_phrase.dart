@@ -20,7 +20,7 @@ class _CheckSeedPhraseState extends State<CheckSeedPhrase> {
   void initState() {
     super.initState();
     eWalletBloc = BlocProvider.of<InitializeEWalletBloc>(context);
-    mnemonicArray = eWalletBloc.state.mnemonicArray;
+    mnemonicArray = List.from(eWalletBloc.state.mnemonicArray);
     mnemonicArray.shuffle();
     for (int i = 0; i < mnemonicArray.length; i++) {
       mnemoicPlace.add(-1);
@@ -33,63 +33,72 @@ class _CheckSeedPhraseState extends State<CheckSeedPhrase> {
       bloc: eWalletBloc,
       listener: (context, state) {},
       builder: (context, state) => SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(S.of(context).newWallet),
-            centerTitle: true,
-          ),
-          body: Container(
-            margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Column(children: [
-              SeedPhraseNotice(
-                text: S.of(context).chooseSeedPhraseMessage,
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(S.of(context).newWallet),
+              centerTitle: true,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  eWalletBloc.add(EnterBackupSeedPhrase());
+                },
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 20, bottom: 20),
-                padding: const EdgeInsets.all(10),
-                width: double.infinity,
-                height: 200,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(16)),
-                child: Text(
-                  state.inputtedSeedPhrase,
-                  style: const TextStyle(fontStyle: FontStyle.italic),
+            ),
+            body: Container(
+              margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              child: Column(children: [
+                SeedPhraseNotice(
+                  text: S.of(context).chooseSeedPhraseMessage,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Wrap(
-                  children: List.generate(mnemonicArray.length, (index) {
-                    return MnemonicItem(
-                      disabled: mnemoicPlace[index] != -1,
-                      text: mnemonicArray[index],
-                      onTap: () {
-                        if (mnemoicPlace[index] == -1) {
-                          context.read<InitializeEWalletBloc>().add(
-                              MnemoicItemAdded(mItem: mnemonicArray[index]));
-                          List<int> tmp = List.from(mnemoicPlace);
-                          tmp[index] = state.inputtedMnemonicArray.length;
-                          setState(() {
-                            mnemoicPlace = tmp;
-                          });
-                        } else {
-                          List<int> tmp = List.from(mnemoicPlace);
-                          context
-                              .read<InitializeEWalletBloc>()
-                              .add(MnemoicItemRemoved(position: tmp[index]));
-                          tmp[index] = -1;
-                          setState(() {
-                            mnemoicPlace = tmp;
-                          });
-                        }
-                      },
-                    );
-                  }),
+                Container(
+                  margin: const EdgeInsets.only(top: 20, bottom: 20),
+                  padding: const EdgeInsets.all(10),
+                  width: double.infinity,
+                  height: 200,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(16)),
+                  child: Text(
+                    state.inputtedSeedPhrase,
+                    style: const TextStyle(fontStyle: FontStyle.italic),
+                  ),
                 ),
-              ),
-              cfSeedPhraseBtn(state, context),
-            ]),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Wrap(
+                    children: List.generate(mnemonicArray.length, (index) {
+                      return MnemonicItem(
+                        disabled: mnemoicPlace[index] != -1,
+                        text: mnemonicArray[index],
+                        onTap: () {
+                          if (mnemoicPlace[index] == -1) {
+                            context.read<InitializeEWalletBloc>().add(
+                                MnemoicItemAdded(mItem: mnemonicArray[index]));
+                            List<int> tmp = List.from(mnemoicPlace);
+                            tmp[index] = state.inputtedMnemonicArray.length;
+                            setState(() {
+                              mnemoicPlace = tmp;
+                            });
+                          } else {
+                            List<int> tmp = List.from(mnemoicPlace);
+                            context
+                                .read<InitializeEWalletBloc>()
+                                .add(MnemoicItemRemoved(position: tmp[index]));
+                            tmp[index] = -1;
+                            setState(() {
+                              mnemoicPlace = tmp;
+                            });
+                          }
+                        },
+                      );
+                    }),
+                  ),
+                ),
+                cfSeedPhraseBtn(state, context),
+              ]),
+            ),
           ),
         ),
       ),

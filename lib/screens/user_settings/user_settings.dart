@@ -106,8 +106,10 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
                   Container(
                     margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(
-                        color: const Color.fromRGBO(2, 35, 52, 1),
-                        borderRadius: BorderRadius.circular(18)),
+                        image: const DecorationImage(
+                            fit: BoxFit.fitWidth,
+                            image: AssetImage('assets/images/card.png')),
+                        borderRadius: BorderRadius.circular(20)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -116,7 +118,8 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
                           margin: const EdgeInsets.only(top: 35),
                           padding: const EdgeInsets.only(top: 5, bottom: 10),
                           decoration: const BoxDecoration(
-                              color: Color.fromRGBO(6, 82, 50, 1)),
+                              // color: Color.fromRGBO(6, 82, 50, 1),
+                              ),
                           child: Row(
                             children: [
                               Expanded(
@@ -139,25 +142,19 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 25, bottom: 50),
+                          padding: const EdgeInsets.only(
+                              top: 25, bottom: 50, left: 30),
                           child: Row(
                             children: [
-                              Expanded(
-                                flex: 50,
-                                child: Text(
-                                  sessionState.user!.fullName,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color.fromRGBO(255, 255, 255, 1),
-                                  ),
+                              Text(
+                                sessionState.user!.fullName,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color.fromRGBO(255, 255, 255, 1),
                                 ),
                               ),
-                              Expanded(
-                                flex: 50,
-                                child: Container(),
-                              )
                             ],
                           ),
                         )
@@ -249,13 +246,13 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
   }
 
   String getWalletBalance(
-      {required List<Wallet> wallets, required String token}) {
+      {required List<XtripWallet> wallets, required String token}) {
     if (wallets.isEmpty) {
       return '0';
     }
-    final Wallet tokenWallet = wallets.firstWhere(
+    final XtripWallet tokenWallet = wallets.firstWhere(
         (element) => element.token == token,
-        orElse: () => Wallet(token: token, balance: 0));
+        orElse: () => XtripWallet(token: token, balance: 0));
     return tokenWallet.balance.toString();
   }
 }

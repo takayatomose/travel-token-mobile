@@ -13,34 +13,35 @@ class UserBalanceColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: Color.fromRGBO(209, 209, 209, 1)),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 5),
-              child: Image(image: AssetImage(iconAsset)),
-            ),
-            Text(
-              balanceValue,
-              style: const TextStyle(
-                  color: Color.fromRGBO(255, 128, 8, 1),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700),
-            )
-          ],
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(left: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: Color.fromRGBO(255, 255, 255, 1)),
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 5),
+                child: Image(image: AssetImage(iconAsset)),
+              ),
+              Text(
+                balanceValue,
+                style: const TextStyle(
+                    color: Color.fromRGBO(255, 255, 255, 1),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700),
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }

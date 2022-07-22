@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/screens/wallet/bloc/wallet_cubit.dart';
+import 'package:xtrip_mobile/screens/wallet/widgets/wallet_address_text.dart';
+import 'package:xtrip_mobile/utils/toast_notification.dart';
 import 'package:xtrip_mobile/widgets/circle_button.dart';
 
 class MainWalletScreen extends StatelessWidget {
@@ -9,7 +14,6 @@ class MainWalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     late WalletCubit walletCubit = BlocProvider.of<WalletCubit>(context);
-
     return BlocConsumer<WalletCubit, WalletState>(
       bloc: walletCubit,
       listener: (context, state) {},
@@ -20,7 +24,9 @@ class MainWalletScreen extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('0 GXT'),
+                    Text(state.importtedEWallet
+                        ? '${state.eWallet!.balance} GXT'
+                        : '0 GXT'),
                     if (state.importtedEWallet) ...walletWidget(state, context),
                     if (!state.importtedEWallet)
                       ElevatedButton(
@@ -62,13 +68,8 @@ class MainWalletScreen extends StatelessWidget {
 
   List<Widget> walletWidget(WalletState state, BuildContext context) {
     final List<Widget> widgets = [];
-    widgets.add(Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(width: 1)),
-      child: Text(state.eWallet!.hideAddress()),
+    widgets.add(WalletAddressText(
+      address: state.eWallet!.hiddenAddress(),
     ));
     widgets.add(Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
@@ -81,7 +82,56 @@ class MainWalletScreen extends StatelessWidget {
               Icons.download,
               color: Colors.grey,
             ),
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                  backgroundColor: Colors.white,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16),
+                    ),
+                  ),
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(vertical: 20),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Text(S.of(context).receive.toUpperCase()),
+                          ),
+                          QrImage(
+                            data: state.eWallet!.address!,
+                            size: 150,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(S.of(context).scanAddress),
+                          ),
+                          WalletAddressText(address: state.eWallet!.address!),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Clipboard.setData(ClipboardData(
+                                    text: state.eWallet!.address));
+                                ToastNotification.showToast(context,
+                                    type: 'success',
+                                    title: S.of(context).successfullyCopied,
+                                    message: S.of(context).addressCopied);
+                              },
+                              child: Text(
+                                S.of(context).copyAddress.toUpperCase(),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  });
+            },
           ),
           CircleButton(
             primaryColor: Colors.white,
