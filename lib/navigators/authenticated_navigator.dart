@@ -58,10 +58,10 @@ class _AuthenticatedNavigatorState extends State<AuthenticatedNavigator> {
             label: S.of(context).shop,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.person_outlined),
+            icon: Image.asset('assets/icons/person.png'),
             label: S.of(context).account,
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.wallet), label: 'Wallet'),
+          // BottomNavigationBarItem(icon: Icon(Icons.wallet), label: 'Wallet'),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
