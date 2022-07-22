@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
+import 'package:xtrip_mobile/sessions/game_screen_cubit.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
 import 'package:xtrip_mobile/sessions/session_state.dart';
 import 'package:xtrip_mobile/widgets/map_bottom_sheet/map_bottom_sheet.dart';
@@ -16,11 +17,13 @@ class UserItemAttributesWidget extends StatefulWidget {
 
 class _UserItemAttributesWidgetState extends State<UserItemAttributesWidget> {
   late SessionCubit sessionCubit;
+  late GameScreenCubit gameScreenCubit;
   @override
   void initState() {
     super.initState();
     sessionCubit = BlocProvider.of<SessionCubit>(context);
     sessionCubit.fetchUserAttributes();
+    gameScreenCubit = BlocProvider.of<GameScreenCubit>(context);
   }
 
   @override
@@ -36,7 +39,10 @@ class _UserItemAttributesWidgetState extends State<UserItemAttributesWidget> {
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                gameScreenCubit.enterWalletScreen();
+                // sessionCubit.enterWalletScreen();
+              },
               child: Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 5),
                 child: Row(

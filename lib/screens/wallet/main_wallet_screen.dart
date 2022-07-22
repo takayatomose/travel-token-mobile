@@ -5,11 +5,25 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/screens/wallet/bloc/wallet_cubit.dart';
 import 'package:xtrip_mobile/screens/wallet/widgets/wallet_address_text.dart';
+import 'package:xtrip_mobile/sessions/game_screen_cubit.dart';
 import 'package:xtrip_mobile/utils/toast_notification.dart';
 import 'package:xtrip_mobile/widgets/circle_button.dart';
 
-class MainWalletScreen extends StatelessWidget {
+class MainWalletScreen extends StatefulWidget {
   const MainWalletScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MainWalletScreen> createState() => _MainWalletScreenState();
+}
+
+class _MainWalletScreenState extends State<MainWalletScreen> {
+  late GameScreenCubit gameScreenCubit;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    gameScreenCubit = BlocProvider.of<GameScreenCubit>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,46 +33,59 @@ class MainWalletScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
+          appBar: AppBar(
+              title: const Text('Wallet'),
+              centerTitle: true,
+              leading: IconButton(
+                onPressed: () {
+                  gameScreenCubit.enterGamePlayScreen();
+                },
+                icon: const Icon(Icons.arrow_back),
+              )),
           body: SafeArea(
             child: Center(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(state.importtedEWallet
-                        ? '${state.eWallet!.balance} GXT'
-                        : '0 GXT'),
-                    if (state.importtedEWallet) ...walletWidget(state, context),
-                    if (!state.importtedEWallet)
-                      ElevatedButton(
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext dContext) {
-                                  return Center(
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton(
-                                              onPressed: () {
-                                                Navigator.of(dContext).pop();
-                                                walletCubit.createWallet();
-                                              },
-                                              child: const Text(
-                                                  'Create new wallet')),
-                                          ElevatedButton(
-                                              onPressed: () {
-                                                Navigator.of(dContext).pop();
-                                                walletCubit.importWallet();
-                                              },
-                                              child:
-                                                  const Text('Import wallet'))
-                                        ]),
-                                  );
-                                });
-                          },
-                          child: const Text('Create Wallet'))
-                  ]),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(state.importtedEWallet
+                          ? '${state.eWallet!.balance} GXT'
+                          : '0 GXT'),
+                      if (state.importtedEWallet)
+                        ...walletWidget(state, context),
+                      if (!state.importtedEWallet)
+                        ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext dContext) {
+                                    return Center(
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.of(dContext).pop();
+                                                  walletCubit.createWallet();
+                                                },
+                                                child: const Text(
+                                                    'Create new wallet')),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.of(dContext).pop();
+                                                  walletCubit.importWallet();
+                                                },
+                                                child:
+                                                    const Text('Import wallet'))
+                                          ]),
+                                    );
+                                  });
+                            },
+                            child: const Text('Create Wallet'))
+                    ]),
+              ),
             ),
           ),
         );

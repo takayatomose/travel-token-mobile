@@ -13,11 +13,12 @@ class SessionState {
   final dynamic user;
   final AuthSessionState authSessionState;
   final UserPlayAttributes userPlayAttributes;
-  SessionState(
-      {required this.locationPermission,
-      this.user,
-      required this.authSessionState,
-      this.userPlayAttributes = const UserPlayAttributes()});
+  SessionState({
+    required this.locationPermission,
+    this.user,
+    required this.authSessionState,
+    this.userPlayAttributes = const UserPlayAttributes(),
+  });
   SessionState copyWith(
       {bool? locationPermission,
       dynamic user,
