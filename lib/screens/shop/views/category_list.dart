@@ -31,6 +31,7 @@ class _CategoryListState extends State<CategoryList> {
                 return CategoryItem(
                     backgroundColor: backgroundColor[index % 5],
                     index: index,
+                    icon: state.categories[index].icon,
                     name: state.categories[index].name.toUpperCase());
               }),
         );

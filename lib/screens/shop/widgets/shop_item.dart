@@ -29,8 +29,6 @@ class ShopItem extends StatelessWidget {
                     margin: const EdgeInsets.all(2),
                     padding: const EdgeInsets.all(8),
                     decoration: const BoxDecoration(
-                      // border:
-                      // Border.all(color:  Color.white, width: 1),
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(14)),
                       color: Color(0xfff3f3f3),
@@ -72,14 +70,21 @@ class ShopItem extends StatelessWidget {
                   onTap: () {
                     showItemDetail(context, item);
                   },
-                  child: Flexible(
-                    flex: 75,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      child: Column(
-                        children: <Widget>[
-                          Image.network('https://picsum.photos/100'),
-                          Padding(
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      children: <Widget>[
+                        Flexible(
+                          flex: 70,
+                          child: Image.network(
+                              Uri.parse(item.icon).isAbsolute
+                                  ? item.icon
+                                  : 'https://cdn-icons.flaticon.com/png/512/2872/premium/2872601.png?token=exp=1658464206~hmac=75043e87a4dad624f61027b82c3cc844',
+                              fit: BoxFit.fitHeight),
+                        ),
+                        Flexible(
+                          flex: 15,
+                          child: Padding(
                             padding: const EdgeInsets.only(top: 8),
                             child: Center(
                               child: Row(
@@ -105,14 +110,17 @@ class ShopItem extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Padding(
+                        ),
+                        Flexible(
+                          flex: 15,
+                          child: Padding(
                               padding: const EdgeInsets.only(top: 4),
                               child: Text(
                                   'E${item.efficiency.toString()}  D${item.durability.toString()}  L${item.luck.toString()}  D${item.distance.toString()} ',
                                   style: const TextStyle(
                                       fontSize: 12, color: Color(0xffABABAB)))),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
