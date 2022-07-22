@@ -17,6 +17,10 @@ class _ShopScreenState extends State<ShopScreen> {
         value: "&orderBy=price&sort=ASC", child: Text("Lowest Price")),
     const DropdownMenuItem(
         value: "&orderBy=price&sort=DESC", child: Text("Highest Price")),
+    const DropdownMenuItem(
+        value: "&orderBy=created_at&sort=ASC", child: Text("Oldest")),
+    const DropdownMenuItem(
+        value: "&orderBy=created_at&sort=DESC", child: Text("Newest")),
   ];
 
   @override
@@ -76,7 +80,8 @@ class _ShopScreenState extends State<ShopScreen> {
                             50), //border raiuds of dropdown button
                       ),
                       child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 4, horizontal: 12),
                           child: DropdownButton(
                             isDense: true,
                             value: state.sortText,

@@ -121,6 +121,7 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
         return Category(
           name: json['name'] as String,
           id: json['id'] as int,
+          icon: json['icon'] as String,
         );
       }).toList();
     }
