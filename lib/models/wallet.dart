@@ -1,16 +1,15 @@
-class Wallet {
+class XtripWallet {
   final String token;
   final double balance;
   final String? address;
-  Wallet({this.token = '', this.address, this.balance = 0.0});
+  XtripWallet({this.token = '', this.address, this.balance = 0.0});
 
-  factory Wallet.fromJson(Map<String, dynamic> json) => Wallet(
+  factory XtripWallet.fromJson(Map<String, dynamic> json) => XtripWallet(
         token: json['token'] as String,
         balance: double.parse(json['balance'].toString()),
       );
 
-  String hideAddress() {
-    print(address!.substring(0, 5));
+  String hiddenAddress() {
     return "${address!.substring(0, 5)}...${address!.substring(address!.length - 10)}";
   }
 }

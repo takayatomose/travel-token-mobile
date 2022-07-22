@@ -3,6 +3,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:xtrip_mobile/bloc/auth/auth_credentials.dart';
 import 'package:xtrip_mobile/constants/user_constants.dart';
+import 'package:xtrip_mobile/constants/wallet_constants.dart';
 import 'package:xtrip_mobile/models/user_play_attributes.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
 import 'package:xtrip_mobile/repositories/user_repository.dart';
@@ -82,6 +83,8 @@ class SessionCubit extends Cubit<SessionState> {
   void signOut() async {
     await _secureStorage.delete(key: USER_TOKEN);
     await _secureStorage.delete(key: USER_REFRESH_TOKEN);
+    await _secureStorage.delete(key: E_WALLET_PRIVATE_KEY);
+    await _secureStorage.delete(key: E_WALLET_PUBLIC_KEY);
     emit(state.copyWith(authSessionState: Unauthenticated()));
   }
 }

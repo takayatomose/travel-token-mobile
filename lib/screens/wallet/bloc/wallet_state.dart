@@ -4,7 +4,7 @@ enum WalletScreenState { main, eWallet, createWallet, importWallet }
 
 class WalletState {
   final WalletScreenState screenState;
-  final Wallet? eWallet;
+  final XtripWallet? eWallet;
   final dynamic spendingWallet;
   final bool importtedEWallet;
 
@@ -15,7 +15,7 @@ class WalletState {
       this.importtedEWallet = false});
   WalletState copyWith(
       {WalletScreenState? screenState,
-      Wallet? eWallet,
+      XtripWallet? eWallet,
       dynamic spendingWallet,
       bool? importtedEWallet}) {
     return WalletState(

@@ -35,23 +35,26 @@ class _UserItemAttributesWidgetState extends State<UserItemAttributesWidget> {
               S.of(context).tokenBalance,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 5, bottom: 5),
-              child: Row(
-                children: const [
-                  Image(
-                    image: AssetImage('assets/images/token_btc.png'),
-                    width: 50,
-                    height: 50,
-                  ),
-                  Text(
-                    '0',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: Color.fromRGBO(33, 38, 48, 1)),
-                  )
-                ],
+            InkWell(
+              onTap: () {},
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 5),
+                child: Row(
+                  children: const [
+                    Image(
+                      image: AssetImage('assets/images/token_btc.png'),
+                      width: 50,
+                      height: 50,
+                    ),
+                    Text(
+                      '0',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromRGBO(33, 38, 48, 1)),
+                    )
+                  ],
+                ),
               ),
             ),
             Row(

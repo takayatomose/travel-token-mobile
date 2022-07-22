@@ -15,6 +15,7 @@ class InitializeEWalletBloc
   InitializeEWalletBloc(
       {required InitializeWalletFormState formState, required this.walletCubit})
       : super(InitializeEWalletState(walletFormState: formState)) {
+        
     on<SeedPhraseChanged>((event, emit) =>
         emit(state.copyWith(inputtedSeedPhrase: event.seedPhrase)));
     on<ExecImportWallet>((event, emit) async {
@@ -55,6 +56,8 @@ class InitializeEWalletBloc
               List.from(inputtedMnemonicArray.where((element) => element != ""))
                   .join(" ")));
     });
+    on<EnterBackupSeedPhrase>((event, emit) => emit(
+        state.copyWith(createWalletStep: CreateWalletStep.backupSeedPhrase)));
   }
 
   Future<void> importWalletFromSeed(String seedPhrase) async {
@@ -67,4 +70,5 @@ class InitializeEWalletBloc
         key: E_WALLET_PUBLIC_KEY, value: publicKey.toString());
     walletCubit.enterMainWallet();
   }
+
 }

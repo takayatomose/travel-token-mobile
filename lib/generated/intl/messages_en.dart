@@ -35,6 +35,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "activatedAccountMsg": MessageLookupByLibrary.simpleMessage(
             "Your account has been activated successfully! You can signin to your account!"),
         "activatedCode": MessageLookupByLibrary.simpleMessage("Activated Code"),
+        "addressCopied": MessageLookupByLibrary.simpleMessage(
+            "Successfully copied address!"),
         "agreedCreatingAccount": MessageLookupByLibrary.simpleMessage(
             "By creating the account, you agree with our "),
         "alreadyHadAccount":
@@ -62,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invitation code copied!"),
         "copiedInviteCodeMsg": MessageLookupByLibrary.simpleMessage(
             "You have copied invitation code!"),
+        "copyAddress": MessageLookupByLibrary.simpleMessage("copy address"),
         "copyright": MessageLookupByLibrary.simpleMessage(
             "A Product of TASTECH. LTD. CO"),
         "createdAccount":
@@ -136,12 +139,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Password does not match"),
         "pwdUpdated": MessageLookupByLibrary.simpleMessage(
             "Your password has been updated"),
+        "receive": MessageLookupByLibrary.simpleMessage("receive"),
         "repair": MessageLookupByLibrary.simpleMessage("Repair"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
         "resetPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Reset Password Success"),
         "resetPwdSuccessMsg": MessageLookupByLibrary.simpleMessage(
             "Your new password has been save! You can login now!"),
+        "scanAddress": MessageLookupByLibrary.simpleMessage(
+            "Scan address to receive payment"),
         "seedPhrase": MessageLookupByLibrary.simpleMessage("Seed Phrase"),
         "seedPhraseEmpty": MessageLookupByLibrary.simpleMessage(
             "Please enter your seed phrase"),
@@ -162,6 +168,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "somethingWrong": MessageLookupByLibrary.simpleMessage(
             "Something went wrong. Please try again later"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
+        "successfullyCopied":
+            MessageLookupByLibrary.simpleMessage("Successfully Coppied"),
         "termConditions":
             MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
         "tokenBalance": MessageLookupByLibrary.simpleMessage("Token balance"),

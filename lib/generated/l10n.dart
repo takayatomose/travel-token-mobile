@@ -1059,6 +1059,56 @@ class S {
       args: [],
     );
   }
+
+  /// `receive`
+  String get receive {
+    return Intl.message(
+      'receive',
+      name: 'receive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan address to receive payment`
+  String get scanAddress {
+    return Intl.message(
+      'Scan address to receive payment',
+      name: 'scanAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `copy address`
+  String get copyAddress {
+    return Intl.message(
+      'copy address',
+      name: 'copyAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully Coppied`
+  String get successfullyCopied {
+    return Intl.message(
+      'Successfully Coppied',
+      name: 'successfullyCopied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully copied address!`
+  String get addressCopied {
+    return Intl.message(
+      'Successfully copied address!',
+      name: 'addressCopied',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
