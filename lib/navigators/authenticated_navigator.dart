@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/navigators/game_play_navigator.dart';
-import 'package:xtrip_mobile/screens/wallet/main_wallet_screen.dart';
 import 'package:xtrip_mobile/screens/wallet/wallet_navigator.dart';
 import 'package:xtrip_mobile/sessions/game_screen_cubit.dart';
 import 'package:xtrip_mobile/sessions/game_screen_state.dart';

@@ -79,7 +79,7 @@ class ShopItem extends StatelessWidget {
                           child: Image.network(
                               Uri.parse(item.icon).isAbsolute
                                   ? item.icon
-                                  : 'https://cdn-icons.flaticon.com/png/512/2872/premium/2872601.png?token=exp=1658464206~hmac=75043e87a4dad624f61027b82c3cc844',
+                                  : 'https://s3.ap-southeast-1.amazonaws.com/static-dev.xtrip.travel/item-category/hard_code.png',
                               fit: BoxFit.fitHeight),
                         ),
                         Flexible(
