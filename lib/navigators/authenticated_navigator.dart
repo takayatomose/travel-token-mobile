@@ -24,7 +24,6 @@ class _AuthenticatedNavigatorState extends State<AuthenticatedNavigator> {
     CustomMap(),
     ShopScreen(),
     UserNavigator(),
-    WalletNavigator(),
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -71,7 +70,6 @@ class _AuthenticatedNavigatorState extends State<AuthenticatedNavigator> {
             ),
             label: S.of(context).account,
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.wallet), label: 'Wallet'),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
