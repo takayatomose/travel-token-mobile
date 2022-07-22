@@ -42,23 +42,33 @@ class _AuthenticatedNavigatorState extends State<AuthenticatedNavigator> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-            icon: const Icon(Icons.settings_outlined),
+            icon: Image.asset('assets/icons/ic_sneaker.png',
+                width: 30, height: 30),
             label: S.of(context).repair,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.card_travel_outlined),
+            icon: Image.asset('assets/icons/ic_launch.png',
+                width: 30, height: 30),
             label: S.of(context).items,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.map_outlined),
+            icon: Image.asset('assets/icons/ic_map.png', width: 30, height: 30),
             label: S.of(context).map,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.shopping_cart_outlined),
+            icon: Image.asset(
+              'assets/icons/ic_shop.png',
+              width: 30,
+              height: 30,
+            ),
             label: S.of(context).shop,
           ),
           BottomNavigationBarItem(
-            icon: Image.asset('assets/icons/person.png'),
+            icon: Image.asset(
+              'assets/icons/ic_person.png',
+              width: 30,
+              height: 30,
+            ),
             label: S.of(context).account,
           ),
           // BottomNavigationBarItem(icon: Icon(Icons.wallet), label: 'Wallet'),
