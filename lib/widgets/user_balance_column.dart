@@ -29,7 +29,11 @@ class UserBalanceColumn extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 5),
-                child: Image(image: AssetImage(iconAsset)),
+                child: Image(
+                  image: AssetImage(iconAsset),
+                  width: 20,
+                  height: 20,
+                ),
               ),
               Text(
                 balanceValue,

@@ -127,7 +127,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
                                   balanceValue: getWalletBalance(
                                       wallets: state.wallets, token: 'GST'),
                                   label: S.of(context).xTokenBalance('GXT'),
-                                  iconAsset: 'assets/images/gold_two.png',
+                                  iconAsset: 'assets/icons/ic_gxt.png',
                                 ),
                               ),
                               Expanded(
@@ -135,7 +135,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
                                   balanceValue: getWalletBalance(
                                       wallets: state.wallets, token: 'XTR'),
                                   label: S.of(context).xTokenBalance('XTR'),
-                                  iconAsset: 'assets/images/token_btc.png',
+                                  iconAsset: 'assets/icons/ic_xtr.png',
                                 ),
                               ),
                             ],

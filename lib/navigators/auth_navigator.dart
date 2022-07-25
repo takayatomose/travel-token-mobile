@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
-import 'package:xtrip_mobile/navigators/authenticated_navigator.dart';
+import 'package:xtrip_mobile/navigators/game_play_navigator.dart';
 import 'package:xtrip_mobile/screens/authentication/forgot_password_screen.dart';
 import 'package:xtrip_mobile/screens/onboard_screen.dart';
 import 'package:xtrip_mobile/screens/authentication/signin_screen.dart';
@@ -31,7 +31,7 @@ class AuthNavigator extends StatelessWidget {
           if (state.screenState == ScreenState.customMap)
             const MaterialPage(child: CustomMap()),
           if (state.screenState == ScreenState.home)
-            const MaterialPage(child: AuthenticatedNavigator())
+            const MaterialPage(child: GamePlayNavigator())
         ],
         onPopPage: (router, result) => router.didPop(result),
       );

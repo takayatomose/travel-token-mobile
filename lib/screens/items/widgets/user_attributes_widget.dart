@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
+import 'package:xtrip_mobile/sessions/game_screen_cubit.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
 import 'package:xtrip_mobile/sessions/session_state.dart';
 import 'package:xtrip_mobile/widgets/map_bottom_sheet/map_bottom_sheet.dart';
@@ -16,11 +17,13 @@ class UserItemAttributesWidget extends StatefulWidget {
 
 class _UserItemAttributesWidgetState extends State<UserItemAttributesWidget> {
   late SessionCubit sessionCubit;
+  late GameScreenCubit gameScreenCubit;
   @override
   void initState() {
     super.initState();
     sessionCubit = BlocProvider.of<SessionCubit>(context);
     sessionCubit.fetchUserAttributes();
+    gameScreenCubit = BlocProvider.of<GameScreenCubit>(context);
   }
 
   @override
@@ -29,30 +32,57 @@ class _UserItemAttributesWidgetState extends State<UserItemAttributesWidget> {
       listener: (context, state) {},
       builder: (context, state) {
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(
-              S.of(context).tokenBalance,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-            ),
             InkWell(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.only(top: 5, bottom: 5),
+              onTap: () {
+                gameScreenCubit.enterWalletScreen();
+                // sessionCubit.enterWalletScreen();
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(26)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: const [
                     Image(
-                      image: AssetImage('assets/images/token_btc.png'),
-                      width: 50,
-                      height: 50,
+                      image: AssetImage(
+                        'assets/icons/ic_xtr.png',
+                      ),
+                      width: 20,
+                      height: 20,
                     ),
-                    Text(
-                      '0',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Color.fromRGBO(33, 38, 48, 1)),
-                    )
+                    Padding(
+                      padding: EdgeInsets.only(left: 10, right: 20),
+                      child: Text(
+                        '0',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            color: Color.fromRGBO(33, 38, 48, 1)),
+                      ),
+                    ),
+                    Image(
+                      image: AssetImage(
+                        'assets/icons/ic_gxt.png',
+                      ),
+                      width: 20,
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Text(
+                        '0',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            color: Color.fromRGBO(33, 38, 48, 1)),
+                      ),
+                    ),
                   ],
                 ),
               ),
