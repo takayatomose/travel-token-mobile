@@ -1109,6 +1109,176 @@ class S {
       args: [],
     );
   }
+
+  /// `recovery`
+  String get recovery {
+    return Intl.message(
+      'recovery',
+      name: 'recovery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `attributes`
+  String get attributes {
+    return Intl.message(
+      'attributes',
+      name: 'attributes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Base`
+  String get base {
+    return Intl.message(
+      'Base',
+      name: 'base',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Point ({pointAvailable})`
+  String availablePoint(Object pointAvailable) {
+    return Intl.message(
+      'Point ($pointAvailable)',
+      name: 'availablePoint',
+      desc: '',
+      args: [pointAvailable],
+    );
+  }
+
+  /// `How to play`
+  String get howToPlay {
+    return Intl.message(
+      'How to play',
+      name: 'howToPlay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Life time {progress}`
+  String lifetimeProgress(Object progress) {
+    return Intl.message(
+      'Life time $progress',
+      name: 'lifetimeProgress',
+      desc: '',
+      args: [progress],
+    );
+  }
+
+  /// `Condition {progress}`
+  String conditionProgress(Object progress) {
+    return Intl.message(
+      'Condition $progress',
+      name: 'conditionProgress',
+      desc: '',
+      args: [progress],
+    );
+  }
+
+  /// `Shoe mint {progress}`
+  String shoeMintsProgress(Object progress) {
+    return Intl.message(
+      'Shoe mint $progress',
+      name: 'shoeMintsProgress',
+      desc: '',
+      args: [progress],
+    );
+  }
+
+  /// `Level up`
+  String get levelUp {
+    return Intl.message(
+      'Level up',
+      name: 'levelUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mint`
+  String get mint {
+    return Intl.message(
+      'Mint',
+      name: 'mint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sell`
+  String get sell {
+    return Intl.message(
+      'Sell',
+      name: 'sell',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lease`
+  String get lease {
+    return Intl.message(
+      'Lease',
+      name: 'lease',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer`
+  String get transfer {
+    return Intl.message(
+      'Transfer',
+      name: 'transfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level up to LV{level}`
+  String levelUpTo(Object level) {
+    return Intl.message(
+      'Level up to LV$level',
+      name: 'levelUpTo',
+      desc: '',
+      args: [level],
+    );
+  }
+
+  /// `Time`
+  String get time {
+    return Intl.message(
+      'Time',
+      name: 'time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cost`
+  String get cost {
+    return Intl.message(
+      'Cost',
+      name: 'cost',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available {amount}`
+  String tokenAvailable(Object amount) {
+    return Intl.message(
+      'Available $amount',
+      name: 'tokenAvailable',
+      desc: '',
+      args: [amount],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

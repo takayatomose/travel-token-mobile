@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
 import 'package:xtrip_mobile/navigators/auth_navigator.dart';
 import 'package:xtrip_mobile/navigators/authenticated_navigator.dart';
-import 'package:xtrip_mobile/navigators/game_play_navigator.dart';
-// import 'package:xtrip_mobile/screens/home_screen.dart';
 import 'package:xtrip_mobile/screens/loading_screen.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
 import 'package:xtrip_mobile/sessions/session_state.dart';

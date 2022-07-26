@@ -104,5 +104,22 @@
     "scanAddress": "Scan address to receive payment",
     "copyAddress": "copy address",
     "successfullyCopied": "Successfully Coppied",
-    "addressCopied": "Successfully copied address!"
+    "addressCopied": "Successfully copied address!",
+    "recovery":"recovery",
+    "attributes": "attributes",
+    "base": "Base",
+    "availablePoint": "Point ({pointAvailable})",
+    "howToPlay": "How to play",
+    "lifetimeProgress": "Life time {progress}",
+    "conditionProgress": "Condition {progress}",
+    "shoeMintsProgress": "Shoe mint {progress}",
+    "levelUp": "Level up",
+    "mint": "Mint",
+    "sell": "Sell",
+    "lease": "Lease",
+    "transfer": "Transfer",
+    "levelUpTo": "Level up to LV{level}",
+    "time": "Time",
+    "cost": "Cost",
+    "tokenAvailable": "Available {amount}"
 }

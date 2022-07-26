@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/screens/items/bloc/my_item_bloc.dart';
+import 'package:xtrip_mobile/sessions/game_screen_cubit.dart';
 import 'package:xtrip_mobile/widgets/paints/trapezoid_paint.dart';
 
 import '../../models/user_item.dart';
@@ -13,61 +14,64 @@ class SingleOwnerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MyItemBloc myItemBloc = Provider.of<MyItemBloc>(context);
+    final GameScreenCubit gameScreenCubit =
+        Provider.of<GameScreenCubit>(context);
 
     return InkWell(
-      onTap: () => {
-        showDialog(
-            context: context,
-            builder: (context) => Dialog(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Text(
-                            userItem.name,
-                            style: const TextStyle(color: Colors.black),
-                          ),
-                        ),
-                        const Image(
-                          image:
-                              AssetImage('assets/images/sneaker_example.png'),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            if (userItem.equippedState ==
-                                UserItemStates.unEquipped)
-                              ElevatedButton(
-                                  onPressed: () {
-                                    myItemBloc
-                                        .add(EquippedItem(itemId: userItem.id));
-                                  },
-                                  child: const Text('Equipe')),
-                            if (userItem.equippedState !=
-                                UserItemStates.mainEquipped)
-                              ElevatedButton(
-                                  onPressed: () {
-                                    myItemBloc.add(SetMainEquippedItem(
-                                        itemId: userItem.id));
-                                  },
-                                  child: const Text('Main Equiped')),
-                            if (userItem.equippedState !=
-                                UserItemStates.unEquipped)
-                              ElevatedButton(
-                                  onPressed: () {
-                                    myItemBloc.add(
-                                        UnEquippedItem(itemId: userItem.id));
-                                  },
-                                  child: const Text('Un Equipped'))
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ))
+      onTap: () {
+        gameScreenCubit.enterUserItemScreen(itemId: userItem.id);
+        // showDialog(
+        //     context: context,
+        //     builder: (context) => Dialog(
+        //           child: SizedBox(
+        //             width: double.infinity,
+        //             child: Column(
+        //               mainAxisSize: MainAxisSize.min,
+        //               children: [
+        //                 Padding(
+        //                   padding: const EdgeInsets.symmetric(vertical: 20),
+        //                   child: Text(
+        //                     userItem.name,
+        //                     style: const TextStyle(color: Colors.black),
+        //                   ),
+        //                 ),
+        //                 const Image(
+        //                   image:
+        //                       AssetImage('assets/images/sneaker_example.png'),
+        //                 ),
+        //                 Row(
+        //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //                   children: [
+        //                     if (userItem.equippedState ==
+        //                         UserItemStates.unEquipped)
+        //                       ElevatedButton(
+        //                           onPressed: () {
+        //                             myItemBloc
+        //                                 .add(EquippedItem(itemId: userItem.id));
+        //                           },
+        //                           child: const Text('Equipe')),
+        //                     if (userItem.equippedState !=
+        //                         UserItemStates.mainEquipped)
+        //                       ElevatedButton(
+        //                           onPressed: () {
+        //                             myItemBloc.add(SetMainEquippedItem(
+        //                                 itemId: userItem.id));
+        //                           },
+        //                           child: const Text('Main Equiped')),
+        //                     if (userItem.equippedState !=
+        //                         UserItemStates.unEquipped)
+        //                       ElevatedButton(
+        //                           onPressed: () {
+        //                             myItemBloc.add(
+        //                                 UnEquippedItem(itemId: userItem.id));
+        //                           },
+        //                           child: const Text('Un Equipped'))
+        //                   ],
+        //                 )
+        //               ],
+        //             ),
+        //           ),
+        //         ))
       },
       child: Stack(
         children: [

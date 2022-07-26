@@ -20,9 +20,21 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(numOfItems) => "My Items (${numOfItems})";
+  static String m0(pointAvailable) => "Point (${pointAvailable})";
 
-  static String m1(token) => "${token} balance";
+  static String m1(progress) => "Condition ${progress}";
+
+  static String m2(level) => "Level up to LV${level}";
+
+  static String m3(progress) => "Life time ${progress}";
+
+  static String m4(numOfItems) => "My Items (${numOfItems})";
+
+  static String m5(progress) => "Shoe mint ${progress}";
+
+  static String m6(amount) => "Available ${amount}";
+
+  static String m7(token) => "${token} balance";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -41,8 +53,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "By creating the account, you agree with our "),
         "alreadyHadAccount":
             MessageLookupByLibrary.simpleMessage("Already had account?"),
+        "attributes": MessageLookupByLibrary.simpleMessage("attributes"),
+        "availablePoint": m0,
         "backedupSeedPhrase":
             MessageLookupByLibrary.simpleMessage("I have written down"),
+        "base": MessageLookupByLibrary.simpleMessage("Base"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change password"),
@@ -52,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseSeedPhraseMessage": MessageLookupByLibrary.simpleMessage(
             "Please choose Seed Phrase in order and make sure your Seed Phrase was correct written, once forgotten, it cannot be recovered."),
         "condition": MessageLookupByLibrary.simpleMessage("Condition"),
+        "conditionProgress": m1,
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm your new password"),
@@ -67,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copyAddress": MessageLookupByLibrary.simpleMessage("copy address"),
         "copyright": MessageLookupByLibrary.simpleMessage(
             "A Product of TASTECH. LTD. CO"),
+        "cost": MessageLookupByLibrary.simpleMessage("Cost"),
         "createdAccount":
             MessageLookupByLibrary.simpleMessage("Account has been created!"),
         "creatingAccountToTravel": MessageLookupByLibrary.simpleMessage(
@@ -109,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "goToShop": MessageLookupByLibrary.simpleMessage("Go go shop"),
         "guidance": MessageLookupByLibrary.simpleMessage("Guidance"),
+        "howToPlay": MessageLookupByLibrary.simpleMessage("How to play"),
         "importWallet": MessageLookupByLibrary.simpleMessage("Import Wallet"),
         "invitationCode":
             MessageLookupByLibrary.simpleMessage("Invitation code"),
@@ -116,13 +134,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "inviteFriend":
             MessageLookupByLibrary.simpleMessage("Invite your friend"),
         "items": MessageLookupByLibrary.simpleMessage("Items"),
+        "lease": MessageLookupByLibrary.simpleMessage("Lease"),
+        "levelUp": MessageLookupByLibrary.simpleMessage("Level up"),
+        "levelUpTo": m2,
+        "lifetimeProgress": m3,
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginHeadline": MessageLookupByLibrary.simpleMessage(
             "Login to your account to keep traveling"),
         "loginWithUs": MessageLookupByLibrary.simpleMessage("Login with us"),
         "luck": MessageLookupByLibrary.simpleMessage("Luck"),
         "map": MessageLookupByLibrary.simpleMessage("Map"),
-        "myItems": m0,
+        "mint": MessageLookupByLibrary.simpleMessage("Mint"),
+        "myItems": m4,
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
         "newPassword":
             MessageLookupByLibrary.simpleMessage("Your new password"),
@@ -140,6 +163,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pwdUpdated": MessageLookupByLibrary.simpleMessage(
             "Your password has been updated"),
         "receive": MessageLookupByLibrary.simpleMessage("receive"),
+        "recovery": MessageLookupByLibrary.simpleMessage("recovery"),
         "repair": MessageLookupByLibrary.simpleMessage("Repair"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
         "resetPasswordSuccess":
@@ -155,12 +179,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Don\'t risk losing your fund. Protect your wallet by saving you Seed Phrase in a place you trust"),
         "seedPhraseNotice2": MessageLookupByLibrary.simpleMessage(
             "It\'s the only way to recover your wallet if you get locked out of the app or get a new device"),
+        "sell": MessageLookupByLibrary.simpleMessage("Sell"),
         "sendUsEmail":
             MessageLookupByLibrary.simpleMessage("Send email to us:"),
         "sentActivatedCode": MessageLookupByLibrary.simpleMessage(
             "Your account has been created successfully! An email has been sent to your email address containing an activation code. Please use code to activate your account!"),
         "sentEmailPwdInstruction": MessageLookupByLibrary.simpleMessage(
             "We sent you and an e-mail to instruction to reset password"),
+        "shoeMintsProgress": m5,
         "shop": MessageLookupByLibrary.simpleMessage("Shop"),
         "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
@@ -172,14 +198,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Successfully Coppied"),
         "termConditions":
             MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
+        "time": MessageLookupByLibrary.simpleMessage("Time"),
+        "tokenAvailable": m6,
         "tokenBalance": MessageLookupByLibrary.simpleMessage("Token balance"),
+        "transfer": MessageLookupByLibrary.simpleMessage("Transfer"),
         "travelToEarn": MessageLookupByLibrary.simpleMessage("Travel To Earn"),
         "userInfoUpdated":
             MessageLookupByLibrary.simpleMessage("User Info updated"),
         "userInfoUpdatedMsg": MessageLookupByLibrary.simpleMessage(
             "You have updated your information"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
-        "xTokenBalance": m1,
+        "xTokenBalance": m7,
         "yourAccount": MessageLookupByLibrary.simpleMessage("Your account"),
         "yourEmail": MessageLookupByLibrary.simpleMessage("Your email"),
         "yourInviteCode":

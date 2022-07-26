@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/navigators/game_play_navigator.dart';
+import 'package:xtrip_mobile/screens/user_item/user_item_navigator.dart';
 import 'package:xtrip_mobile/screens/wallet/wallet_navigator.dart';
 import 'package:xtrip_mobile/sessions/game_screen_cubit.dart';
 import 'package:xtrip_mobile/sessions/game_screen_state.dart';
@@ -19,6 +20,8 @@ class AuthenticatedNavigator extends StatelessWidget {
               const MaterialPage(child: GamePlayNavigator()),
             if (state is GameWalletScreenSatte)
               const MaterialPage(child: WalletNavigator()),
+            if (state is GameItemScreenState)
+              const MaterialPage(child: UserItemNavigator()),
           ],
           onPopPage: (route, result) => route.didPop(result),
         ),

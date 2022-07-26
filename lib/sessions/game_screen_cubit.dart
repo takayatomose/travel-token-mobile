@@ -11,4 +11,8 @@ class GameScreenCubit extends Cubit<GameScreenState> {
   void enterGamePlayScreen() {
     emit(GamePlayScreenState());
   }
+
+  void enterUserItemScreen({required int itemId}) {
+    emit(GameItemScreenState(itemId: itemId));
+  }
 }
