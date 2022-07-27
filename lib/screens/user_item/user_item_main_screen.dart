@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/screens/user_item/bloc/user_item_bloc.dart';
+import 'package:xtrip_mobile/screens/user_item/dialogs/item_repair_dialog.dart';
 import 'package:xtrip_mobile/screens/user_item/widgets/item_attribute_indicator.dart';
 import 'package:xtrip_mobile/screens/user_item/widgets/item_attribute_indicator_border.dart';
 import 'package:xtrip_mobile/screens/user_item/widgets/item_attribute_update_dialog.dart';
@@ -10,9 +11,15 @@ import 'package:xtrip_mobile/screens/user_item/widgets/item_update_cost.dart';
 import 'package:xtrip_mobile/screens/user_item/widgets/user_item_container.dart';
 import 'package:xtrip_mobile/screens/user_item/widgets/user_item_image.dart';
 
-class UserItemMainScreen extends StatelessWidget {
+class UserItemMainScreen extends StatefulWidget {
   const UserItemMainScreen({Key? key}) : super(key: key);
 
+  @override
+  State<UserItemMainScreen> createState() => _UserItemMainScreenState();
+}
+
+class _UserItemMainScreenState extends State<UserItemMainScreen> {
+  double _sliderValue = 70;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserItemBloc, UserItemState>(
@@ -199,30 +206,7 @@ class UserItemMainScreen extends StatelessWidget {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ItemAttributeUpdateDialog(
-          onConfirmPressed: () {},
-          title: S.of(context).repair,
-          widgets: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 30, right: 30, top: 20, bottom: 10),
-              child: Container(),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              child: ItemUpdateCost(
-                  costName: S.of(context).cost, costVal: '1.4 XTR'),
-            ),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.only(right: 30),
-              child: Text(
-                S.of(context).tokenAvailable('10.48 XTR'),
-                textAlign: TextAlign.end,
-              ),
-            ),
-          ],
-        );
+        return const ItemRepairDialog();
       },
     );
   }

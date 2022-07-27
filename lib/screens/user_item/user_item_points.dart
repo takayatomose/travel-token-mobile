@@ -112,7 +112,7 @@ class _UserItemPointsState extends State<UserItemPoints> {
         },
         attributeVal: luckPoints.toString(),
         assetName: 'assets/icons/ic_item_luck.png',
-        attributeName: S.of(context).efficiency,
+        attributeName: S.of(context).luck,
         onSubPressed: () {
           if (luckPoints == 6) {
             return;
