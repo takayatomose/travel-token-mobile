@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xtrip_mobile/generated/l10n.dart';
+import 'package:xtrip_mobile/screens/user_item/widgets/user_item_btn_actions.dart';
 
 class ItemAttributeUpdateDialog extends StatelessWidget {
   final String title;
@@ -42,45 +42,11 @@ class ItemAttributeUpdateDialog extends StatelessWidget {
           ...widgets,
           Padding(
             padding: const EdgeInsets.only(top: 30, bottom: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 35),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          side: const BorderSide(
-                              width: 1, color: Color.fromRGBO(255, 128, 8, 1))),
-                      onPressed: () {},
-                      child: Text(
-                        S.of(context).cancel,
-                        style: const TextStyle(
-                            color: Color.fromRGBO(255, 128, 8, 1),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700),
-                      )),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 35),
-                      primary: const Color.fromRGBO(255, 128, 8, 1),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8))),
-                  onPressed: () {},
-                  child: Text(
-                    S.of(context).confirm,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700),
-                  ),
-                )
-              ],
+            child: UserItemBtnActions(
+              onCancelPressed: () {
+                Navigator.of(context).pop();
+              },
+              onConfirmPressed: () {},
             ),
           )
         ]),

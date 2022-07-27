@@ -1279,6 +1279,26 @@ class S {
       args: [amount],
     );
   }
+
+  /// `Add points`
+  String get addPoints {
+    return Intl.message(
+      'Add points',
+      name: 'addPoints',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available points: {points}`
+  String availablePoints(Object points) {
+    return Intl.message(
+      'Available points: $points',
+      name: 'availablePoints',
+      desc: '',
+      args: [points],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

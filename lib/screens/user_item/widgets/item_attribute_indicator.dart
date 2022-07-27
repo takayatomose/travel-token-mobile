@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:xtrip_mobile/screens/user_item/widgets/item_attribute_icon.dart';
 
 class ItemAttributeIndicator extends StatelessWidget {
   final String attributeName;
@@ -23,19 +24,9 @@ class ItemAttributeIndicator extends StatelessWidget {
         children: [
           Expanded(
               flex: 50,
-              child: Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Image(width: 25, height: 25, image: AssetImage(assetName)),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      attributeName,
-                      style: const TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                ],
+              child: ItemAttributeIcon(
+                assetName: assetName,
+                attributeName: attributeName,
               )),
           Expanded(
             flex: 50,
