@@ -16,7 +16,6 @@ class SingleOwnerItem extends StatelessWidget {
     final MyItemBloc myItemBloc = Provider.of<MyItemBloc>(context);
     final GameScreenCubit gameScreenCubit =
         Provider.of<GameScreenCubit>(context);
-
     return InkWell(
       onTap: () {
         gameScreenCubit.enterUserItemScreen(itemId: userItem.id);

@@ -22,19 +22,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(pointAvailable) => "Point (${pointAvailable})";
 
-  static String m1(progress) => "Condition ${progress}";
+  static String m1(points) => "Available points: ${points}";
 
-  static String m2(level) => "Level up to LV${level}";
+  static String m2(progress) => "Condition ${progress}";
 
-  static String m3(progress) => "Life time ${progress}";
+  static String m3(level) => "Level up to LV${level}";
 
-  static String m4(numOfItems) => "My Items (${numOfItems})";
+  static String m4(progress) => "Life time ${progress}";
 
-  static String m5(progress) => "Shoe mint ${progress}";
+  static String m5(numOfItems) => "My Items (${numOfItems})";
 
-  static String m6(amount) => "Available ${amount}";
+  static String m6(progress) => "Shoe mint ${progress}";
 
-  static String m7(token) => "${token} balance";
+  static String m7(amount) => "Available ${amount}";
+
+  static String m8(token) => "${token} balance";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -47,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "activatedAccountMsg": MessageLookupByLibrary.simpleMessage(
             "Your account has been activated successfully! You can signin to your account!"),
         "activatedCode": MessageLookupByLibrary.simpleMessage("Activated Code"),
+        "addPoints": MessageLookupByLibrary.simpleMessage("Add points"),
         "addressCopied": MessageLookupByLibrary.simpleMessage(
             "Successfully copied address!"),
         "agreedCreatingAccount": MessageLookupByLibrary.simpleMessage(
@@ -55,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Already had account?"),
         "attributes": MessageLookupByLibrary.simpleMessage("attributes"),
         "availablePoint": m0,
+        "availablePoints": m1,
         "backedupSeedPhrase":
             MessageLookupByLibrary.simpleMessage("I have written down"),
         "base": MessageLookupByLibrary.simpleMessage("Base"),
@@ -67,7 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseSeedPhraseMessage": MessageLookupByLibrary.simpleMessage(
             "Please choose Seed Phrase in order and make sure your Seed Phrase was correct written, once forgotten, it cannot be recovered."),
         "condition": MessageLookupByLibrary.simpleMessage("Condition"),
-        "conditionProgress": m1,
+        "conditionProgress": m2,
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm your new password"),
@@ -136,8 +140,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "items": MessageLookupByLibrary.simpleMessage("Items"),
         "lease": MessageLookupByLibrary.simpleMessage("Lease"),
         "levelUp": MessageLookupByLibrary.simpleMessage("Level up"),
-        "levelUpTo": m2,
-        "lifetimeProgress": m3,
+        "levelUpTo": m3,
+        "lifetimeProgress": m4,
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginHeadline": MessageLookupByLibrary.simpleMessage(
             "Login to your account to keep traveling"),
@@ -145,7 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "luck": MessageLookupByLibrary.simpleMessage("Luck"),
         "map": MessageLookupByLibrary.simpleMessage("Map"),
         "mint": MessageLookupByLibrary.simpleMessage("Mint"),
-        "myItems": m4,
+        "myItems": m5,
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
         "newPassword":
             MessageLookupByLibrary.simpleMessage("Your new password"),
@@ -186,7 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your account has been created successfully! An email has been sent to your email address containing an activation code. Please use code to activate your account!"),
         "sentEmailPwdInstruction": MessageLookupByLibrary.simpleMessage(
             "We sent you and an e-mail to instruction to reset password"),
-        "shoeMintsProgress": m5,
+        "shoeMintsProgress": m6,
         "shop": MessageLookupByLibrary.simpleMessage("Shop"),
         "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
@@ -199,7 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "termConditions":
             MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
         "time": MessageLookupByLibrary.simpleMessage("Time"),
-        "tokenAvailable": m6,
+        "tokenAvailable": m7,
         "tokenBalance": MessageLookupByLibrary.simpleMessage("Token balance"),
         "transfer": MessageLookupByLibrary.simpleMessage("Transfer"),
         "travelToEarn": MessageLookupByLibrary.simpleMessage("Travel To Earn"),
@@ -208,7 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "userInfoUpdatedMsg": MessageLookupByLibrary.simpleMessage(
             "You have updated your information"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
-        "xTokenBalance": m7,
+        "xTokenBalance": m8,
         "yourAccount": MessageLookupByLibrary.simpleMessage("Your account"),
         "yourEmail": MessageLookupByLibrary.simpleMessage("Your email"),
         "yourInviteCode":

@@ -121,5 +121,7 @@
     "levelUpTo": "Level up to LV{level}",
     "time": "Time",
     "cost": "Cost",
-    "tokenAvailable": "Available {amount}"
+    "tokenAvailable": "Available {amount}",
+    "addPoints": "Add points",
+    "availablePoints": "Available points: {points}"
 }
