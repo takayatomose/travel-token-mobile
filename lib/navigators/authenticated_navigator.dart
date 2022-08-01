@@ -21,7 +21,10 @@ class AuthenticatedNavigator extends StatelessWidget {
             if (state is GameWalletScreenSatte)
               const MaterialPage(child: WalletNavigator()),
             if (state is GameItemScreenState)
-              const MaterialPage(child: UserItemNavigator()),
+              MaterialPage(
+                  child: UserItemNavigator(
+                itemId: state.itemId,
+              )),
           ],
           onPopPage: (route, result) => route.didPop(result),
         ),

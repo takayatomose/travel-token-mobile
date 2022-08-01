@@ -8,6 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/navigators/app_navigator.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
+import 'package:xtrip_mobile/repositories/item_repository.dart';
 import 'package:xtrip_mobile/repositories/user_repository.dart';
 import 'package:xtrip_mobile/sessions/session_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
         providers: [
           RepositoryProvider(create: (context) => AuthRepository()),
           RepositoryProvider(create: (context) => UserRepository()),
+          RepositoryProvider(create: (context) => ItemRepository()),
         ],
         child: BlocProvider(
           create: (context) => SessionCubit(

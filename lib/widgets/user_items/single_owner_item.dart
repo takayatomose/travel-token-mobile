@@ -19,58 +19,6 @@ class SingleOwnerItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         gameScreenCubit.enterUserItemScreen(itemId: userItem.id);
-        // showDialog(
-        //     context: context,
-        //     builder: (context) => Dialog(
-        //           child: SizedBox(
-        //             width: double.infinity,
-        //             child: Column(
-        //               mainAxisSize: MainAxisSize.min,
-        //               children: [
-        //                 Padding(
-        //                   padding: const EdgeInsets.symmetric(vertical: 20),
-        //                   child: Text(
-        //                     userItem.name,
-        //                     style: const TextStyle(color: Colors.black),
-        //                   ),
-        //                 ),
-        //                 const Image(
-        //                   image:
-        //                       AssetImage('assets/images/sneaker_example.png'),
-        //                 ),
-        //                 Row(
-        //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //                   children: [
-        //                     if (userItem.equippedState ==
-        //                         UserItemStates.unEquipped)
-        //                       ElevatedButton(
-        //                           onPressed: () {
-        //                             myItemBloc
-        //                                 .add(EquippedItem(itemId: userItem.id));
-        //                           },
-        //                           child: const Text('Equipe')),
-        //                     if (userItem.equippedState !=
-        //                         UserItemStates.mainEquipped)
-        //                       ElevatedButton(
-        //                           onPressed: () {
-        //                             myItemBloc.add(SetMainEquippedItem(
-        //                                 itemId: userItem.id));
-        //                           },
-        //                           child: const Text('Main Equiped')),
-        //                     if (userItem.equippedState !=
-        //                         UserItemStates.unEquipped)
-        //                       ElevatedButton(
-        //                           onPressed: () {
-        //                             myItemBloc.add(
-        //                                 UnEquippedItem(itemId: userItem.id));
-        //                           },
-        //                           child: const Text('Un Equipped'))
-        //                   ],
-        //                 )
-        //               ],
-        //             ),
-        //           ),
-        //         ))
       },
       child: Stack(
         children: [
