@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/navigators/app_navigator.dart';
@@ -17,7 +16,6 @@ import 'package:xtrip_mobile/simple_bloc_observer.dart';
 
 Future main() async {
   await runZonedGuarded(() async {
-    await dotenv.load(fileName: '.env');
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);

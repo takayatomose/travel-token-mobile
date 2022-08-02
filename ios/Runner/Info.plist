@@ -27,11 +27,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Location Needed</string>
+	<string>Your location is used to calculate the daily distance you travel to receive rewards</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Location Needed</string>
+	<string>Your location is used to calculate the daily distance you travel to receive rewards</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location Needed</string>
+	<string>Your location is used to calculate the daily distance you travel to receive rewards</string>
 	<key>ProvisionedDevices</key>
 	<array>
 		<string>00008030-000415942E40802E</string>

@@ -1,4 +1,4 @@
-package com.atastay.xtrip_mobile
+package travel.xtrip.app
 
 import io.flutter.embedding.android.FlutterActivity
 

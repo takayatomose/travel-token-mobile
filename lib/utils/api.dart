@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:http_interceptor/http_interceptor.dart';
@@ -10,13 +8,14 @@ import 'package:xtrip_mobile/utils/apiinterceptor.dart';
 class ApiService {
   final Client httpClient =
       InterceptedClient.build(interceptors: [ApiInterceptor()]);
+  static const API_URL =
+      String.fromEnvironment('API_URL', defaultValue: 'api-prod.xtrip.travel');
   static getHttpClient() {
-    if (dotenv.get('APP_SSL') == 'false') {
-      return Uri.http(
-          dotenv.get('API_URL', fallback: 'api-prod.xtrip.travel'), '');
+    if (const String.fromEnvironment('APP_SSL', defaultValue: 'true') ==
+        'false') {
+      return Uri.http(API_URL, '');
     } else {
-      return Uri.https(
-          dotenv.get('API_URL', fallback: 'api-prod.xtrip.travel'), '');
+      return Uri.https(API_URL, '');
     }
   }
 
