@@ -32,6 +32,10 @@
 	<string>Location Needed</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location Needed</string>
+	<key>ProvisionedDevices</key>
+	<array>
+		<string>00008030-000415942E40802E</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -41,6 +45,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -56,9 +62,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>ProvisionedDevices</key>
-	<array>
-		<string>00008030-000415942E40802E</string>
-	</array>
 </dict>
 </plist>
