@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -40,7 +42,17 @@ class SessionCubit extends Cubit<SessionState> {
         throw Exception('Not logged in');
       }
       if (JwtDecoder.isExpired(userToken) == true) {
-        // TODO: refresh token
+        final refreshToken = await _secureStorage.read(key: USER_REFRESH_TOKEN);
+        if (refreshToken != null &&
+            refreshToken != '' &&
+            refreshToken.isNotEmpty) {
+          final response = await authRepo.refreshToken(
+              userToken: userToken, refreshToken: refreshToken);
+          final Map<String, String> body = json.decode(response.body);
+          if (body['token'] != null && body['json'] != '') {
+            await _secureStorage.write(key: USER_TOKEN, value: body['json']);
+          }
+        }
       }
 
       final user = await userRepo.getUserInfo();

@@ -1,4 +1,4 @@
-import 'package:xtrip_mobile/sessions/form_submission_status.dart';
+part of './sigin_bloc.dart';
 
 class SignInState {
   final String email;

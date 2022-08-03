@@ -2,8 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/auth/signin/sigin_bloc.dart';
-import 'package:xtrip_mobile/bloc/auth/signin/signin_event.dart';
-import 'package:xtrip_mobile/bloc/auth/signin/signin_state.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';

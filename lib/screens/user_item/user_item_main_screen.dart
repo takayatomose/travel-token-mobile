@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/generated/l10n.dart';
+import 'package:xtrip_mobile/models/user_item.dart';
 import 'package:xtrip_mobile/screens/user_item/bloc/user_item_bloc.dart';
 import 'package:xtrip_mobile/screens/user_item/dialogs/item_repair_dialog.dart';
 import 'package:xtrip_mobile/screens/user_item/widgets/item_attribute_indicator.dart';
@@ -10,6 +11,7 @@ import 'package:xtrip_mobile/screens/user_item/widgets/item_mints_progress.dart'
 import 'package:xtrip_mobile/screens/user_item/widgets/item_update_cost.dart';
 import 'package:xtrip_mobile/screens/user_item/widgets/user_item_container.dart';
 import 'package:xtrip_mobile/screens/user_item/widgets/user_item_image.dart';
+import 'package:xtrip_mobile/widgets/loading_indicator.dart';
 
 class UserItemMainScreen extends StatefulWidget {
   const UserItemMainScreen({Key? key}) : super(key: key);
@@ -19,7 +21,6 @@ class UserItemMainScreen extends StatefulWidget {
 }
 
 class _UserItemMainScreenState extends State<UserItemMainScreen> {
-  double _sliderValue = 70;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserItemBloc, UserItemState>(
@@ -29,119 +30,7 @@ class _UserItemMainScreenState extends State<UserItemMainScreen> {
             icon: const Icon(Icons.arrow_back),
             onPressed: () {},
           ),
-          bodyContainer: SingleChildScrollView(
-            child: Column(
-              children: [
-                const UserItemImage(),
-                const ItemMintsProgress(
-                  maxNumOfMints: 5,
-                  numOfMints: 2,
-                ),
-                ItemAttributeIndicatorBorder(
-                    centerText: S.of(context).conditionProgress('70.4/100'),
-                    percent: 0.75),
-                ItemAttributeIndicatorBorder(
-                    centerText: S.of(context).lifetimeProgress('60/120'),
-                    percent: 0.5),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Text(
-                    S.of(context).howToPlay,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w700, fontSize: 12),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 25),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 50,
-                        child: Text(
-                          S.of(context).attributes.toUpperCase(),
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 50,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                primary: const Color.fromRGBO(255, 128, 8, 1),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(48)),
-                              ),
-                              onPressed: () {},
-                              child: Text(
-                                S.of(context).base,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 14),
-                              ),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  side: const BorderSide(
-                                      width: 1,
-                                      color: Color.fromRGBO(42, 46, 71, 1)),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  primary: Colors.transparent,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(48))),
-                              onPressed: () {
-                                context
-                                    .read<UserItemBloc>()
-                                    .add(EnterAddPointScreen());
-                              },
-                              child: Text(
-                                S.of(context).availablePoint(0),
-                                style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color.fromRGBO(42, 46, 71, 1)),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                ItemAttributeIndicator(
-                  attributeName: S.of(context).efficiency,
-                  assetName: 'assets/icons/ic_item_efficiency.png',
-                  attributeValue: '10',
-                  percent: 0.5,
-                ),
-                ItemAttributeIndicator(
-                  attributeName: S.of(context).recovery,
-                  assetName: 'assets/icons/ic_item_recovery.png',
-                  attributeValue: '3',
-                  percent: 0.7,
-                ),
-                ItemAttributeIndicator(
-                  attributeName: S.of(context).luck,
-                  assetName: 'assets/icons/ic_item_luck.png',
-                  attributeValue: '6',
-                  percent: 0.6,
-                ),
-                ItemAttributeIndicator(
-                  attributeName: S.of(context).distance,
-                  assetName: 'assets/icons/ic_item_distance.png',
-                  attributeValue: '5',
-                  percent: 0.4,
-                ),
-              ],
-            ),
-          ),
+          bodyContainer: getItemBody(state, context),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             onTap: (int index) {
@@ -149,7 +38,7 @@ class _UserItemMainScreenState extends State<UserItemMainScreen> {
                 showLevelUpPopup(context);
               }
               if (index == 1) {
-                showRepairePopup(context);
+                showRepairPopup(context);
               }
             },
             items: [
@@ -202,7 +91,135 @@ class _UserItemMainScreenState extends State<UserItemMainScreen> {
     );
   }
 
-  Future<dynamic> showRepairePopup(BuildContext context) {
+  Widget getItemBody(UserItemState state, BuildContext context) {
+    if (state.fetchState == ItemFetchStates.fetching) {
+      return const Center(
+        child: LoadingIndicator(),
+      );
+    }
+    if (state.item == null) {
+      return const Center(child: Text('Invalid item'));
+    }
+    UserItem _userItem = state.item!;
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const UserItemImage(),
+          ItemMintsProgress(
+            maxNumOfMints: 5,
+            numOfMints: _userItem.numOfMints,
+          ),
+          ItemAttributeIndicatorBorder(
+              centerText: S.of(context).conditionProgress(
+                  "${_userItem.itemCondition.condition}/100"),
+              percent: _userItem.itemCondition.condition / 100),
+          ItemAttributeIndicatorBorder(
+              centerText: S.of(context).lifetimeProgress(
+                  "${_userItem.itemCondition.lifetimeCount}/${_userItem.lifetime}"),
+              percent:
+                  _userItem.itemCondition.lifetimeCount / _userItem.lifetime),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Text(
+              S.of(context).howToPlay,
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 25),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 50,
+                  child: Text(
+                    S.of(context).attributes.toUpperCase(),
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w700),
+                  ),
+                ),
+                Expanded(
+                  flex: 50,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          primary: const Color.fromRGBO(255, 128, 8, 1),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(48)),
+                        ),
+                        onPressed: () {},
+                        child: Text(
+                          S.of(context).base,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14),
+                        ),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            side: const BorderSide(
+                                width: 1, color: Color.fromRGBO(42, 46, 71, 1)),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            primary: Colors.transparent,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(48))),
+                        onPressed: () {
+                          context
+                              .read<UserItemBloc>()
+                              .add(EnterAddPointScreen());
+                        },
+                        child: Text(
+                          S
+                              .of(context)
+                              .availablePoint(_userItem.availablePoint),
+                          style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: Color.fromRGBO(42, 46, 71, 1)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ItemAttributeIndicator(
+            attributeName: S.of(context).efficiency,
+            assetName: 'assets/icons/ic_item_efficiency.png',
+            attributeValue: _userItem.efficiency,
+            baseValue: _userItem.maxEfficiency,
+          ),
+          ItemAttributeIndicator(
+            attributeName: S.of(context).recovery,
+            assetName: 'assets/icons/ic_item_recovery.png',
+            attributeValue: _userItem.recovery,
+            baseValue: _userItem.maxRecovery,
+          ),
+          ItemAttributeIndicator(
+            attributeName: S.of(context).luck,
+            assetName: 'assets/icons/ic_item_luck.png',
+            attributeValue: _userItem.luck,
+            baseValue: _userItem.maxLuck,
+          ),
+          ItemAttributeIndicator(
+            attributeName: S.of(context).distance,
+            assetName: 'assets/icons/ic_item_distance.png',
+            attributeValue: _userItem.distance,
+            baseValue: _userItem.maxDistance,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<dynamic> showRepairPopup(BuildContext context) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {

@@ -21,7 +21,7 @@ class Item {
         id: json['id'] as int,
         name: json['name'] as String,
         icon: json['icon'] as String,
-        price: json['price'] as int,
+        price: json['price'] != null ? json['price'] as int : 0,
         efficiency: json['efficiency'] as int,
         durability: json['durability'] as int,
         luck: json['luck'] as int,

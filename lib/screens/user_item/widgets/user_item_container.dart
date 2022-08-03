@@ -12,6 +12,7 @@ class UserItemContainer extends StatelessWidget {
   final Widget? appBarLeading;
   final Widget? bodyContainer;
   final Widget? bottomNavigationBar;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

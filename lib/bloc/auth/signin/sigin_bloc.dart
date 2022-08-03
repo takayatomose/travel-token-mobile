@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xtrip_mobile/bloc/auth/auth_credentials.dart';
-import 'package:xtrip_mobile/bloc/auth/signin/signin_event.dart';
-import 'package:xtrip_mobile/bloc/auth/signin/signin_state.dart';
 import 'package:xtrip_mobile/cubits/auth_cubit.dart';
 import 'package:xtrip_mobile/repositories/auth_repository.dart';
 import 'package:xtrip_mobile/sessions/form_submission_status.dart';
+part './signin_event.dart';
+part './signin_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final AuthRepository authRepo;

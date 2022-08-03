@@ -56,4 +56,18 @@ class AuthRepository {
         body: json.encode({'email': email, 'activationCode': code}));
     return response;
   }
+
+  Future<http.Response> refreshToken(
+      {required String userToken, required String refreshToken}) async {
+    final response = await apiService.postAPI(
+        uri: '/auth/refresh-token',
+        body: json.encode({
+          'userToken': userToken,
+          'refreshToken': refreshToken,
+        }));
+    if (response.statusCode != 200 || response.statusCode != 201) {
+      throw Exception('token invalid');
+    }
+    return response;
+  }
 }

@@ -1,3 +1,5 @@
+part of './sigin_bloc.dart';
+
 abstract class SignInEvent {}
 
 class SignInEmailChanged extends SignInEvent {
